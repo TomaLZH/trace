@@ -14,6 +14,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
 
     
     var lm : CLLocationManager?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +26,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         lm?.startUpdatingLocation()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        lm = CLLocationManager()
+        lm?.delegate = self
+        lm?.desiredAccuracy = kCLLocationAccuracyBest
+        lm?.distanceFilter = 0
+        lm?.requestWhenInUseAuthorization()
+        
+        lm?.startUpdatingLocation()
+        
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+    {
+        var location = locations.last!
+    }
+    
+    
 
     
     @IBOutlet weak var mapView: MKMapView!
