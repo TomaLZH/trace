@@ -13,6 +13,7 @@ import MapKit
 class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITabBarDelegate, UITableViewDelegate {
 
     
+    
     var lm : CLLocationManager?
 
     override func viewDidLoad() {
