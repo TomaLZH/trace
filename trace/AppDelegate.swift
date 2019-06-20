@@ -8,6 +8,7 @@
 
 import UIKit
 import ApiAI
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let apiai = ApiAI.shared()
         apiai?.configuration = configuration
+        
+        FirebaseApp.configure()
         
         return true
     }
