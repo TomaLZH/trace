@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
+
+        
         
         let configuration = AIDefaultConfiguration()
         configuration.clientAccessToken = "c092badda3ce4b9e8a9918288e76c587"
@@ -24,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let apiai = ApiAI.shared()
         apiai?.configuration = configuration
         
-        FirebaseApp.configure()
         
         return true
     }
