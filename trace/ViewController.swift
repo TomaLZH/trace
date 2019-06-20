@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITabBarDelegate, UITableViewDelegate {
+class ViewController: UIViewController,  CLLocationManagerDelegate, MKMapViewDelegate ,UITabBarDelegate, UITableViewDelegate {
 
     
     
