@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xpX-3p-sSG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xpX-3p-sSG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,17 +64,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="deR-q9-KF0">
-                                <rect key="frame" x="0.0" y="64" width="375" height="366"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="548"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9U6-xK-0Bl">
-                                        <rect key="frame" x="8" y="8" width="359" height="350"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="350" id="pdH-Pf-Qd3"/>
-                                        </constraints>
-                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="548"/>
                                     </mapView>
                                 </subviews>
-                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="9U6-xK-0Bl" secondAttribute="trailing" constant="8" id="Bd8-gI-1gg"/>
+                                    <constraint firstItem="9U6-xK-0Bl" firstAttribute="leading" secondItem="deR-q9-KF0" secondAttribute="leading" constant="8" id="OgM-g2-mcD"/>
+                                    <constraint firstAttribute="bottom" secondItem="9U6-xK-0Bl" secondAttribute="bottom" constant="8" id="TXM-qt-N38"/>
+                                    <constraint firstItem="9U6-xK-0Bl" firstAttribute="top" secondItem="deR-q9-KF0" secondAttribute="top" constant="8" id="gPD-KG-jyi"/>
+                                </constraints>
                             </stackView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n7J-xP-JOL">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -95,11 +96,15 @@
                         <constraints>
                             <constraint firstItem="n7J-xP-JOL" firstAttribute="leading" secondItem="O0W-Y1-gcv" secondAttribute="leading" id="0Rr-nr-dQC"/>
                             <constraint firstItem="deR-q9-KF0" firstAttribute="top" secondItem="n7J-xP-JOL" secondAttribute="bottom" constant="8" id="7tI-91-fN7"/>
+                            <constraint firstItem="O0W-Y1-gcv" firstAttribute="bottom" secondItem="deR-q9-KF0" secondAttribute="bottom" constant="6" id="9vK-Wi-ltc"/>
                             <constraint firstItem="deR-q9-KF0" firstAttribute="top" secondItem="n7J-xP-JOL" secondAttribute="bottom" id="BRV-zF-Jeh"/>
+                            <constraint firstItem="deR-q9-KF0" firstAttribute="trailing" secondItem="O0W-Y1-gcv" secondAttribute="trailing" id="Pez-Tf-Py2"/>
+                            <constraint firstItem="deR-q9-KF0" firstAttribute="leading" secondItem="O0W-Y1-gcv" secondAttribute="leading" id="TCf-LM-XxN"/>
                             <constraint firstItem="n7J-xP-JOL" firstAttribute="top" secondItem="O0W-Y1-gcv" secondAttribute="top" id="bpo-nB-8EQ"/>
                             <constraint firstItem="deR-q9-KF0" firstAttribute="leading" secondItem="O0W-Y1-gcv" secondAttribute="leading" id="qZj-1p-cZP"/>
                             <constraint firstItem="deR-q9-KF0" firstAttribute="trailing" secondItem="O0W-Y1-gcv" secondAttribute="trailing" id="uVh-Tz-tNL"/>
                             <constraint firstItem="n7J-xP-JOL" firstAttribute="trailing" secondItem="O0W-Y1-gcv" secondAttribute="trailing" id="w5M-Sj-g3j"/>
+                            <constraint firstItem="deR-q9-KF0" firstAttribute="top" secondItem="n7J-xP-JOL" secondAttribute="bottom" id="zGY-Ys-UeP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O0W-Y1-gcv"/>
                     </view>
@@ -117,7 +122,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="chA-ib-qQS">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OHZ-vh-JMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="xpX-3p-sSG" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="weD-RM-RYI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -130,6 +134,7 @@
                         <segue destination="tPg-Q9-Rla" kind="relationship" relationship="viewControllers" id="Kjg-1d-uxD"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OHZ-vh-JMB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="550" y="-194"/>
         </scene>
@@ -148,8 +153,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFG-n6-yHs">
-                                <rect key="frame" x="117" y="138" width="140" height="158"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFG-n6-yHs">
+                                <rect key="frame" x="9" y="138" width="350" height="158"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -186,6 +191,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-street-view-filled-45" width="33.75" height="33.75"/>
+        <image name="icons8-street-view-filled-45" width="45" height="45"/>
     </resources>
 </document>
