@@ -8,13 +8,14 @@
 
 import UIKit
 import MessageKit
+import InputBarAccessoryView
 
 class TraceChatController:
     MessagesViewController,
     MessagesDataSource,
     MessagesLayoutDelegate,
     MessagesDisplayDelegate,
-    MessageInputBarDelegate
+    InputBarAccessoryViewDelegate
 {
 
     var messages: [Message] = []
@@ -79,7 +80,7 @@ class TraceChatController:
         avatarView.backgroundColor = color
     }
     
-    func inputBar(_ inputBar: MessageInputBar,
+    func inputBar(_ inputBar: InputBarAccessoryView,
                   didPressSendButtonWith text: String) {
         let newMessage = Message(member: member, text: text, messageId: UUID().uuidString)
         
