@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CE5333D22BCB54B00B427DE /* TraceChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5333C22BCB54B00B427DE /* TraceChatController.swift */; };
+		2CE5333F22BCB5B300B427DE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5333E22BCB5B300B427DE /* Message.swift */; };
 		5140F0A422BB5F97007D340A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5140F0A322BB5F97007D340A /* GoogleService-Info.plist */; };
 		5174F422229D0FF500D45601 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174F421229D0FF500D45601 /* AppDelegate.swift */; };
 		5174F424229D0FF500D45601 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174F423229D0FF500D45601 /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2CE5333C22BCB54B00B427DE /* TraceChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceChatController.swift; sourceTree = "<group>"; };
+		2CE5333E22BCB5B300B427DE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		45C2F2CFD0F2A705B1E65211 /* Pods-trace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trace.release.xcconfig"; path = "Target Support Files/Pods-trace/Pods-trace.release.xcconfig"; sourceTree = "<group>"; };
 		5140F0A322BB5F97007D340A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5174F41E229D0FF500D45601 /* trace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trace.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +80,8 @@
 				5174F42D229D0FF500D45601 /* Info.plist */,
 				51A9A7C522A0D3B80038B937 /* FirstViewController.swift */,
 				51D855A422BA0DF3007A5E7B /* ChatController.swift */,
+				2CE5333C22BCB54B00B427DE /* TraceChatController.swift */,
+				2CE5333E22BCB5B300B427DE /* Message.swift */,
 			);
 			path = trace;
 			sourceTree = "<group>";
@@ -216,6 +222,8 @@
 				51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */,
 				5174F424229D0FF500D45601 /* ViewController.swift in Sources */,
 				5174F422229D0FF500D45601 /* AppDelegate.swift in Sources */,
+				2CE5333F22BCB5B300B427DE /* Message.swift in Sources */,
+				2CE5333D22BCB54B00B427DE /* TraceChatController.swift in Sources */,
 				51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

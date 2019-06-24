@@ -175,6 +175,14 @@
                                     <action selector="entermessage:" destination="tPg-Q9-Rla" eventType="touchUpInside" id="DBd-cA-kM4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhH-nS-6Ee">
+                                <rect key="frame" x="91" y="493" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Test New UI"/>
+                                <connections>
+                                    <segue destination="BL3-uK-4Ob" kind="show" id="sOO-ik-njr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="uyM-zK-lSh"/>
@@ -188,6 +196,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wqx-U5-JC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="484" y="655.32233883058473"/>
+        </scene>
+        <!--Trace Chat Controller-->
+        <scene sceneID="3hX-OS-9BM">
+            <objects>
+                <viewController id="BL3-uK-4Ob" customClass="TraceChatController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ShM-nC-H0v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="HuT-c0-unJ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Wo-Oc-HHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1359" y="805"/>
         </scene>
     </scenes>
     <resources>
