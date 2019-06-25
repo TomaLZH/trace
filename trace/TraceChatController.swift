@@ -9,6 +9,8 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import ApiAI
+import AVFoundation
 
 class TraceChatController:
     MessagesViewController,
@@ -20,16 +22,24 @@ class TraceChatController:
 
     var messages: [Message] = []
     var member: Member!
+    var memberTrace = Member(name: "Trace", color: .red)
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        member = Member(name: "Desmond", color: .green)
+        member = Member(name: "Sender", color: .blue)
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
+        
+        // Hiding the avatar view ////////////////////////
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
+        {
+            layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+        }
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int
@@ -70,23 +80,64 @@ class TraceChatController:
         return 0
     }
     
-    func configureAvatarView(_ avatarView: AvatarView,
-                             for message: MessageType,
-                             at indexPath: IndexPath,
-                             in messagesCollectionView: MessagesCollectionView)
-    {
-        let message = messages[indexPath.section]
-        let color = message.member.color
-        avatarView.backgroundColor = color
-    }
+//    func configureAvatarView(_ avatarView: AvatarView,
+//                             for message: MessageType,
+//                             at indexPath: IndexPath,
+//                             in messagesCollectionView: MessagesCollectionView)
+//    {
+//        let message = messages[indexPath.section]
+//        let color = message.member.color
+//        avatarView.backgroundColor = color
+//    }
     
     func inputBar(_ inputBar: InputBarAccessoryView,
                   didPressSendButtonWith text: String) {
-        let newMessage = Message(member: member, text: text, messageId: UUID().uuidString)
+        let newMessage = Message(member: member, text: text, messageId: "0")
         
         messages.append(newMessage)
         inputBar.inputTextView.text = ""
         messagesCollectionView.reloadData()
         messagesCollectionView.scrollToBottom(animated: true)
+        
+        requestDialogFlow(message: newMessage.text)
+    }
+    
+    func requestDialogFlow(message: String?)
+    {
+        let request = ApiAI.shared().textRequest()
+        
+        if let text = message, text != "" {
+            request?.query = text
+        } else {
+            return
+        }
+        
+        request?.setMappedCompletionBlockSuccess({ (request, response) in
+            let response = response as! AIResponse
+            if let textResponse = response.result.fulfillment.speech {
+                let traceReply = Message(member: self.memberTrace, text: textResponse, messageId: "1")
+                self.messages.append(traceReply)
+                self.messagesCollectionView.reloadData()
+                self.messagesCollectionView.scrollToBottom(animated: true)
+                
+                self.speechAndText(text: textResponse)
+            }
+        }, failure: { (request, error) in
+            print(error!)
+        })
+        
+        ApiAI.shared().enqueue(request)
+    }
+    
+    let speechSynthesizer = AVSpeechSynthesizer()
+    
+    func speechAndText(text: String) {
+        
+        // Show reply by Trace
+        
+        // Read out reply
+        let speechUtterance = AVSpeechUtterance(string: text)
+        speechSynthesizer.speak(speechUtterance)
+        
     }
 }

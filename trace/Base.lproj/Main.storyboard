@@ -141,6 +141,7 @@
         <!--Chat Controller-->
         <scene sceneID="eRN-vn-HW4">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wqx-U5-JC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="tPg-Q9-Rla" customClass="ChatController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0YL-Cf-73p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -193,7 +194,6 @@
                         <outlet property="tracetext" destination="CFG-n6-yHs" id="CIv-Tw-6Zr"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wqx-U5-JC7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="484" y="655.32233883058473"/>
         </scene>
