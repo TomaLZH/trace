@@ -9,4 +9,7 @@ target 'trace' do
 pod 'ApiAI'
 pod 'Firebase/Core'
 pod 'MessageKit'
+pod 'GoogleMaps'
+pod 'GooglePlaces'
+pod 'Mapbox-iOS-SDK', '~>5.1'
 end

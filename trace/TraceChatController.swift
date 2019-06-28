@@ -92,16 +92,6 @@ class TraceChatController:
         return 0
     }
     
-//    func configureAvatarView(_ avatarView: AvatarView,
-//                             for message: MessageType,
-//                             at indexPath: IndexPath,
-//                             in messagesCollectionView: MessagesCollectionView)
-//    {
-//        let message = messages[indexPath.section]
-//        let color = message.member.color
-//        avatarView.backgroundColor = color
-//    }
-    
     func inputBar(_ inputBar: InputBarAccessoryView,
                   didPressSendButtonWith text: String) {
         let newMessage = Message(member: member, text: text, messageId: "0")
