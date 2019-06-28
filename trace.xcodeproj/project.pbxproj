@@ -15,6 +15,7 @@
 		5174F427229D0FF500D45601 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5174F425229D0FF500D45601 /* Main.storyboard */; };
 		5174F429229D0FF500D45601 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5174F428229D0FF500D45601 /* Assets.xcassets */; };
 		5174F42C229D0FF500D45601 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5174F42A229D0FF500D45601 /* LaunchScreen.storyboard */; };
+		517BC63E22C5B108003F5921 /* geocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC63D22C5B108003F5921 /* geocode.swift */; };
 		51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A9A7C522A0D3B80038B937 /* FirstViewController.swift */; };
 		51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D855A422BA0DF3007A5E7B /* ChatController.swift */; };
 		C9E21ECC8A48C2AB66B2CB4A /* Pods_trace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7EF63071897B93B38433B4E /* Pods_trace.framework */; };
@@ -32,6 +33,7 @@
 		5174F428229D0FF500D45601 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5174F42B229D0FF500D45601 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5174F42D229D0FF500D45601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		517BC63D22C5B108003F5921 /* geocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geocode.swift; sourceTree = "<group>"; };
 		51A9A7C522A0D3B80038B937 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		51D855A422BA0DF3007A5E7B /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		75C1F50FE0B2B2B4D8D9F175 /* Pods-trace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trace.debug.xcconfig"; path = "Target Support Files/Pods-trace/Pods-trace.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				51D855A422BA0DF3007A5E7B /* ChatController.swift */,
 				2CE5333C22BCB54B00B427DE /* TraceChatController.swift */,
 				2CE5333E22BCB5B300B427DE /* Message.swift */,
+				517BC63D22C5B108003F5921 /* geocode.swift */,
 			);
 			path = trace;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */,
 				5174F424229D0FF500D45601 /* ViewController.swift in Sources */,
 				5174F422229D0FF500D45601 /* AppDelegate.swift in Sources */,
+				517BC63E22C5B108003F5921 /* geocode.swift in Sources */,
 				2CE5333F22BCB5B300B427DE /* Message.swift in Sources */,
 				2CE5333D22BCB54B00B427DE /* TraceChatController.swift in Sources */,
 				51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */,
