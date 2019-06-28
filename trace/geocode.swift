@@ -7,20 +7,25 @@
 //
 
 import UIKit
+import CoreLocation
 
 class geocode: UIViewController {
-
+    lazy var geocoder = CLGeocoder()
     @IBOutlet weak var address: UITextField!
     @IBOutlet weak var country: UITextField!
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var submitaddress: UIButton!
     
     @IBOutlet weak var result: UITextField!
+    
+    
     @IBAction func submitadd(_ sender: Any) {
         guard let country = country.text else { return }
-        guard let street = address.text else { return }
+        guard let street = self.address.text else { return }
         
-        print("\(country), \(street)")
+        // Create Address String
+        let address = "\(country), \(street)"
         
         // Geocode Address String
         geocoder.geocodeAddressString(address) { (placemarks, error) in
@@ -29,7 +34,7 @@ class geocode: UIViewController {
         }
         
         // Update View
-        geocodeButton.isHidden = true
+        submitaddress.isHidden = true
         activityIndicatorView.startAnimating()
         
     }
@@ -40,7 +45,30 @@ class geocode: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
+        // Update View
+        submitaddress.isHidden = false
+        activityIndicatorView.stopAnimating()
+        
+        if let error = error {
+            print("Unable to Forward Geocode Address (\(error))")
+            result.text = "Unable to Find Location for Address"
+            
+        } else {
+            var location: CLLocation?
+            
+            if let placemarks = placemarks, placemarks.count > 0 {
+                location = placemarks.first?.location
+            }
+            
+            if let location = location {
+                let coordinate = location.coordinate
+                result.text = "\(coordinate.latitude), \(coordinate.longitude)"
+            } else {
+                result.text = "No Matching Location Found"
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 

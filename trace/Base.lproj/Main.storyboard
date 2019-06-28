@@ -201,12 +201,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="G3D-v5-Ft9">
+                                <rect key="frame" x="177" y="378" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="nuc-8r-t9P"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="7a4-xD-XSr"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="G3D-v5-Ft9" id="Otc-BJ-63x"/>
                         <outlet property="address" destination="Bxa-i1-Ngs" id="PMf-uD-TyQ"/>
                         <outlet property="country" destination="MhP-Zq-laX" id="zWg-70-WXo"/>
                         <outlet property="result" destination="A7e-uJ-jO2" id="rka-8I-g8W"/>
