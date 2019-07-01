@@ -29,7 +29,7 @@ class NavigationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        goButton.layer.cornerRadius = goButton.frame.size.height/2
+       // goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
     }
     
