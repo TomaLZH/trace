@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xpX-3p-sSG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xpX-3p-sSG">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -113,6 +113,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgU-D2-QIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1848.8" y="115.59220389805098"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QmK-oq-49R">
+            <objects>
+                <viewController id="C1F-FS-WQs" customClass="NavigationController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OiE-Xl-Zkb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ql9-cm-ik3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="589"/>
+                                <connections>
+                                    <outlet property="delegate" destination="OiE-Xl-Zkb" id="0wj-99-LUy"/>
+                                </connections>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7un-va-eoI">
+                                <rect key="frame" x="287" y="607" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="goButtonTapped:" destination="C1F-FS-WQs" eventType="touchUpInside" id="Npl-uX-GOF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZ4-KI-Ndj">
+                                <rect key="frame" x="0.0" y="597" width="375" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="AqE-9o-AfZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ql9-cm-ik3" firstAttribute="leading" secondItem="OiE-Xl-Zkb" secondAttribute="leadingMargin" id="4PA-A8-lsh"/>
+                            <constraint firstItem="0Fv-vO-7hn" firstAttribute="bottom" secondItem="GZ4-KI-Ndj" secondAttribute="bottom" id="4Sq-s4-O6C"/>
+                            <constraint firstItem="0Fv-vO-7hn" firstAttribute="trailing" secondItem="GZ4-KI-Ndj" secondAttribute="trailing" id="850-5n-0Pm"/>
+                            <constraint firstItem="ql9-cm-ik3" firstAttribute="top" secondItem="OiE-Xl-Zkb" secondAttribute="topMargin" id="B9O-3S-x6D"/>
+                            <constraint firstItem="GZ4-KI-Ndj" firstAttribute="leading" secondItem="0Fv-vO-7hn" secondAttribute="leading" id="WED-w4-4y8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ql9-cm-ik3" secondAttribute="trailing" id="WUc-Ym-3Ku"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ql9-cm-ik3" secondAttribute="bottom" id="y0N-2z-qJt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0Fv-vO-7hn"/>
+                    </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="GZ4-KI-Ndj" id="Yn9-rZ-h8W"/>
+                        <outlet property="goButton" destination="7un-va-eoI" id="d4l-74-lJI"/>
+                        <outlet property="mapView" destination="ql9-cm-ik3" id="Pul-z0-FnO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4dy-uu-fDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3148" y="212.74362818590706"/>
         </scene>
         <!--Current-->
         <scene sceneID="IIn-jo-4ZT">
@@ -324,6 +379,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-street-view-filled-45" width="33.75" height="33.75"/>
+        <image name="icons8-street-view-filled-45" width="45" height="45"/>
     </resources>
 </document>
