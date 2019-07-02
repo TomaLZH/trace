@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C202D8E22CB3E7E00E160BF /* Itinerary.swift */; };
 		2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33933122C9C63900A1F87B /* NavigationController.swift */; };
 		2CE5333D22BCB54B00B427DE /* TraceChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5333C22BCB54B00B427DE /* TraceChatController.swift */; };
 		2CE5333F22BCB5B300B427DE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5333E22BCB5B300B427DE /* Message.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C202D8E22CB3E7E00E160BF /* Itinerary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Itinerary.swift; sourceTree = "<group>"; };
 		2C33933122C9C63900A1F87B /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		2CE5333C22BCB54B00B427DE /* TraceChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceChatController.swift; sourceTree = "<group>"; };
 		2CE5333E22BCB5B300B427DE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -56,6 +58,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C202D8B22CB328800E160BF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2CE5333E22BCB5B300B427DE /* Message.swift */,
+				2C202D8E22CB3E7E00E160BF /* Itinerary.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2C202D8C22CB329300E160BF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C202D8D22CB329A00E160BF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				51A9A7C522A0D3B80038B937 /* FirstViewController.swift */,
+				51D855A422BA0DF3007A5E7B /* ChatController.swift */,
+				2CE5333C22BCB54B00B427DE /* TraceChatController.swift */,
+				2C33933122C9C63900A1F87B /* NavigationController.swift */,
+				517BC63D22C5B108003F5921 /* geocode.swift */,
+				5174F423229D0FF500D45601 /* ViewController.swift */,
+				513BE53D22C9C47000865C08 /* nearby.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		5174F415229D0FF500D45601 = {
 			isa = PBXGroup;
 			children = (
@@ -77,20 +109,15 @@
 		5174F420229D0FF500D45601 /* trace */ = {
 			isa = PBXGroup;
 			children = (
-				513BE53D22C9C47000865C08 /* nearby.swift */,
+				2C202D8D22CB329A00E160BF /* Controller */,
+				2C202D8C22CB329300E160BF /* View */,
+				2C202D8B22CB328800E160BF /* Model */,
 				5140F0A322BB5F97007D340A /* GoogleService-Info.plist */,
 				5174F421229D0FF500D45601 /* AppDelegate.swift */,
-				5174F423229D0FF500D45601 /* ViewController.swift */,
 				5174F425229D0FF500D45601 /* Main.storyboard */,
 				5174F428229D0FF500D45601 /* Assets.xcassets */,
 				5174F42A229D0FF500D45601 /* LaunchScreen.storyboard */,
 				5174F42D229D0FF500D45601 /* Info.plist */,
-				51A9A7C522A0D3B80038B937 /* FirstViewController.swift */,
-				51D855A422BA0DF3007A5E7B /* ChatController.swift */,
-				2CE5333C22BCB54B00B427DE /* TraceChatController.swift */,
-				2CE5333E22BCB5B300B427DE /* Message.swift */,
-				517BC63D22C5B108003F5921 /* geocode.swift */,
-				2C33933122C9C63900A1F87B /* NavigationController.swift */,
 			);
 			path = trace;
 			sourceTree = "<group>";
@@ -255,6 +282,7 @@
 				2CE5333F22BCB5B300B427DE /* Message.swift in Sources */,
 				2CE5333D22BCB54B00B427DE /* TraceChatController.swift in Sources */,
 				51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */,
+				2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
