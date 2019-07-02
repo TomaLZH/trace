@@ -17,7 +17,10 @@ class nearby: UIViewController {
     
     @IBAction func submitted(_ sender: Any) {
         
-        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH") else{ return }
+        
+        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near=Singapore&limit=2"
+) else{ return }
+        
         
         
         let session = URLSession.shared
@@ -27,10 +30,27 @@ class nearby: UIViewController {
             }
             if let data = data{
                 print(data)
+                do{
+                    
+
+                    let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String: Any]
+                    let venues = output["response"] as! [String: Any]
+                    let venues2 = venues["groups"] as! NSArray
+      //              let venues3 = venues2[2] as! NSDictionary
+                    
+                    
+                    
+                    
+                    
+//response.group.items.venue.name
+                } catch{
+                    print(error)
+                }
+            
             }
         }.resume()
-    }
     
+    }
     
     
     override func viewDidLoad() {
