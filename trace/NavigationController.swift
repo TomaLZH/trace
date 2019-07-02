@@ -20,7 +20,7 @@ class NavigationController: UIViewController {
         getDirections()
     }
     let locationManager = CLLocationManager()
-    let regionInMeters: Double = 10000
+    let regionInMeters: Double = 5000
     var previousLocation: CLLocation?
     
     let geoCoder = CLGeocoder()
