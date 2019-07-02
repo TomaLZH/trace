@@ -122,8 +122,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ql9-cm-ik3">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ql9-cm-ik3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="589"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="OiE-Xl-Zkb" id="0wj-99-LUy"/>
                                 </connections>
@@ -136,7 +137,7 @@
                                     <action selector="goButtonTapped:" destination="C1F-FS-WQs" eventType="touchUpInside" id="Npl-uX-GOF"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZ4-KI-Ndj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZ4-KI-Ndj">
                                 <rect key="frame" x="0.0" y="597" width="375" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -148,15 +149,6 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="ql9-cm-ik3" firstAttribute="leading" secondItem="OiE-Xl-Zkb" secondAttribute="leadingMargin" id="4PA-A8-lsh"/>
-                            <constraint firstItem="0Fv-vO-7hn" firstAttribute="bottom" secondItem="GZ4-KI-Ndj" secondAttribute="bottom" id="4Sq-s4-O6C"/>
-                            <constraint firstItem="0Fv-vO-7hn" firstAttribute="trailing" secondItem="GZ4-KI-Ndj" secondAttribute="trailing" id="850-5n-0Pm"/>
-                            <constraint firstItem="ql9-cm-ik3" firstAttribute="top" secondItem="OiE-Xl-Zkb" secondAttribute="topMargin" id="B9O-3S-x6D"/>
-                            <constraint firstItem="GZ4-KI-Ndj" firstAttribute="leading" secondItem="0Fv-vO-7hn" secondAttribute="leading" id="WED-w4-4y8"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ql9-cm-ik3" secondAttribute="trailing" id="WUc-Ym-3Ku"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="ql9-cm-ik3" secondAttribute="bottom" id="y0N-2z-qJt"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0Fv-vO-7hn"/>
                     </view>
                     <connections>

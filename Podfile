@@ -10,5 +10,6 @@ pod 'ApiAI'
 pod 'Firebase/Core'
 pod 'MessageKit'
 pod 'GoogleMaps'
+pod 'Firebase'
 pod 'GooglePlaces'
 end
