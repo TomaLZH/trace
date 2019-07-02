@@ -8,8 +8,8 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 import FirebaseDatabase
-
 
 class geocode: UIViewController {
     lazy var geocoder = CLGeocoder()
@@ -21,9 +21,10 @@ class geocode: UIViewController {
     
     @IBOutlet weak var result: UITextField!
     
+    var ref: DatabaseReference?
+    var databaseHandle: DatabaseHandle?
     
-    
-    
+    var newpost = [String]()
     
     @IBAction func submitadd(_ sender: Any) {
         guard let country = country.text else { return }
@@ -46,8 +47,23 @@ class geocode: UIViewController {
     //aaaa
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        ref  = Database.database().reference()
+        
+        databaseHandle = ref?.child("data").observe(.childAdded, with: { (snapshot) in
+            //code to execute when child is added
+            //take the snapshot and add it to the array
+            print(snapshot)
+            //convert data to string
+            let post = snapshot.value as? String
+            
+            if let actualpost = post{
+                self.newpost.append(actualpost)
+            }
+            
+            
+            
+        })
         
         // Do any additional setup after loading the view.
     }

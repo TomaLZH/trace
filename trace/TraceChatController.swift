@@ -11,6 +11,15 @@ import MessageKit
 import InputBarAccessoryView
 import ApiAI
 import AVFoundation
+import FirebaseDatabase
+
+
+
+
+
+var ref: DatabaseReference?
+var databaseHandle: DatabaseHandle?
+
 
 class TraceChatController:
     MessagesViewController,
@@ -19,7 +28,12 @@ class TraceChatController:
     MessagesDisplayDelegate,
     InputBarAccessoryViewDelegate
 {
+    
+    
+    var newpost = [String]()
+    
 
+    
     var messages: [Message] = []
     var member: Member!
     var memberTrace = Member(name: "Trace", color: .red)
