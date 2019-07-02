@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33933122C9C63900A1F87B /* NavigationController.swift */; };
 		2CE5333D22BCB54B00B427DE /* TraceChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5333C22BCB54B00B427DE /* TraceChatController.swift */; };
 		2CE5333F22BCB5B300B427DE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5333E22BCB5B300B427DE /* Message.swift */; };
 		513BE53E22C9C47000865C08 /* nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513BE53D22C9C47000865C08 /* nearby.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C33933122C9C63900A1F87B /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		2CE5333C22BCB54B00B427DE /* TraceChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraceChatController.swift; sourceTree = "<group>"; };
 		2CE5333E22BCB5B300B427DE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		45C2F2CFD0F2A705B1E65211 /* Pods-trace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trace.release.xcconfig"; path = "Target Support Files/Pods-trace/Pods-trace.release.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				2CE5333C22BCB54B00B427DE /* TraceChatController.swift */,
 				2CE5333E22BCB5B300B427DE /* Message.swift */,
 				517BC63D22C5B108003F5921 /* geocode.swift */,
+				2C33933122C9C63900A1F87B /* NavigationController.swift */,
 			);
 			path = trace;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */,
 				5174F424229D0FF500D45601 /* ViewController.swift in Sources */,
 				5174F422229D0FF500D45601 /* AppDelegate.swift in Sources */,
+				2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */,
 				517BC63E22C5B108003F5921 /* geocode.swift in Sources */,
 				2CE5333F22BCB5B300B427DE /* Message.swift in Sources */,
 				2CE5333D22BCB54B00B427DE /* TraceChatController.swift in Sources */,

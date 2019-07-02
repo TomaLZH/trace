@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xpX-3p-sSG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="C1F-FS-WQs">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -113,6 +113,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgU-D2-QIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1848.8" y="115.59220389805098"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QmK-oq-49R">
+            <objects>
+                <viewController id="C1F-FS-WQs" customClass="NavigationController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OiE-Xl-Zkb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hY0-RE-6Lg">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                                <connections>
+                                    <outlet property="delegate" destination="C1F-FS-WQs" id="l0u-qK-xX3"/>
+                                </connections>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoM-sm-yWV">
+                                <rect key="frame" x="16" y="617" width="343" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="tdU-HE-u1s"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIC-jS-qi8">
+                                <rect key="frame" x="329" y="579" width="30" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="GO"/>
+                                <connections>
+                                    <action selector="goButtonTapped:" destination="C1F-FS-WQs" eventType="touchUpInside" id="cOi-po-RyC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hY0-RE-6Lg" firstAttribute="top" secondItem="OiE-Xl-Zkb" secondAttribute="top" id="1QE-pZ-WS1"/>
+                            <constraint firstItem="eoM-sm-yWV" firstAttribute="leading" secondItem="OiE-Xl-Zkb" secondAttribute="leadingMargin" id="3l2-lg-mjn"/>
+                            <constraint firstItem="0Fv-vO-7hn" firstAttribute="bottom" secondItem="zIC-jS-qi8" secondAttribute="bottom" id="Qzd-dW-iIj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eoM-sm-yWV" secondAttribute="trailing" id="S84-Ov-XNI"/>
+                            <constraint firstItem="0Fv-vO-7hn" firstAttribute="bottom" secondItem="eoM-sm-yWV" secondAttribute="bottom" id="WJI-Z8-7v5"/>
+                            <constraint firstItem="hY0-RE-6Lg" firstAttribute="leading" secondItem="OiE-Xl-Zkb" secondAttribute="leading" id="cTJ-41-LOR"/>
+                            <constraint firstAttribute="trailing" secondItem="hY0-RE-6Lg" secondAttribute="trailing" id="myx-M8-QSN"/>
+                            <constraint firstItem="eoM-sm-yWV" firstAttribute="top" secondItem="hY0-RE-6Lg" secondAttribute="bottom" id="yWF-U6-hMu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0Fv-vO-7hn"/>
+                    </view>
+                    <connections>
+                        <outlet property="addressLabel" destination="eoM-sm-yWV" id="AaY-bu-6YZ"/>
+                        <outlet property="goButton" destination="zIC-jS-qi8" id="el7-AZ-i26"/>
+                        <outlet property="mapView" destination="hY0-RE-6Lg" id="0fY-UW-HYE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4dy-uu-fDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3148" y="212.74362818590706"/>
         </scene>
         <!--Current-->
         <scene sceneID="IIn-jo-4ZT">
