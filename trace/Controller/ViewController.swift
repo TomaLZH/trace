@@ -15,32 +15,23 @@ class ViewController: UIViewController,  CLLocationManagerDelegate, MKMapViewDel
     
     
     var lm : CLLocationManager?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        lm = CLLocationManager()
-        lm?.delegate = self
-        lm?.desiredAccuracy = kCLLocationAccuracyBest
-        lm?.distanceFilter = 0
-        lm?.requestWhenInUseAuthorization()
-        
-        lm?.startUpdatingLocation()
         // Do any additional setup after loading the view, typically from a nib.
         
         lm = CLLocationManager()
         lm?.delegate = self
         lm?.desiredAccuracy = kCLLocationAccuracyBest
-        lm?.distanceFilter = 0
+        lm?.distanceFilter = 10
+        lm?.activityType = .automotiveNavigation
         lm?.requestWhenInUseAuthorization()
         
         lm?.startUpdatingLocation()
         
     }
     
-    
-    
-
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -55,7 +46,13 @@ class ViewController: UIViewController,  CLLocationManagerDelegate, MKMapViewDel
             latitudinalMeters: 1000,
             longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
+        
+        pingNearby(location)
     }
     
+    private func pingNearby(_ location: CLLocation)
+    {
+        print("Pinging nearby location...")
+    }
 }
 

@@ -60,6 +60,8 @@ class TraceChatController:
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
         
+        // testing side button
+        
         // Hiding the avatar view ////////////////////////
         if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         {
@@ -67,7 +69,7 @@ class TraceChatController:
             layout.textMessageSizeCalculator.incomingAvatarSize = .zero
         }
     }
-    
+        
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int
     {
         return messages.count

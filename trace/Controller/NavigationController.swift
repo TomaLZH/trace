@@ -54,6 +54,13 @@ class NavigationController: UIViewController {
             checkLocationAuthorization()
         } else {
             // Show alert letting the user know they have to turn this on.
+            let alert = UIAlertController(title: "Turn on location services", message: "Go to General -> Settings -> Privacy", preferredStyle: UIAlertController.Style.alert)
+            
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+            
+            
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -94,7 +101,15 @@ class NavigationController: UIViewController {
     
     func getDirections() {
         guard let location = locationManager.location?.coordinate else {
-            //TODO: Inform user we don't have their current location
+            //Inform user we don't have their current location
+            let alert = UIAlertController(title: "Sorry", message: "We don't have your current location", preferredStyle: UIAlertController.Style.alert)
+            
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+            
+            
+            self.present(alert, animated: true, completion: nil)
+
             return
         }
         
@@ -103,7 +118,7 @@ class NavigationController: UIViewController {
         resetMapView(withNew: directions)
         
         directions.calculate { [unowned self] (response, error) in
-            //TODO: Handle error if needed
+            //Handle error if needed
             guard let response = response else { return } //TODO: Show response not available in an alert
             
             for route in response.routes {
@@ -164,12 +179,12 @@ extension NavigationController: MKMapViewDelegate {
             guard let self = self else { return }
             
             if let _ = error {
-                //TODO: Show alert informing the user
+                //Show alert informing the user
                 return
             }
             
             guard let placemark = placemarks?.first else {
-                //TODO: Show alert informing the user
+                //how alert informing the user
                 return
             }
             
