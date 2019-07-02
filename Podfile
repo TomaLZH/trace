@@ -11,5 +11,6 @@ pod 'Firebase/Core'
 pod 'MessageKit'
 pod 'GoogleMaps'
 pod 'Firebase'
+pod 'Firebase/Database'
 pod 'GooglePlaces'
 end
