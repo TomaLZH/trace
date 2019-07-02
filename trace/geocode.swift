@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import FirebaseDatabase
+
 
 class geocode: UIViewController {
     lazy var geocoder = CLGeocoder()
@@ -18,6 +20,9 @@ class geocode: UIViewController {
     @IBOutlet weak var submitaddress: UIButton!
     
     @IBOutlet weak var result: UITextField!
+    
+    
+    
     
     
     @IBAction func submitadd(_ sender: Any) {
@@ -42,6 +47,8 @@ class geocode: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
         // Do any additional setup after loading the view.
     }
     
