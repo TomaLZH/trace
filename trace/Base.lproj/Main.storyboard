@@ -140,7 +140,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zIC-jS-qi8">
                                 <rect key="frame" x="329" y="579" width="30" height="30"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.75998830128202832" green="1" blue="0.70415927524668187" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="GO"/>
                                 <connections>
                                     <action selector="goButtonTapped:" destination="C1F-FS-WQs" eventType="touchUpInside" id="cOi-po-RyC"/>

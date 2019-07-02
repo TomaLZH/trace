@@ -29,7 +29,7 @@ class NavigationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // goButton.layer.cornerRadius = goButton.frame.size.height/2
+       goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
     }
     
@@ -115,7 +115,7 @@ class NavigationController: UIViewController {
     
     
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
-        let destinationCoordinate       = getCenterLocation(for: mapView).coordinate
+        let destinationCoordinate       = getCenterLocation(for: mapView).coordinate//replace with corrdinates obtained from zh in an array
         let startingLocation            = MKPlacemark(coordinate: coordinate)
         let destination                 = MKPlacemark(coordinate: destinationCoordinate)
         
