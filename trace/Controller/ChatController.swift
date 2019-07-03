@@ -1,11 +1,3 @@
-//
-//  ChatController.swift
-//  trace
-//
-//  Created by ITP312 on 19/6/19.
-//  Copyright © 2019 NYP. All rights reserved.
-//
-
 import UIKit
 import ApiAI
 import AVFoundation
@@ -27,8 +19,9 @@ class ChatController: UIViewController {
         
         request?.setMappedCompletionBlockSuccess({ (request, response) in
             let response = response as! AIResponse
-            if let textResponse = response.result.fulfillment.speech {
-                self.speechAndText(text: textResponse)
+            if let msg = response.result.fulfillment.messages[0] as NSDictionary? {
+                self.speechAndText(text: msg.value(forKey: "speech") as! String)
+                self.manageResponse(response)
             }
         }, failure: { (request, error) in
             print(error!)
@@ -40,8 +33,6 @@ class ChatController: UIViewController {
     
     
     override func viewDidLoad() {
-        
-        
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -56,15 +47,22 @@ class ChatController: UIViewController {
             self.tracetext.text = text
         }, completion: nil)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    // This function will check the intent of the response and do things if need be
+    func manageResponse(_ response: AIResponse) {
+        let intent = response.result.metadata.intentName
+        let parameters = response.result.parameters!
+        
+        switch intent {
+        case "done-yes": // User has finished creating their itinerary
+            let country = parameters["country"] as! AIResponseParameter
+            let date = parameters["date"] as! AIResponseParameter
+            let itinerary = Itinerary(country: country.stringValue,
+                                      date: date.stringValue,
+                                      venue: ["List of strings for venues"])
+            FirebaseDBController.insertOrReplace(for: .Itineraries, item: itinerary)
+        default:
+            print("Unmanaged intent.")
+        }
     }
-    */
-
 }

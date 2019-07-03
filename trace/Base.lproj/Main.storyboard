@@ -221,7 +221,7 @@
                     <navigationItem key="navigationItem" id="NNT-AZ-vN3">
                         <barButtonItem key="rightBarButtonItem" title="Chat" id="mHZ-8K-Ou0">
                             <connections>
-                                <segue destination="BL3-uK-4Ob" kind="show" id="pge-cR-ncd"/>
+                                <segue destination="ybn-Pf-hf9" kind="show" id="Uma-aT-anW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -322,27 +322,66 @@
             <point key="canvasLocation" x="1380" y="-1545"/>
         </scene>
         <!--Trace-->
-        <scene sceneID="3hX-OS-9BM">
+        <scene sceneID="rvk-rB-VmL">
             <objects>
-                <viewController id="BL3-uK-4Ob" customClass="TraceChatController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ShM-nC-H0v">
+                <viewController id="ybn-Pf-hf9" customClass="ChatController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C66-RI-xi9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lvj-QN-Vaw">
+                                <rect key="frame" x="46" y="374" width="283" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trace is your travelling companion. Ask her anything about your travels!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suT-14-J69">
+                                <rect key="frame" x="46" y="305" width="283" height="41"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8VT-Jq-xaA">
+                                <rect key="frame" x="150" y="438" width="75" height="30"/>
+                                <color key="backgroundColor" red="0.07409469252650458" green="0.71290336239151864" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="entermessage:" destination="ybn-Pf-hf9" eventType="touchUpInside" id="7FC-Sx-j8u"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="HuT-c0-unJ"/>
+                        <constraints>
+                            <constraint firstItem="RIy-dP-TOi" firstAttribute="trailing" secondItem="lvj-QN-Vaw" secondAttribute="trailing" constant="46" id="1dE-jp-9mZ"/>
+                            <constraint firstItem="lvj-QN-Vaw" firstAttribute="leading" secondItem="RIy-dP-TOi" secondAttribute="leading" constant="46" id="5FX-wz-3dC"/>
+                            <constraint firstItem="8VT-Jq-xaA" firstAttribute="leading" secondItem="RIy-dP-TOi" secondAttribute="leading" constant="150" id="8qU-HY-9yb"/>
+                            <constraint firstItem="RIy-dP-TOi" firstAttribute="bottom" secondItem="8VT-Jq-xaA" secondAttribute="bottom" constant="150" id="98H-CM-2Rf"/>
+                            <constraint firstItem="suT-14-J69" firstAttribute="leading" secondItem="RIy-dP-TOi" secondAttribute="leading" constant="46" id="GBp-I3-U1q"/>
+                            <constraint firstItem="RIy-dP-TOi" firstAttribute="trailing" secondItem="suT-14-J69" secondAttribute="trailing" constant="46" id="SZy-jh-xKA"/>
+                            <constraint firstItem="8VT-Jq-xaA" firstAttribute="top" secondItem="lvj-QN-Vaw" secondAttribute="bottom" constant="34" id="Ttj-vq-cDb"/>
+                            <constraint firstItem="lvj-QN-Vaw" firstAttribute="top" secondItem="suT-14-J69" secondAttribute="bottom" constant="28" id="kzz-3o-XNT"/>
+                            <constraint firstItem="RIy-dP-TOi" firstAttribute="trailing" secondItem="8VT-Jq-xaA" secondAttribute="trailing" constant="150" id="oV2-ss-wzw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RIy-dP-TOi"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Trace" id="WbT-PP-Kzh">
-                        <barButtonItem key="rightBarButtonItem" title="go" id="lbL-hM-fOt">
+                    <navigationItem key="navigationItem" title="Trace" id="VaI-ho-yMn">
+                        <barButtonItem key="rightBarButtonItem" title="go" id="pmK-cY-tKp">
                             <connections>
-                                <action selector="pushnext:" destination="BL3-uK-4Ob" id="kNy-lA-Ft3"/>
-                                <segue destination="GuX-ip-S7R" kind="show" identifier="mwam" id="jpp-nL-WkP"/>
+                                <segue destination="GuX-ip-S7R" kind="show" id="v6U-Gz-Ccp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="inputtext" destination="lvj-QN-Vaw" id="JXM-CA-1UU"/>
+                        <outlet property="tracetext" destination="suT-14-J69" id="xZ5-xx-zOP"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Wo-Oc-HHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jf3-W5-B9d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1132" y="-582"/>
+            <point key="canvasLocation" x="1236" y="-582.45877061469275"/>
         </scene>
     </scenes>
     <resources>
