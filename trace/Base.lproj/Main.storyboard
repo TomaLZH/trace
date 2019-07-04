@@ -285,7 +285,7 @@
                     <navigationItem key="navigationItem" title="Trace" id="VaI-ho-yMn">
                         <barButtonItem key="rightBarButtonItem" title="go" id="pmK-cY-tKp">
                             <connections>
-                                <action selector="go:" destination="ybn-Pf-hf9" id="DWV-ZL-Xyt"/>
+                                <action selector="nextpap:" destination="ybn-Pf-hf9" id="wak-nE-Tzf"/>
                                 <segue destination="C1F-FS-WQs" kind="show" identifier="mwam" id="BuR-JL-G9i"/>
                             </connections>
                         </barButtonItem>

@@ -32,58 +32,8 @@ class ChatController: UIViewController {
     }
     
 
-
-    var list : [String] = []
-    
-    @IBAction func go(_ sender: Any) {
-        
-        
-        //ATTRACTIONS NEARBY
-        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near=Bedok&limit=10") else{ return }
-        
-        
-        
-        let session = URLSession.shared
-        session.dataTask(with: url){(data,response,error) in
-            if let response = response{
-                
-            }
-            if let data = data{
-                
-                do{
-                    
-                    
-                    let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
-                    let venues = output["response"] as! NSDictionary
-                    let venues2 = venues["groups"] as! NSArray
-                    var venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
-                    var list = venues3[0] as! NSArray
-                    
-                    for i in 0..<list.count{
-                        print(list[i])
-                    }
-                    
-                    var lats = venues2.value(forKeyPath: "items.venue.location.lat") as! NSArray
-                    print(lats)
-                    
-                    var longs = venues2.value(forKeyPath: "items.venue.location.lng") as! NSArray
-                    print(longs)
-                    
-                    
-                    
-                    
-                   // print(attraction)
-                    DispatchQueue.main.async {
-                        
-                        
-                    //    self.resultattrac.text = "\(attraction)"
-                    }
-                } catch{
-                    print(error)
-                }
-                
-            }
-            }.resume()
+    @IBAction func nextpap(_ sender: Any) {
+  
         
         
         
@@ -92,6 +42,8 @@ class ChatController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -101,8 +53,8 @@ class ChatController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mwam"{
             let detailvc = segue.destination as! NavigationController
-            let last = list
-            detailvc.arraya = last
+            detailvc.arraya =
+            
         }
     }
     
