@@ -13,4 +13,7 @@ pod 'GoogleMaps'
 pod 'Firebase'
 pod 'Firebase/Database'
 pod 'GooglePlaces'
+pod 'Alamofire', '~> 4.5'
+pod 'PromiseKit', '~> 4.4'
+
 end
