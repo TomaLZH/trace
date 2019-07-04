@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import FirebaseDatabase
 
-class nearby: UIViewController {
+class nearby: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var address: UITextField!
     @IBOutlet weak var section: UITextField!
@@ -40,7 +40,7 @@ class nearby: UIViewController {
         
         
         //ATTRACTIONS NEARBY
-    guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near=SingaporePolytechnic&limit=5") else{ return }
+    guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near=Bedok&limit=10") else{ return }
         
         
         
@@ -66,7 +66,7 @@ class nearby: UIViewController {
                     DispatchQueue.main.async {
                         
 
-                   // self.resultattrac.text = printthisshit
+                   self.resultattrac.text = "\(attraction)"
                     }
                     //response.group.items.venue.name
                 } catch{
