@@ -1,8 +1,11 @@
 import UIKit
 import FirebaseDatabase
+import Firebase
+import FirebaseAuth
 
 // uid for testing purposes only
-let user = "simulator"
+let userID = Auth.auth().currentUser?.uid
+let user = userID
 
 enum itemType: String {
     case Itineraries = "itineraries/"
