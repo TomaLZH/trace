@@ -34,7 +34,7 @@ class NavigationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ref!.child("itineraries").child("simulator").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref!.child("nil").child("simulator").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
             self.country = value?["country"] as? String ?? ""
