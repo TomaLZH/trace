@@ -31,6 +31,18 @@ class NavigationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showNearbyAttractions()
+        goButton.layer.cornerRadius = goButton.frame.size.height/2
+        checkLocationServices()
+        
+        
+        
+        
+
+    }
+    
+    
+    func showNearbyAttractions() {
         
         //ATTRACTIONS NEARBY
         guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near=Ang,Mo,Kio&limit=10") else{ return }
@@ -63,7 +75,7 @@ class NavigationController: UIViewController {
                     
                     let longa = venues2.value(forKeyPath: "items.venue.location.lng") as! NSArray
                     let longs = longa[0] as! NSArray
-
+                    
                     print(longs)
                     
                     
@@ -81,19 +93,6 @@ class NavigationController: UIViewController {
                 
             }
             }.resume()
-        
-        
-        
-        
-        
-        
-        goButton.layer.cornerRadius = goButton.frame.size.height/2
-        checkLocationServices()
-        
-        
-        
-        
-
     }
     
     
