@@ -50,13 +50,7 @@ class ChatController: UIViewController {
     
     
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "mwam"{
-            let detailvc = segue.destination as! NavigationController
-            detailvc.arraya =
-            
-        }
-    }
+
     
     
     
