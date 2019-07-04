@@ -31,12 +31,29 @@ class ChatController: UIViewController {
         inputtext.text = ""
     }
     
-    
+
+    @IBAction func nextpap(_ sender: Any) {
+  
+        
+        
+        
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         // Do any additional setup after loading the view.
     }
+    
+    
+
+
+    
+    
+    
     
     let speechSynthesizer = AVSpeechSynthesizer()
     
@@ -66,3 +83,4 @@ class ChatController: UIViewController {
         }
     }
 }
+

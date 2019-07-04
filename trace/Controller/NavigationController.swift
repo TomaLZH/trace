@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 
 class NavigationController: UIViewController {
+    var arraya : [String]?
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -29,8 +30,69 @@ class NavigationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       goButton.layer.cornerRadius = goButton.frame.size.height/2
+        
+        showNearbyAttractions()
+        goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
+        
+        
+        
+        
+
+    }
+    
+    
+    func showNearbyAttractions() {
+        
+        //ATTRACTIONS NEARBY
+        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near=Ang,Mo,Kio&limit=10") else{ return }
+        
+        
+        
+        let session = URLSession.shared
+        session.dataTask(with: url){(data,response,error) in
+            if let response = response{
+                
+            }
+            if let data = data{
+                
+                do{
+                    
+                    
+                    let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
+                    let venues = output["response"] as! NSDictionary
+                    let venues2 = venues["groups"] as! NSArray
+                    let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
+                    let list = venues3[0] as! NSArray
+                    
+                    for i in 0..<list.count{
+                        print(list[i])
+                    }
+                    
+                    let lata = venues2.value(forKeyPath: "items.venue.location.lat") as! NSArray
+                    let lats = lata[0] as! NSArray
+                    print(lats)
+                    
+                    let longa = venues2.value(forKeyPath: "items.venue.location.lng") as! NSArray
+                    let longs = longa[0] as! NSArray
+                    
+                    print(longs)
+                    
+                    
+                    for i in 0..<list.count{
+                        var annotation = MKPointAnnotation()
+                        annotation.title = list[i] as! String
+                        annotation.coordinate = CLLocationCoordinate2D(latitude: lats[i] as! Double, longitude: longs[i] as! Double)
+                        self.mapView.addAnnotation(annotation)
+                    }
+                    
+                    
+                } catch{
+                    print(error)
+                }
+                
+            }
+            }.resume()
     }
     
     
@@ -204,6 +266,47 @@ extension NavigationController: MKMapViewDelegate {
         
         return renderer
     }
+    
+    // This allows you to change how the annotations look
+    // to the user. From markers to pins
+    //
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) ->
+        MKAnnotationView? {
+            // The user's current location is also considered an annotation
+            // on the map. We are not going to override how it looks
+            // so let's just return nil.
+            //
+            if annotation is MKUserLocation
+            { return nil
+            }
+            // This behaves like the Table View's dequeue re-usable cell.
+            //
+            var annotationView = mapView.dequeueReusableAnnotationView( withIdentifier: "pin")
+            
+            // If there aren't any reusable views to dequeue,
+            // we will have to create a new one.
+            //
+            if annotationView == nil {
+                var pinAnnotationView = MKPinAnnotationView()
+                annotationView = pinAnnotationView
+            }
+            // Assign the annotation (the 2nd parameter)
+            // to the pin so that iOS knows where to position
+            // it in the map.
+            //
+            annotationView?.annotation = annotation
+            // Setting this to true allows the callout bubble
+            // to pop up when the user clicks on the pin
+            //
+            annotationView?.canShowCallout = true
+            
+            
+            let rightIconView = UIButton(type: .infoLight)
+            annotationView?.rightCalloutAccessoryView = rightIconView
+            
+            return annotationView
+    }
+    
 
 
 }
