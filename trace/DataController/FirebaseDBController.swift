@@ -2,7 +2,7 @@ import UIKit
 import FirebaseDatabase
 
 // uid for testing purposes only
-let user = "simulator"
+let user = "stimulator"
 
 enum itemType: String {
     case Itineraries = "itineraries/"
