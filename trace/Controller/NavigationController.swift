@@ -9,14 +9,17 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseDatabase
+import Firebase
 
 class NavigationController: UIViewController {
     var arraya : [String]?
+    var country = ""
+    var ref: DatabaseReference?
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var goButton: UIButton!
-    
     @IBAction func goButtonTapped(_ sender: Any) {
         getDirections()
     }
@@ -31,21 +34,38 @@ class NavigationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref!.child("itineraries").child("simulator").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            self.country = value?["country"] as? String ?? ""
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
+        
         showNearbyAttractions()
         goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
-        
-        
-        
+
         
 
     }
     
     
+    
+    
+    
     func showNearbyAttractions() {
         
+
+            
+    
+
+        
         //ATTRACTIONS NEARBY
-        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near=Ang,Mo,Kio&limit=10") else{ return }
+            guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near"+country+"&limit=10") else{ return }
         
         
         

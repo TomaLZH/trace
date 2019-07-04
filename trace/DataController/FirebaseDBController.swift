@@ -1,7 +1,9 @@
 import UIKit
 import FirebaseDatabase
+import Firebase
 
 // uid for testing purposes only
+//let userID = Auth.auth().currentUser?.uid
 let user = "simulator"
 
 enum itemType: String {
