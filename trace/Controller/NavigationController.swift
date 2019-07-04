@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 
 class NavigationController: UIViewController {
+    var arraya : [String]?
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addressLabel: UILabel!
@@ -29,7 +30,8 @@ class NavigationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       goButton.layer.cornerRadius = goButton.frame.size.height/2
+        print(arraya)
+        goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
     }
     

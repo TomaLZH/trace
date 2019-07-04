@@ -35,8 +35,8 @@ class nearby: UIViewController, UITableViewDelegate {
         
         
         
-    var attraction: [Any] = []
-        
+    var attraction = [String:Any] ()
+    var venues3 : [String] = []
         
         
         //ATTRACTIONS NEARBY
@@ -54,21 +54,31 @@ class nearby: UIViewController, UITableViewDelegate {
                 do{
                     
 
-                    let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String: Any]
-                    let venues = output["response"] as! [String: Any]
+                    let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
+                    let venues = output["response"] as! NSDictionary
                     let venues2 = venues["groups"] as! NSArray
-                    let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
-                    let venues4 = venues3[0] as! NSArray
-                    for i in 0..<venues4.count{
-                    attraction.append(venues4[i])
+                    var venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
+                    var list = venues3[0] as! NSArray
+                    
+                    for i in 0..<list.count{
+                        print(list[i])
                     }
+                    
+                    var lats = venues2.value(forKeyPath: "items.venue.location.lat") as! NSArray
+                    print(lats)
+                    
+                    var longs = venues2.value(forKeyPath: "items.venue.location.lng") as! NSArray
+                    print(longs)
+                    
+                    
+                    
+                    
                     print(attraction)
                     DispatchQueue.main.async {
                         
 
                    self.resultattrac.text = "\(attraction)"
                     }
-                    //response.group.items.venue.name
                 } catch{
                     print(error)
                 }
