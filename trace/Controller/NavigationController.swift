@@ -86,6 +86,20 @@ class NavigationController: UIViewController {
         
         goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
+        
+        
+        var annotation = MKPointAnnotation()
+        annotation.title = "Yio Chu Kang Station"
+        annotation.coordinate =
+            CLLocationCoordinate2D(latitude: 1.3817, longitude: 103.8449)
+        mapView.addAnnotation(annotation)
+        
+        annotation = MKPointAnnotation()
+        annotation.title = "Ang Mo Kio Station"
+        annotation.coordinate = CLLocationCoordinate2D(latitude: 1.3700, longitude: 103.8496)
+        mapView.addAnnotation(annotation)
+        
+
     }
     
     
@@ -259,6 +273,47 @@ extension NavigationController: MKMapViewDelegate {
         
         return renderer
     }
+    
+    // This allows you to change how the annotations look
+    // to the user. From markers to pins
+    //
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) ->
+        MKAnnotationView? {
+            // The user's current location is also considered an annotation
+            // on the map. We are not going to override how it looks
+            // so let's just return nil.
+            //
+            if annotation is MKUserLocation
+            { return nil
+            }
+            // This behaves like the Table View's dequeue re-usable cell.
+            //
+            var annotationView = mapView.dequeueReusableAnnotationView( withIdentifier: "pin")
+            
+            // If there aren't any reusable views to dequeue,
+            // we will have to create a new one.
+            //
+            if annotationView == nil {
+                var pinAnnotationView = MKPinAnnotationView()
+                annotationView = pinAnnotationView
+            }
+            // Assign the annotation (the 2nd parameter)
+            // to the pin so that iOS knows where to position
+            // it in the map.
+            //
+            annotationView?.annotation = annotation
+            // Setting this to true allows the callout bubble
+            // to pop up when the user clicks on the pin
+            //
+            annotationView?.canShowCallout = true
+            
+            
+            let rightIconView = UIButton(type: .infoLight)
+            annotationView?.rightCalloutAccessoryView = rightIconView
+            
+            return annotationView
+    }
+    
 
 
 }
