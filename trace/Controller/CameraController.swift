@@ -19,7 +19,7 @@ class CameraController: UIViewController {
     @IBOutlet weak var predictionLabel: UILabel!
     @IBOutlet weak var translatedText: UILabel!
     
-    @IBOutlet weak var detectedText: UILabel!
+   // @IBOutlet weak var detectedText: UILabel!
     
     @IBAction func selectLanguageBtnPressed(_ sender: Any) {
     }
