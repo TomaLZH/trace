@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "583998874.3687871"
+            timestampString = "584001723.471591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "showNearbyAttractions()"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "showNearbyAttractions(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "583998874.369077"
+            timestampString = "584001723.472248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "showNearbyAttractions()"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "showNearbyAttractions(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "583998874.3691289"
+            timestampString = "584001723.4725339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "showNearbyAttractions()"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "showNearbyAttractions(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,12 +138,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "583998874.3691781"
+            timestampString = "584001723.472826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "showNearbyAttractions()"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "showNearbyAttractions(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -154,28 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "583998874.369225"
+            timestampString = "584001723.473104"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "showNearbyAttractions()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "583998874.369272"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "showNearbyAttractions()"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "showNearbyAttractions(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -198,28 +182,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "583998874.369324"
+            timestampString = "584001723.473389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "showNearbyAttractions()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "583998874.36937"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "showNearbyAttractions()"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "showNearbyAttractions(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

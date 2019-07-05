@@ -58,8 +58,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hY0-RE-6Lg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="568"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="C1F-FS-WQs" id="l0u-qK-xX3"/>
+                                    <outletCollection property="gestureRecognizers" destination="3cP-SX-OPJ" appends="YES" id="zeh-rc-00c"/>
                                 </connections>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoM-sm-yWV">
@@ -95,14 +97,32 @@
                         <viewLayoutGuide key="safeArea" id="0Fv-vO-7hn"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="mi2-ZO-fXN"/>
-                    <navigationItem key="navigationItem" id="hMT-0E-m8y"/>
+                    <navigationItem key="navigationItem" id="hMT-0E-m8y">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="OpP-9M-p42">
+                            <rect key="frame" x="23" y="7" width="329" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Top"/>
+                                <segment title="Food"/>
+                                <segment title="All"/>
+                                <segment title="Sights"/>
+                                <segment title="Outdoor"/>
+                            </segments>
+                            <connections>
+                                <action selector="Segmentchanged:" destination="C1F-FS-WQs" eventType="valueChanged" id="cge-mX-Fig"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
+                        <outlet property="SegmentSelected" destination="OpP-9M-p42" id="RO9-fK-1DO"/>
                         <outlet property="addressLabel" destination="eoM-sm-yWV" id="AaY-bu-6YZ"/>
                         <outlet property="goButton" destination="zIC-jS-qi8" id="el7-AZ-i26"/>
                         <outlet property="mapView" destination="hY0-RE-6Lg" id="0fY-UW-HYE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dy-uu-fDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="3cP-SX-OPJ"/>
             </objects>
             <point key="canvasLocation" x="497" y="-582"/>
         </scene>
