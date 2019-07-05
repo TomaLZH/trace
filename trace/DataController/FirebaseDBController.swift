@@ -4,6 +4,7 @@ import Firebase
 import FirebaseAuth
 
 // uid for testing purposes only
+
 let userID = Auth.auth().currentUser?.uid
 let user = userID
 
@@ -25,4 +26,6 @@ class FirebaseDBController {
                 ])
         }
     }
+    
+    
 }

@@ -12,11 +12,34 @@ import CoreLocation
 import FirebaseDatabase
 import Firebase
 
+enum Section: String {
+    case All = ""
+    case Top = "topPicks"
+    case Food = "food"
+    case Sights = "sights"
+    case Outdoor = "outdoors"
+}
+
 class NavigationController: UIViewController {
     var arraya : [String]?
     var country = ""
+    var date = ""
+    var venue: [String] = []
     var ref: DatabaseReference?
+    
+    var currentPos: CLLocationCoordinate2D?
 
+    @IBOutlet weak var SegmentSelected: UISegmentedControl!
+    @IBAction func Segmentchanged(_ sender: Any) {
+        switch SegmentSelected.selectedSegmentIndex{
+        case 0: showNearbyAttractions(currentPos, .Top)
+        case 1: showNearbyAttractions(currentPos, .Food)
+        case 2: showNearbyAttractions(currentPos, .All)
+        case 3: showNearbyAttractions(currentPos, .Sights)
+        case 4: showNearbyAttractions(currentPos, .Outdoor)
+        default: break
+        }
+    }
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var goButton: UIButton!
@@ -24,28 +47,29 @@ class NavigationController: UIViewController {
         getDirections()
     }
     let locationManager = CLLocationManager()
+    
     let regionInMeters: Double = 5000
     var previousLocation: CLLocation?
     
     let geoCoder = CLGeocoder()
     var directionsArray: [MKDirections] = []
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ref!.child("nil").child("simulator").observeSingleEvent(of: .value, with: { (snapshot) in
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/nil/")
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let value = snapshot.value as? NSDictionary
-            self.country = value?["country"] as? String ?? ""
-            
+            var snapshoot = snapshot as! DataSnapshot
+            self.country = snapshoot.childSnapshot(forPath: "country").value as! String
             // ...
         }) { (error) in
             print(error.localizedDescription)
         }
 
-        
-        showNearbyAttractions()
+        currentPos = locationManager.location?.coordinate
+        showNearbyAttractions(currentPos, .Top)
         goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
 
@@ -57,21 +81,20 @@ class NavigationController: UIViewController {
     
     
     
-    func showNearbyAttractions() {
-        
-
-            
-    
-
-        
+    func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: Section) {
         //ATTRACTIONS NEARBY
-            guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near"+country+"&limit=10") else{ return }
+        //String(format:"%f", a)
+        mapView.removeAnnotations(mapView.annotations)
+
         
+        let lat = String(format:"%f", (pos!.latitude))
+        let lng = String(format:"%f", (pos!.longitude))
         
+        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=10&section=\(section)") else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
-            if let response = response{
+            if let response = response {
                 
             }
             if let data = data{
@@ -81,6 +104,7 @@ class NavigationController: UIViewController {
                     
                     let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
                     let venues = output["response"] as! NSDictionary
+                    print(venues)
                     let venues2 = venues["groups"] as! NSArray
                     let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
                     let list = venues3[0] as! NSArray
@@ -97,7 +121,6 @@ class NavigationController: UIViewController {
                     let longs = longa[0] as! NSArray
                     
                     print(longs)
-                    
                     
                     for i in 0..<list.count{
                         var annotation = MKPointAnnotation()
