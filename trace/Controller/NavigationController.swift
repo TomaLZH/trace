@@ -15,6 +15,8 @@ import Firebase
 class NavigationController: UIViewController {
     var arraya : [String]?
     var country = ""
+    var date = ""
+    var venue: [String] = []
     var ref: DatabaseReference?
 
     @IBOutlet weak var mapView: MKMapView!
@@ -33,12 +35,11 @@ class NavigationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ref!.child("nil").child("simulator").observeSingleEvent(of: .value, with: { (snapshot) in
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/nil/")
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let value = snapshot.value as? NSDictionary
-            self.country = value?["country"] as? String ?? ""
-            
+            var snapshoot = snapshot as! DataSnapshot
+            self.country = snapshoot.childSnapshot(forPath: "country").value as! String
             // ...
         }) { (error) in
             print(error.localizedDescription)
@@ -65,9 +66,14 @@ class NavigationController: UIViewController {
 
         
         //ATTRACTIONS NEARBY
-            guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?ll=40.7,-74&client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&near"+country+"&limit=10") else{ return }
+     //   guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(locationManager.location?.coordinate.latitude),\(locationManager.location?.coordinate.longitude)&limit=10") else{ return }
+        //String(format:"%f", a)
         
-        
+        var coor = locationManager.location?.coordinate
+        let lat = String(format:"%f", (coor?.latitude)!)
+        let lon = String(format:"%f", (coor?.longitude)!)
+
+  guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lon)&section=food") else{ return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -81,6 +87,7 @@ class NavigationController: UIViewController {
                     
                     let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
                     let venues = output["response"] as! NSDictionary
+                    print(venues)
                     let venues2 = venues["groups"] as! NSArray
                     let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
                     let list = venues3[0] as! NSArray
