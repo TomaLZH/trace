@@ -50,7 +50,7 @@ extension CameraController: UIImagePickerControllerDelegate {
 }
 
 // MARK :- UIPickerViewDelegate
-extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension CameraController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -71,7 +71,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 // MARK: - IBActions
-extension ViewController {
+extension CameraController {
     
     @IBAction func languageSelectorTapped(_ sender: Any) {
         
