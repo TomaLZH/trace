@@ -17,5 +17,5 @@ pod 'Firebase/Auth'
 
 
 pod 'TravelKit'
-
+pod 'FoursquareAPIClient'
 end
