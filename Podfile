@@ -16,4 +16,6 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 
 
+pod 'TravelKit'
+
 end
