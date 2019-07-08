@@ -16,10 +16,6 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'GooglePlaces'
 pod 'Alamofire', '~> 4.5'
-pod 'PromiseKit', '~> 4.4'
 
 
-pod 'Firebase/Core' , '~> 5.2.0'
-pod 'Firebase/MLVision' , '~> 5.2.0'
-pod 'Firebase/MLVisionTextModel', '~> 5.2.0'
 end
