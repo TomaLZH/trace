@@ -23,6 +23,7 @@
 		517BC63E22C5B108003F5921 /* geocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC63D22C5B108003F5921 /* geocode.swift */; };
 		51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A9A7C522A0D3B80038B937 /* FirstViewController.swift */; };
 		51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D855A422BA0DF3007A5E7B /* ChatController.swift */; };
+		51EDD9D322D2EADA00C20CA1 /* GoogleTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */; };
 		C9E21ECC8A48C2AB66B2CB4A /* Pods_trace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7EF63071897B93B38433B4E /* Pods_trace.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		517BC63D22C5B108003F5921 /* geocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geocode.swift; sourceTree = "<group>"; };
 		51A9A7C522A0D3B80038B937 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		51D855A422BA0DF3007A5E7B /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleTranslate.swift; sourceTree = "<group>"; };
 		75C1F50FE0B2B2B4D8D9F175 /* Pods-trace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trace.debug.xcconfig"; path = "Target Support Files/Pods-trace/Pods-trace.debug.xcconfig"; sourceTree = "<group>"; };
 		C7EF63071897B93B38433B4E /* Pods_trace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -89,6 +91,7 @@
 				513BE53D22C9C47000865C08 /* nearby.swift */,
 				5128884222CF2CD900EE271C /* CameraController.swift */,
 				2C018BE822D23830000BFCCA /* FreeMapController.swift */,
+				51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				2CE5333F22BCB5B300B427DE /* Message.swift in Sources */,
 				2CFF88E122CD2FA600D326C6 /* FirebaseDBController.swift in Sources */,
 				51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */,
+				51EDD9D322D2EADA00C20CA1 /* GoogleTranslate.swift in Sources */,
 				2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
