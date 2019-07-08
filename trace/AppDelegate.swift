@@ -22,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         let configuration = AIDefaultConfiguration()
-        configuration.clientAccessToken = "c092badda3ce4b9e8a9918288e76c587"
+        // zheng han's: c092badda3ce4b9e8a9918288e76c587
+        // desmond's: d31b71863d344cadafed1a9311943fa4
+        configuration.clientAccessToken = "d31b71863d344cadafed1a9311943fa4"
         
         let apiai = ApiAI.shared()
         apiai?.configuration = configuration
