@@ -15,7 +15,6 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'GooglePlaces'
-pod 'Alamofire', '~> 4.5'
 
 
 end
