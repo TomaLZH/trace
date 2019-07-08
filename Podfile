@@ -17,5 +17,6 @@ pod 'Firebase/Auth'
 
 
 pod 'TravelKit'
+pod 'Firebase/MLVision'
 
 end
