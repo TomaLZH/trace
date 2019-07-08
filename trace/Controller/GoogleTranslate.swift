@@ -5,6 +5,7 @@
 //  Created by ITP312 on 8/7/19.
 //  Copyright © 2019 NYP. All rights reserved.
 //
+/*
 import Foundation
 
 class GoogleTranslate : NSObject {
@@ -98,3 +99,4 @@ class GoogleTranslate : NSObject {
     }
     
 }
+*/

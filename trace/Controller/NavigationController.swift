@@ -21,6 +21,7 @@ enum Section: String {
 }
 
 class NavigationController: UIViewController {
+    var place : CLLocationCoordinate2D?
     var arraya : [String]?
     var country = ""
     var date = ""
@@ -28,7 +29,7 @@ class NavigationController: UIViewController {
     var ref: DatabaseReference?
     
     var currentPos: CLLocationCoordinate2D?
-
+    
     @IBOutlet weak var SegmentSelected: UISegmentedControl!
     @IBAction func Segmentchanged(_ sender: Any) {
         switch SegmentSelected.selectedSegmentIndex{
@@ -43,49 +44,37 @@ class NavigationController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var goButton: UIButton!
-    @IBAction func goButtonTapped(_ sender: Any) {
-        getDirections()
-    }
+
     let locationManager = CLLocationManager()
     
-    let regionInMeters: Double = 5000
+    let regionInMeters: Double = 2000
     var previousLocation: CLLocation?
     
     let geoCoder = CLGeocoder()
     var directionsArray: [MKDirections] = []
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/nil/")
-        ref.observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            var snapshoot = snapshot as! DataSnapshot
-            self.country = snapshoot.childSnapshot(forPath: "country").value as! String
-            // ...
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-
         currentPos = locationManager.location?.coordinate
+
         showNearbyAttractions(currentPos, .Top)
-        goButton.layer.cornerRadius = goButton.frame.size.height/2
+//        goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
-
-        
-
     }
     
-    
-    
-    
+    override func viewDidAppear(_ animated: Bool) {
+        //IF user redirected from asking direction from the chat. This is trigger
+        print(MapState.nearbyCategory)
+        if MapState.nearbyCategory != nil {
+            mapView.removeAnnotations(mapView.annotations)
+            getDirections(currentPos, MapState.nearbyCategory)
+        }
+    }
     
     func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: Section) {
         //ATTRACTIONS NEARBY
         //String(format:"%f", a)
-        mapView.removeAnnotations(mapView.annotations)
-
+        
         
         let lat = String(format:"%f", (pos!.latitude))
         let lng = String(format:"%f", (pos!.longitude))
@@ -104,23 +93,23 @@ class NavigationController: UIViewController {
                     
                     let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
                     let venues = output["response"] as! NSDictionary
-                    print(venues)
                     let venues2 = venues["groups"] as! NSArray
                     let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
                     let list = venues3[0] as! NSArray
-                    
+                    /*
                     for i in 0..<list.count{
                         print(list[i])
                     }
+                    */
                     
                     let lata = venues2.value(forKeyPath: "items.venue.location.lat") as! NSArray
                     let lats = lata[0] as! NSArray
-                    print(lats)
+                    // print(lats)
                     
                     let longa = venues2.value(forKeyPath: "items.venue.location.lng") as! NSArray
                     let longs = longa[0] as! NSArray
                     
-                    print(longs)
+                    // print(longs)
                     
                     for i in 0..<list.count{
                         var annotation = MKPointAnnotation()
@@ -128,7 +117,6 @@ class NavigationController: UIViewController {
                         annotation.coordinate = CLLocationCoordinate2D(latitude: lats[i] as! Double, longitude: longs[i] as! Double)
                         self.mapView.addAnnotation(annotation)
                     }
-                    
                     
                 } catch{
                     print(error)
@@ -204,34 +192,80 @@ class NavigationController: UIViewController {
     }
     
     
-    func getDirections() {
-        guard let location = locationManager.location?.coordinate else {
-            //Inform user we don't have their current location
-            let alert = UIAlertController(title: "Sorry", message: "We don't have your current location", preferredStyle: UIAlertController.Style.alert)
-            
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-            
-            
-            self.present(alert, animated: true, completion: nil)
+    func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?) {
+        
+        
+        //get the location
+        
+        let lat = String(format:"%f", pos!.latitude)
+        let lng = String(format:"%f", pos!.longitude)
+        print(lat)
+        print(lng)
+        print(nearbycat)
 
-            return
-        }
         
-        let request = createDirectionsRequest(from: location)
-        let directions = MKDirections(request: request)
-        resetMapView(withNew: directions)
+        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=1&section=\(nearbycat)") else { return }
         
-        directions.calculate { [unowned self] (response, error) in
-            //Handle error if needed
-            guard let response = response else { return } //TODO: Show response not available in an alert
-            
-            for route in response.routes {
-                self.mapView.addOverlay(route.polyline)
-                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+        print("desmond")
+        let session = URLSession.shared
+        session.dataTask(with: url){(data,response,error) in
+            if let response = response { }
+            if let data = data {
+                do {
+                    // FIND LAT AND LONG FroM JSON
+                    
+                    let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
+                    let venues = output["response"] as! NSDictionary
+                    print(venues)
+                    let venues2 = venues["groups"] as! NSArray
+                    let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
+                    let list = venues3[0] as! NSArray
+                    
+
+                    
+                    let lata = venues2.value(forKeyPath: "items.venue.location.lat") as! NSArray
+                    let lats = lata[0] as! NSArray
+ 
+                    
+                    let longa = venues2.value(forKeyPath: "items.venue.location.lng") as! NSArray
+                    let longs = longa[0] as! NSArray
+                    
+                    print(longs)
+                    
+                    //ASSIGN JSON TO PLACE
+
+                    self.place?.latitude = lats[0] as! Double
+                    self.place?.longitude = longs[0] as! Double
+                    
+                    //GET DIRECTIONS TO  PLACE
+                    
+                    let request = createDirectionsRequest(from: self.place!)
+                    let directions = MKDirections(request: request)
+                    resetMapView(withNew: directions)
+                    print(self.place?.latitude)
+                    print(self.place?.longitude)
+                    
+                    directions.calculate { [unowned self] (response, error) in
+                        //Handle error if needed
+                        guard let response = response else { return } //TODO: Show response not available in an alert
+                        
+                        for route in response.routes {
+                            self.mapView.addOverlay(route.polyline)
+                            self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                        }
+                    }
+                } catch{
+                    print(error)
+                }
+                
             }
-        }
-    }
+        }.resume()
+    
+    
+        
+
+
+    
     
     
     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
@@ -258,7 +292,7 @@ class NavigationController: UIViewController {
     
     
 }
-
+}
 
 extension NavigationController: CLLocationManagerDelegate {
     
@@ -297,12 +331,12 @@ extension NavigationController: MKMapViewDelegate {
             let streetNumber = placemark.subThoroughfare ?? ""
             let streetName = placemark.thoroughfare ?? ""
             
-            DispatchQueue.main.async {
-                self.addressLabel.text = "\(streetNumber) \(streetName)"
-            }
+          //  DispatchQueue.main.async {
+           //     self.addressLabel.text = "\(streetNumber) \(streetName)"
+            //}
         }
     }
-    
+ 
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
@@ -354,16 +388,18 @@ extension NavigationController: MKMapViewDelegate {
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
                  calloutAccessoryControlTapped control: UIControl!) {
         
-       /** if control == view.rightCalloutAccessoryView {
-            println("Disclosure Pressed! \(view.annotation.subtitle)")
-            
-            if let cpa = view.annotation as? CustomPointAnnotation {
-                println("cpa.imageName = \(cpa.imageName)")
-            }
-        } **/
+        /** if control == view.rightCalloutAccessoryView {
+         println("Disclosure Pressed! \(view.annotation.subtitle)")
+         
+         if let cpa = view.annotation as? CustomPointAnnotation {
+         println("cpa.imageName = \(cpa.imageName)")
+         }
+         } **/
         
     }
     
-
+    
+    
 
 }
+

@@ -1,6 +1,6 @@
 import UIKit
 import Firebase
-
+/*
 class CameraController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var detectedText: UILabel!
@@ -165,3 +165,4 @@ extension CameraController {
         task?.resume()
     }
 }
+*/

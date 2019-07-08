@@ -4,7 +4,7 @@ import AVFoundation
 
 
 class ChatController: UIViewController {
-
+    var nearbycata: String?
     @IBOutlet weak var tracetext: UILabel!
     @IBOutlet weak var inputtext: UITextField!
     
@@ -56,6 +56,12 @@ class ChatController: UIViewController {
         let parameters = response.result.parameters!
         
         switch intent {
+        case "findnearest" :
+            let cat = parameters["category"] as! AIResponseParameter
+            print(cat.stringValue)
+            MapState.nearbyCategory = cat.stringValue
+            tabBarController?.selectedIndex = 0
+            
         case "done-yes": // User has finished creating their itinerary
             let country = parameters["country"] as! AIResponseParameter
             let date = parameters["date"] as! AIResponseParameter
