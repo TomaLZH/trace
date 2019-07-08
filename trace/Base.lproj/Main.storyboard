@@ -96,6 +96,7 @@
                                 <state key="normal" title="Camera"/>
                                 <connections>
                                     <action selector="cameraButtonPressed:" destination="b66-Ld-7b1" eventType="touchUpInside" id="ugU-pa-OJ5"/>
+                                    <action selector="cameraButtonTapped:" destination="b66-Ld-7b1" eventType="touchUpInside" id="dwj-41-m0m"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mWW-cX-Rz6">
@@ -106,6 +107,7 @@
                                 </constraints>
                                 <state key="normal" title="Photo"/>
                                 <connections>
+                                    <action selector="photosButtonTapped:" destination="b66-Ld-7b1" eventType="touchUpInside" id="THm-VZ-efj"/>
                                     <action selector="selectPhotosButtonPressed:" destination="b66-Ld-7b1" eventType="touchUpInside" id="7a6-U6-GC3"/>
                                 </connections>
                             </button>
@@ -134,6 +136,7 @@
                                 </constraints>
                                 <state key="normal" title="Select Language"/>
                                 <connections>
+                                    <action selector="languageSelectorTapped:" destination="b66-Ld-7b1" eventType="touchUpInside" id="7qZ-GC-Cfz"/>
                                     <action selector="selectLanguageBtnPressed:" destination="b66-Ld-7b1" eventType="touchUpInside" id="jBg-lo-cRv"/>
                                 </connections>
                             </button>
@@ -171,7 +174,11 @@
                         <viewLayoutGuide key="safeArea" id="8Ey-cq-7zL"/>
                     </view>
                     <connections>
+                        <outlet property="detectedText" destination="rCd-Fr-9eY" id="gZT-H0-Nwz"/>
                         <outlet property="imageView" destination="uFx-O2-K74" id="XiV-QB-AtE"/>
+                        <outlet property="languagePicker" destination="s5S-yx-pZV" id="AjZ-li-zxT"/>
+                        <outlet property="languagePickerHeightConstraint" destination="gY0-DP-fcT" id="ItK-cl-yeJ"/>
+                        <outlet property="languageSelectorButton" destination="1LU-SJ-2PF" id="HQt-la-v2g"/>
                         <outlet property="pickerView" destination="gY0-DP-fcT" id="e56-AM-yoz"/>
                         <outlet property="predictionLabel" destination="rCd-Fr-9eY" id="C5Q-TB-p2T"/>
                         <outlet property="selectLanguage" destination="1LU-SJ-2PF" id="Dba-Mz-k95"/>
