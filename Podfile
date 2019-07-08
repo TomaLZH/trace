@@ -14,7 +14,6 @@ pod 'Firebase'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
-pod 'GooglePlaces'
 
 
 end
