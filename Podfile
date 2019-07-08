@@ -8,7 +8,7 @@ target 'trace' do
   # Pods for trace
 pod 'ApiAI'
 pod 'Firebase/Core'
-pod 'MessageKit'
+
 pod 'GoogleMaps'
 pod 'Firebase'
 pod 'Firebase/Auth'

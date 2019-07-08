@@ -97,10 +97,7 @@ PODS:
   - GoogleUtilities/UserDefaults (6.2.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.2)
-  - InputBarAccessoryView (4.2.2)
   - leveldb-library (1.20)
-  - MessageKit (3.0.0):
-    - InputBarAccessoryView (~> 4.2.2)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -116,7 +113,6 @@ DEPENDENCIES:
   - Firebase/Database
   - GoogleMaps
   - GooglePlaces
-  - MessageKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -134,9 +130,7 @@ SPEC REPOS:
     - GooglePlaces
     - GoogleUtilities
     - GTMSessionFetcher
-    - InputBarAccessoryView
     - leveldb-library
-    - MessageKit
     - nanopb
 
 SPEC CHECKSUMS:
@@ -154,11 +148,9 @@ SPEC CHECKSUMS:
   GooglePlaces: e874db179f2675c4f3eeda0b686b540273a578b0
   GoogleUtilities: 996e0db07153674fd1b54b220fda3a3dc3547cba
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
-  InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
-  MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
 
-PODFILE CHECKSUM: cbbd7aec49db8ffd716eb229ce27fd03277e5e7d
+PODFILE CHECKSUM: be2c4501225da2e7d66637dbbdfffb42841da4a8
 
 COCOAPODS: 1.7.2
