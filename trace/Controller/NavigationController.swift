@@ -57,7 +57,7 @@ class NavigationController: UIViewController {
         super.viewDidLoad()
         currentPos = locationManager.location?.coordinate
 
-        showNearbyAttractions(currentPos, .Top)
+        // showNearbyAttractions(currentPos, .Top)
 //        goButton.layer.cornerRadius = goButton.frame.size.height/2
         checkLocationServices()
     }
