@@ -21,6 +21,11 @@ class NavigationController: UIViewController {
     var date = ""
     var venue: [String] = []
     var ref: DatabaseReference?
+    let locationManager = CLLocationManager()
+    let regionInMeters: Double = 2000
+    var previousLocation: CLLocation?
+    let geoCoder = CLGeocoder()
+    var directionsArray: [MKDirections] = []
     
     var currentPos: CLLocationCoordinate2D?
     
@@ -31,7 +36,7 @@ class NavigationController: UIViewController {
         case 1: showNearbyAttractions(currentPos, "food")
         case 2: showNearbyAttractions(currentPos, "all")
         case 3: showNearbyAttractions(currentPos, "sights")
-        case 4: showNearbyAttractions(currentPos, "outdoor")
+        case 4: showNearbyAttractions(currentPos, "shops")
         default: break
         }
     }
@@ -39,19 +44,13 @@ class NavigationController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var goButton: UIButton!
 
-    let locationManager = CLLocationManager()
-    
-    let regionInMeters: Double = 2000
-    var previousLocation: CLLocation?
-    
-    let geoCoder = CLGeocoder()
-    var directionsArray: [MKDirections] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         currentPos = locationManager.location?.coordinate
-
-        //showNearbyAttractions(currentPos, "all")
+        
+        showNearbyAttractions(currentPos, "all")
 //        goButton.layer.cornerRadius = goButton.frame.size.height/2
     }
     
@@ -64,17 +63,22 @@ class NavigationController: UIViewController {
         }
     }
     
+    
+    
+    //ATTRACTIONS NEARBY
     func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: String) {
-        //ATTRACTIONS NEARBY
-        //String(format:"%f", a)
-        checkLocationServices()
 
+        checkLocationServices()
+        mapView.removeOverlays(mapView.overlays)
+        //remove annotation to reset the map
         mapView.removeAnnotations(mapView.annotations)
-        print(section)
+        
+        //convert Coordinate to String
         let lat = String(format:"%f", (pos!.latitude))
         let lng = String(format:"%f", (pos!.longitude))
         
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=10&section=\(section)") else { return }
+        // put in the values to get the JSON reply
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=20&section=\(section)") else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -85,34 +89,40 @@ class NavigationController: UIViewController {
                 
                 do{
                     
-                    
+                    // Make the JSON readable and go through the array/dictionary to get
                     let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
                     let venues = output["response"] as! NSDictionary
                     let venues2 = venues["groups"] as! NSArray
                     let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
-                    let list = venues3[0] as! NSArray
-                    /*
-                    for i in 0..<list.count{
-                        print(list[i])
-                    }
-                    */
                     
+                    //- name
+                    let listname = venues3[0] as! NSArray
+                    
+                    //- latitude
                     let lata = venues2.value(forKeyPath: "items.venue.location.lat") as! NSArray
                     let lats = lata[0] as! NSArray
-                    // print(lats)
                     
+                    //- longitude
                     let longa = venues2.value(forKeyPath: "items.venue.location.lng") as! NSArray
                     let longs = longa[0] as! NSArray
+                
+                    //Loop through to assign the coordinates
+                    for i in 0..<listname.count{
                     
-                    // print(longs)
-                    print("STOOOOOP")
-                    for i in 0..<list.count{
+                        //Dispatch Queue to make the pins appear faster
+                        DispatchQueue.global(qos: .background).sync{
                         
-                        var annotation = MKPointAnnotation()
-                        annotation.title = list[i] as! String
-                        annotation.coordinate = CLLocationCoordinate2D(latitude: lats[i] as! Double, longitude: longs[i] as! Double)
-                        print(annotation.coordinate)
-                        self.mapView.addAnnotation(annotation)
+                        // Assign the annotation with the approiate value
+                            var annotation = MKPointAnnotation()
+                            annotation.title = listname[i] as! String
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: lats[i] as! Double, longitude: longs[i] as! Double)
+                            print(annotation.coordinate)
+                            
+                            // Add the Annotation
+                            DispatchQueue.main.async {
+                                self.mapView.addAnnotation(annotation)
+                            }
+                        }
                     }
                     
                 } catch{
@@ -195,19 +205,16 @@ class NavigationController: UIViewController {
         
         //get the location
         checkLocationServices()
-
         
+        //Convert Coordinate to String
         let lat = String(format:"%f", pos!.latitude)
         let lng = String(format:"%f", pos!.longitude)
-        let cat = nearbycat as! String
-        print(lat)
-        print(lng)
-        print(cat)
-
+        let cata = nearbycat as! String
+        //replace white space of category to ,
+        let cat = cata.replacingOccurrences(of: " ", with: ",")
+        //Put in parameters to get approiate JSON reply
+        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&limit=1&query=\(cat)") else { return }
         
-        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=1&section=\(cat)") else { return }
-        
-        print("desmond")
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
             if let response = response { }
@@ -219,7 +226,7 @@ class NavigationController: UIViewController {
                     let venues = output["response"] as! NSDictionary
                     let venues2 = venues["groups"] as! NSArray
                     let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
-                    let list = venues3[0] as! NSArray
+                    let listname = venues3[0] as! NSArray
                     
 
                     
@@ -232,21 +239,22 @@ class NavigationController: UIViewController {
                     let longs = longa[0] as! NSArray
                     let longi = longs[0] as! Double
                     
-                    print(lati)
-                    print(longi)
-                    
-                    //ASSIGN JSON TO PLACE
-
+                    //ASSIGN JSON Coordinate TO PLACE
                     self.place = CLLocationCoordinate2D(latitude: lati, longitude: longi)
                     print(self.place)
-                    //GET DIRECTIONS TO  PLACE
                     
+                    //GET DIRECTIONS TO  PLACE
                     let request = createDirectionsRequest(from: self.place!)
                     let directions = MKDirections(request: request)
                     resetMapView(withNew: directions)
-                    print(self.place?.latitude)
-                    print(self.place?.longitude)
                     
+                    //add annotation to the target place
+                    let annotation = MKPointAnnotation()
+                    annotation.title = listname[0] as! String
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.place!.latitude, longitude: self.place!.longitude)
+                    self.mapView.addAnnotation(annotation)
+                    
+                    //add the line
                     directions.calculate { [unowned self] (response, error) in
                         //Handle error if needed
                         guard let response = response else { return } //TODO: Show response not available in an alert
@@ -390,13 +398,13 @@ extension NavigationController: MKMapViewDelegate {
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
                  calloutAccessoryControlTapped control: UIControl!) {
         
-        /** if control == view.rightCalloutAccessoryView {
+        /* if control == view.rightCalloutAccessoryView {
          println("Disclosure Pressed! \(view.annotation.subtitle)")
          
          if let cpa = view.annotation as? CustomPointAnnotation {
          println("cpa.imageName = \(cpa.imageName)")
          }
-         } **/
+         } */
         
     }
     
