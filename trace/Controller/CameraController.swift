@@ -15,7 +15,7 @@ class CameraController: UIViewController, UINavigationControllerDelegate {
     let languageCodes = [  "hi", "hi", "fr", "it", "de", "ja" ]
     
     lazy var vision = Vision.vision()
-    var textDetector: VisionTextDetector?
+    var textDetector: VisionTextDetector? // pod install Firebase/MLVisionTextDetect crash whole project
     var pickerVisible: Bool = false
     var targetCode = "hi"
     
@@ -167,5 +167,5 @@ extension CameraController {
     }
 }
 
- */
+/*
 
