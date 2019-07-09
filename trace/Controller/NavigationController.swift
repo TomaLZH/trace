@@ -32,10 +32,10 @@ class NavigationController: UIViewController {
     @IBOutlet weak var SegmentSelected: UISegmentedControl!
     @IBAction func Segmentchanged(_ sender: Any) {
         switch SegmentSelected.selectedSegmentIndex{
-        case 0: showNearbyAttractions(currentPos, "toppicks")
+        case 0: showNearbyAttractions(currentPos, "all")
         case 1: showNearbyAttractions(currentPos, "food")
-        case 2: showNearbyAttractions(currentPos, "all")
-        case 3: showNearbyAttractions(currentPos, "sights")
+        case 2: showNearbyAttractions(currentPos, "drinks")
+        case 3: showNearbyAttractions(currentPos, "arts")
         case 4: showNearbyAttractions(currentPos, "shops")
         default: break
         }
