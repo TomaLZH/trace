@@ -57,6 +57,7 @@ class ItineraryTableViewController: UITableViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
+        let name = itineraryList[indexPath.row].name
         let country = itineraryList[indexPath.row].country
         let start = dateFormatter.date(from: itineraryList[indexPath.row].startDate)
         let end = dateFormatter.date(from: itineraryList[indexPath.row].endDate)
@@ -69,6 +70,7 @@ class ItineraryTableViewController: UITableViewController {
         
         dateFormatter.dateFormat = "dd MMM yyyy, EEE"
         
+        cell.nameLabel.text = name
         cell.countryLabel.text = country
         cell.dateLabel.text = "\(dateFormatter.string(from: start!)) - \(dateFormatter.string(from: end!))"
         cell.daysLabel.text = "\(noOfDays!) day\(plural_s) trip"
@@ -76,6 +78,18 @@ class ItineraryTableViewController: UITableViewController {
         return cell
     }
  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showItinerary" {
+            let itineraryViewController = segue.destination as! ItineraryViewController
+            
+            let myIndexPath = self.tableView.indexPathForSelectedRow
+            if myIndexPath != nil {
+                let itinerary = itineraryList[myIndexPath!.row]
+                itineraryViewController.itinerary = itinerary
+            }
+        }
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
