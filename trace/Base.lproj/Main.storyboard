@@ -40,6 +40,9 @@
                                 <rect key="frame" x="329" y="579" width="30" height="30"/>
                                 <color key="backgroundColor" red="0.75998830128202832" green="1" blue="0.70415927524668187" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="GO"/>
+                                <connections>
+                                    <action selector="weather:" destination="C1F-FS-WQs" eventType="touchUpInside" id="yQ7-X2-vQt"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -191,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AZX-cq-zpf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="-430"/>
+            <point key="canvasLocation" x="1937" y="-582"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="chA-ib-qQS">

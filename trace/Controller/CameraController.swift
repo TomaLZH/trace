@@ -1,3 +1,4 @@
+/*
 import UIKit
 import Firebase
 
@@ -166,4 +167,5 @@ extension CameraController {
     }
 }
 
+ */
 

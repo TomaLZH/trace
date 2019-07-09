@@ -27,6 +27,7 @@
 		51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A9A7C522A0D3B80038B937 /* FirstViewController.swift */; };
 		51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D855A422BA0DF3007A5E7B /* ChatController.swift */; };
 		51EDD9D322D2EADA00C20CA1 /* GoogleTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */; };
+		51EDD9D522D4509D00C20CA1 /* GetWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDD9D422D4509D00C20CA1 /* GetWeather.swift */; };
 		C9E21ECC8A48C2AB66B2CB4A /* Pods_trace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7EF63071897B93B38433B4E /* Pods_trace.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		51A9A7C522A0D3B80038B937 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		51D855A422BA0DF3007A5E7B /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleTranslate.swift; sourceTree = "<group>"; };
+		51EDD9D422D4509D00C20CA1 /* GetWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWeather.swift; sourceTree = "<group>"; };
 		75C1F50FE0B2B2B4D8D9F175 /* Pods-trace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trace.debug.xcconfig"; path = "Target Support Files/Pods-trace/Pods-trace.debug.xcconfig"; sourceTree = "<group>"; };
 		C7EF63071897B93B38433B4E /* Pods_trace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -92,15 +94,16 @@
 			children = (
 				51A9A7C522A0D3B80038B937 /* FirstViewController.swift */,
 				51D855A422BA0DF3007A5E7B /* ChatController.swift */,
-				2C33933122C9C63900A1F87B /* NavigationController.swift */,
 				517BC63D22C5B108003F5921 /* geocode.swift */,
 				5174F423229D0FF500D45601 /* ViewController.swift */,
 				513BE53D22C9C47000865C08 /* nearby.swift */,
-				5128884222CF2CD900EE271C /* CameraController.swift */,
 				2C018BE822D23830000BFCCA /* FreeMapController.swift */,
-				51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */,
 				2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */,
 				2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */,
+				2C33933122C9C63900A1F87B /* NavigationController.swift */,
+				51EDD9D422D4509D00C20CA1 /* GetWeather.swift */,
+				5128884222CF2CD900EE271C /* CameraController.swift */,
+				51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				513BE53E22C9C47000865C08 /* nearby.swift in Sources */,
 				2C018BEB22D3C67B000BFCCA /* ItineraryTableViewController.swift in Sources */,
 				2C018BEF22D3D54F000BFCCA /* ItineraryStartController.swift in Sources */,
+				51EDD9D522D4509D00C20CA1 /* GetWeather.swift in Sources */,
 				51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */,
 				5174F424229D0FF500D45601 /* ViewController.swift in Sources */,
 				2C018BE922D23830000BFCCA /* FreeMapController.swift in Sources */,

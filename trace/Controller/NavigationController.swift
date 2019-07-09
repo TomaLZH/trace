@@ -47,6 +47,42 @@ class NavigationController: UIViewController {
     let geoCoder = CLGeocoder()
     var directionsArray: [MKDirections] = []
     
+    
+    
+    @IBAction func weather(_ sender: Any) {
+        if CLLocationManager.locationServicesEnabled(){
+            switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("Authorized.")
+                let lat = locationManager.location?.coordinate.latitude
+                let long = locationManager.location?.coordinate.longitude
+                let location = CLLocation(latitude: lat!, longitude: long!)
+                CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error)in
+                    if error != nil {
+                        return
+                    } else if let country = placemarks?.first?.country,
+                        let city = placemarks?.first?.locality {
+                        print(country)
+                        print(city)
+                        
+                        let weatherGetter = GetWeather()
+                        weatherGetter.getWeather(city: city)
+                        
+                    }
+                    
+                })
+                
+            default: break
+            }
+        }
+    }
+
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         currentPos = locationManager.location?.coordinate
