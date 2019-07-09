@@ -84,7 +84,7 @@ class ItineraryTableViewController: UITableViewController {
             
             let myIndexPath = self.tableView.indexPathForSelectedRow
             if myIndexPath != nil {
-                let itinerary = itineraryList[myIndexPath!.section]
+                let itinerary = itineraryList[myIndexPath!.row]
                 itineraryViewController.itinerary = itinerary
             }
         }

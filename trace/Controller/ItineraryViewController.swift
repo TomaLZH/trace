@@ -18,6 +18,10 @@ class ItineraryViewController: UITableViewController {
         // Hard-coded for testing
         tableViewData = [cellData(isOpened: false, title: "Day 1", sectionData: ["9am Uber", "10am Activity", "11am Activity"]),
                          cellData(isOpened: false, title: "Day 2", sectionData: ["12pm Lunch", "3pm Tour", "6pm Dinner", "9pm Camp"])]
+        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
         navigationItem.title = itinerary?.name
     }

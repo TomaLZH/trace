@@ -365,7 +365,7 @@
             </objects>
             <point key="canvasLocation" x="1200.8" y="282.90854572713647"/>
         </scene>
-        <!--Itinerary-->
+        <!--Itinerary View Controller-->
         <scene sceneID="wdW-ln-itO">
             <objects>
                 <tableViewController id="OWG-3r-hhy" customClass="ItineraryViewController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
@@ -425,7 +425,7 @@
                             <outlet property="delegate" destination="OWG-3r-hhy" id="Hhw-wh-eRf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Itinerary" id="YEb-f4-BeW">
+                    <navigationItem key="navigationItem" id="YEb-f4-BeW">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="mqH-uJ-5kj">
                             <connections>
                                 <segue destination="k7F-41-Z5y" kind="show" identifier="editItinerary" id="L1K-iy-jNr"/>
@@ -437,7 +437,7 @@
             </objects>
             <point key="canvasLocation" x="1200.8" y="999.85007496251887"/>
         </scene>
-        <!--Itinerary Start Controller-->
+        <!--Itinerary-->
         <scene sceneID="c5U-0r-kcz">
             <objects>
                 <viewController id="k7F-41-Z5y" customClass="ItineraryStartController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
@@ -524,6 +524,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oJl-cK-bvi"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Itinerary" id="zCO-CH-Dlb"/>
                     <connections>
                         <outlet property="countryTextField" destination="b7j-rW-qBg" id="FmP-NP-bX0"/>
                         <outlet property="doneButton" destination="vuU-Us-Gp7" id="70v-oh-8FO"/>

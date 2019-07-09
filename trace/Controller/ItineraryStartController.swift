@@ -52,7 +52,8 @@ class ItineraryStartController: UIViewController {
         guard let startDate = startDateTextField.text else { return }
         guard let endDate = endDateTextField.text else { return }
         
-        let newItinerary = Itinerary(name: name,
+        let newItinerary = Itinerary(id: itineraryToEdit?.id,
+                                     name: name,
                                      country: country,
                                      startDate: startDate,
                                      endDate: endDate,
