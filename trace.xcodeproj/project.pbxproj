@@ -10,6 +10,7 @@
 		2C018BE922D23830000BFCCA /* FreeMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BE822D23830000BFCCA /* FreeMapController.swift */; };
 		2C018BEB22D3C67B000BFCCA /* ItineraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */; };
 		2C018BED22D3C796000BFCCA /* ItineraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEC22D3C796000BFCCA /* ItineraryCell.swift */; };
+		2C018BEF22D3D54F000BFCCA /* ItineraryStartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */; };
 		2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C202D8E22CB3E7E00E160BF /* Itinerary.swift */; };
 		2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33933122C9C63900A1F87B /* NavigationController.swift */; };
 		2CFF88E122CD2FA600D326C6 /* FirebaseDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF88E022CD2FA600D326C6 /* FirebaseDBController.swift */; };
@@ -33,6 +34,7 @@
 		2C018BE822D23830000BFCCA /* FreeMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeMapController.swift; sourceTree = "<group>"; };
 		2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryTableViewController.swift; sourceTree = "<group>"; };
 		2C018BEC22D3C796000BFCCA /* ItineraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ItineraryCell.swift; path = trace/Controller/ItineraryCell.swift; sourceTree = SOURCE_ROOT; };
+		2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryStartController.swift; sourceTree = "<group>"; };
 		2C202D8E22CB3E7E00E160BF /* Itinerary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Itinerary.swift; sourceTree = "<group>"; };
 		2C33933122C9C63900A1F87B /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		2CFF88E022CD2FA600D326C6 /* FirebaseDBController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDBController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				2C018BE822D23830000BFCCA /* FreeMapController.swift */,
 				51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */,
 				2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */,
+				2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			files = (
 				513BE53E22C9C47000865C08 /* nearby.swift in Sources */,
 				2C018BEB22D3C67B000BFCCA /* ItineraryTableViewController.swift in Sources */,
+				2C018BEF22D3D54F000BFCCA /* ItineraryStartController.swift in Sources */,
 				51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */,
 				5174F424229D0FF500D45601 /* ViewController.swift in Sources */,
 				2C018BE922D23830000BFCCA /* FreeMapController.swift in Sources */,

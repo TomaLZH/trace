@@ -9,6 +9,12 @@
 import UIKit
 
 class ItineraryTableViewController: UITableViewController {
+    
+    var itineraryList: [Itinerary] = []
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadItineraries()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,23 +30,52 @@ class ItineraryTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return itineraryList.count
     }
 
-    /*
+    func loadItineraries() {
+        FirebaseDBController.loadItineraries(onComplete:
+            {
+                (dbItineraryList) in
+                
+                self.itineraryList = dbItineraryList
+                
+                self.tableView.reloadData()
+            }
+        )
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "itineraryCell", for: indexPath) as! ItineraryCell
 
-        // Configure the cell...
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let country = itineraryList[indexPath.row].country
+        let start = dateFormatter.date(from: itineraryList[indexPath.row].startDate)
+        let end = dateFormatter.date(from: itineraryList[indexPath.row].endDate)
+        
+        // Calculate number of days
+        let calendar = NSCalendar.current
+        let components = calendar.dateComponents([.day], from: start!, to: end!)
+        let noOfDays = components.day
+        let plural_s = noOfDays! <= 1 ? "" : "s"
+        
+        dateFormatter.dateFormat = "dd MMM yyyy, EEE"
+        
+        cell.countryLabel.text = country
+        cell.dateLabel.text = "\(dateFormatter.string(from: start!)) - \(dateFormatter.string(from: end!))"
+        cell.daysLabel.text = "\(noOfDays!) day\(plural_s) trip"
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.

@@ -2,6 +2,10 @@ import UIKit
 
 class ItineraryCell: UITableViewCell {
 
+    @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var daysLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
