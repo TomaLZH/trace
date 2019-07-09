@@ -5,7 +5,7 @@
 //  Created by ITP312 on 8/7/19.
 //  Copyright © 2019 NYP. All rights reserved.
 //
-/*
+
 import Foundation
 
 class GoogleTranslate : NSObject {
@@ -29,7 +29,7 @@ class GoogleTranslate : NSObject {
         urlComponents.path          = "/language/translate/v2"
         
         urlComponents.queryItems    = [
-            URLQueryItem(name: "key"  , value: "YOUR_GOOGLE_TRANSLATE_API_KEY") //eofnhiethnithrn
+            URLQueryItem(name: "key"  , value: "AIzaSyDUkXgaygfJ9gcTqcmGfsrkRVmQBKButNQ") //Google translate api key
         ]
         
         //  Headers
@@ -76,7 +76,7 @@ class GoogleTranslate : NSObject {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! Dictionary<String,AnyObject>
                 
                 // Check HTTP status code
-                if  let response    = response as? HTTPURLResponse {
+                if  let response = response as? HTTPURLResponse {
                     let statusCode  = response.statusCode
                     if  statusCode != 200 && statusCode != 201 {
                         let googleError = NSError(domain: "Google translation", code: statusCode, userInfo: nil)
@@ -99,4 +99,5 @@ class GoogleTranslate : NSObject {
     }
     
 }
-*/
+
+

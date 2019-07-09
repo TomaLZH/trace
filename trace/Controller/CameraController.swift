@@ -1,6 +1,6 @@
 import UIKit
 import Firebase
-/*
+
 class CameraController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var detectedText: UILabel!
@@ -10,8 +10,8 @@ class CameraController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var languageSelectorButton: UIButton!
     @IBOutlet weak var translatedText: UILabel!
     
-    let languages = ["Select Language", "Hindi", "French", "Italian", "German", "Japanese"]
-    let languageCodes = ["hi", "hi", "fr", "it", "de", "ja"]
+    let languages = [  "Select Language", "Hindi", "French", "Italian", "German", "Japanese" ]
+    let languageCodes = [  "hi", "hi", "fr", "it", "de", "ja" ]
     
     lazy var vision = Vision.vision()
     var textDetector: VisionTextDetector?
@@ -27,20 +27,20 @@ class CameraController: UIViewController, UINavigationControllerDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    // MARK: - Configuration
+    // Configuration
     func configureLanguagePicker() {
         languagePicker.dataSource = self
         languagePicker.delegate = self
     }
 }
 
-// MARK: - UIImagePickerControllerDelegate
+// UIImagePickerControllerDelegate
 extension CameraController: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         dismiss(animated: true, completion: nil)
         
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             fatalError("couldn't load image")
         }
         imageView.image = image
@@ -49,7 +49,7 @@ extension CameraController: UIImagePickerControllerDelegate {
     }
 }
 
-// MARK :- UIPickerViewDelegate
+// UIPickerViewDelegate
 extension CameraController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -70,7 +70,7 @@ extension CameraController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
-// MARK: - IBActions
+// IBActions for the picker view
 extension CameraController {
     
     @IBAction func languageSelectorTapped(_ sender: Any) {
@@ -122,7 +122,7 @@ extension CameraController {
     }
 }
 
-// MARK: - Methods
+// Methods
 extension CameraController {
     func detectText (image: UIImage) {
         
@@ -150,7 +150,7 @@ extension CameraController {
     
     func translateText(detectedText: String) {
         
-        guard !detectedText.isEmpty else {
+        guard !detectedText.isEmpty else { 
             return
         }
         
@@ -165,4 +165,5 @@ extension CameraController {
         task?.resume()
     }
 }
-*/
+
+
