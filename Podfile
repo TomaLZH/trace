@@ -17,7 +17,6 @@ pod 'Firebase/Auth'
 
 
 pod 'TravelKit'
-pod 'FoursquareAPIClient'
 
 pod 'Firebase/MLVision'
 end
