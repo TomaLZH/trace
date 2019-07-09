@@ -12,16 +12,10 @@ import CoreLocation
 import FirebaseDatabase
 import Firebase
 
-enum Section: String {
-    case All = ""
-    case Top = "topPicks"
-    case Food = "food"
-    case Sights = "sights"
-    case Outdoor = "outdoors"
-}
+
 
 class NavigationController: UIViewController {
-    var place : CLLocationCoordinate2D?
+    var place: CLLocationCoordinate2D?
     var arraya : [String]?
     var country = ""
     var date = ""
@@ -33,11 +27,11 @@ class NavigationController: UIViewController {
     @IBOutlet weak var SegmentSelected: UISegmentedControl!
     @IBAction func Segmentchanged(_ sender: Any) {
         switch SegmentSelected.selectedSegmentIndex{
-        case 0: showNearbyAttractions(currentPos, .Top)
-        case 1: showNearbyAttractions(currentPos, .Food)
-        case 2: showNearbyAttractions(currentPos, .All)
-        case 3: showNearbyAttractions(currentPos, .Sights)
-        case 4: showNearbyAttractions(currentPos, .Outdoor)
+        case 0: showNearbyAttractions(currentPos, "toppicks")
+        case 1: showNearbyAttractions(currentPos, "food")
+        case 2: showNearbyAttractions(currentPos, "all")
+        case 3: showNearbyAttractions(currentPos, "sights")
+        case 4: showNearbyAttractions(currentPos, "outdoor")
         default: break
         }
     }
@@ -57,9 +51,8 @@ class NavigationController: UIViewController {
         super.viewDidLoad()
         currentPos = locationManager.location?.coordinate
 
-        // showNearbyAttractions(currentPos, .Top)
+        showNearbyAttractions(currentPos, "all")
 //        goButton.layer.cornerRadius = goButton.frame.size.height/2
-        checkLocationServices()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,22 +64,24 @@ class NavigationController: UIViewController {
         }
     }
     
-    func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: Section) {
+    func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: String) {
         //ATTRACTIONS NEARBY
         //String(format:"%f", a)
-        
-        
+        checkLocationServices()
+
+        mapView.removeAnnotations(mapView.annotations)
+        print(section)
         let lat = String(format:"%f", (pos!.latitude))
         let lng = String(format:"%f", (pos!.longitude))
         
-        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=10&section=\(section)") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=10&section=\(section)") else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
-            if let response = response {
+            if var response = response {
                 
             }
-            if let data = data{
+            if var data = data{
                 
                 do{
                     
@@ -110,11 +105,13 @@ class NavigationController: UIViewController {
                     let longs = longa[0] as! NSArray
                     
                     // print(longs)
-                    
+                    print("STOOOOOP")
                     for i in 0..<list.count{
+                        
                         var annotation = MKPointAnnotation()
                         annotation.title = list[i] as! String
                         annotation.coordinate = CLLocationCoordinate2D(latitude: lats[i] as! Double, longitude: longs[i] as! Double)
+                        print(annotation.coordinate)
                         self.mapView.addAnnotation(annotation)
                     }
                     
@@ -195,16 +192,20 @@ class NavigationController: UIViewController {
     func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?) {
         
         
+        
         //get the location
+        checkLocationServices()
+
         
         let lat = String(format:"%f", pos!.latitude)
         let lng = String(format:"%f", pos!.longitude)
+        let cat = nearbycat as! String
         print(lat)
         print(lng)
-        print(nearbycat)
+        print(cat)
 
         
-        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=1&section=\(nearbycat)") else { return }
+        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=1&section=\(cat)") else { return }
         
         print("desmond")
         let session = URLSession.shared
@@ -216,7 +217,6 @@ class NavigationController: UIViewController {
                     
                     let output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
                     let venues = output["response"] as! NSDictionary
-                    print(venues)
                     let venues2 = venues["groups"] as! NSArray
                     let venues3 = venues2.value(forKeyPath: "items.venue.name") as! NSArray
                     let list = venues3[0] as! NSArray
@@ -225,18 +225,20 @@ class NavigationController: UIViewController {
                     
                     let lata = venues2.value(forKeyPath: "items.venue.location.lat") as! NSArray
                     let lats = lata[0] as! NSArray
+                    let lati = lats[0] as! Double
  
                     
                     let longa = venues2.value(forKeyPath: "items.venue.location.lng") as! NSArray
                     let longs = longa[0] as! NSArray
+                    let longi = longs[0] as! Double
                     
-                    print(longs)
+                    print(lati)
+                    print(longi)
                     
                     //ASSIGN JSON TO PLACE
 
-                    self.place?.latitude = lats[0] as! Double
-                    self.place?.longitude = longs[0] as! Double
-                    
+                    self.place = CLLocationCoordinate2D(latitude: lati, longitude: longi)
+                    print(self.place)
                     //GET DIRECTIONS TO  PLACE
                     
                     let request = createDirectionsRequest(from: self.place!)
