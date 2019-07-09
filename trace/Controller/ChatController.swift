@@ -65,7 +65,8 @@ class ChatController: UIViewController {
         case "done-yes": // User has finished creating their itinerary
             let country = parameters["country"] as! AIResponseParameter
             let date = parameters["date"] as! AIResponseParameter
-            let itinerary = Itinerary(country: country.stringValue,
+            let itinerary = Itinerary(name: "Default",
+                                      country: country.stringValue,
                                       startDate: date.stringValue,
                                       endDate: date.stringValue,
                                       venue: ["List of strings for venues"])

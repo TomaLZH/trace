@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		2C018BE922D23830000BFCCA /* FreeMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BE822D23830000BFCCA /* FreeMapController.swift */; };
 		2C018BEB22D3C67B000BFCCA /* ItineraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */; };
-		2C018BED22D3C796000BFCCA /* ItineraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEC22D3C796000BFCCA /* ItineraryCell.swift */; };
 		2C018BEF22D3D54F000BFCCA /* ItineraryStartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */; };
 		2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C202D8E22CB3E7E00E160BF /* Itinerary.swift */; };
 		2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33933122C9C63900A1F87B /* NavigationController.swift */; };
+		2CEF788A22D44FAB006D6DE1 /* ItineraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788922D44FAB006D6DE1 /* ItineraryCell.swift */; };
+		2CEF788C22D44FCE006D6DE1 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788B22D44FCE006D6DE1 /* DayCell.swift */; };
+		2CEF788E22D44FFE006D6DE1 /* ItineraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788D22D44FFE006D6DE1 /* ItineraryViewController.swift */; };
+		2CEF789022D4531B006D6DE1 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788F22D4531B006D6DE1 /* TaskCell.swift */; };
 		2CFF88E122CD2FA600D326C6 /* FirebaseDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF88E022CD2FA600D326C6 /* FirebaseDBController.swift */; };
 		5128884322CF2CD900EE271C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5128884222CF2CD900EE271C /* CameraController.swift */; };
 		513BE53E22C9C47000865C08 /* nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513BE53D22C9C47000865C08 /* nearby.swift */; };
@@ -33,10 +36,13 @@
 /* Begin PBXFileReference section */
 		2C018BE822D23830000BFCCA /* FreeMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeMapController.swift; sourceTree = "<group>"; };
 		2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryTableViewController.swift; sourceTree = "<group>"; };
-		2C018BEC22D3C796000BFCCA /* ItineraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ItineraryCell.swift; path = trace/Controller/ItineraryCell.swift; sourceTree = SOURCE_ROOT; };
 		2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryStartController.swift; sourceTree = "<group>"; };
 		2C202D8E22CB3E7E00E160BF /* Itinerary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Itinerary.swift; sourceTree = "<group>"; };
 		2C33933122C9C63900A1F87B /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		2CEF788922D44FAB006D6DE1 /* ItineraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryCell.swift; sourceTree = "<group>"; };
+		2CEF788B22D44FCE006D6DE1 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		2CEF788D22D44FFE006D6DE1 /* ItineraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryViewController.swift; sourceTree = "<group>"; };
+		2CEF788F22D4531B006D6DE1 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		2CFF88E022CD2FA600D326C6 /* FirebaseDBController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDBController.swift; sourceTree = "<group>"; };
 		45C2F2CFD0F2A705B1E65211 /* Pods-trace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trace.release.xcconfig"; path = "Target Support Files/Pods-trace/Pods-trace.release.xcconfig"; sourceTree = "<group>"; };
 		5128884222CF2CD900EE271C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
@@ -79,14 +85,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		2C202D8C22CB329300E160BF /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2C018BEC22D3C796000BFCCA /* ItineraryCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		2C202D8D22CB329A00E160BF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,8 +99,19 @@
 				51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */,
 				2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */,
 				2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */,
+				2CEF788D22D44FFE006D6DE1 /* ItineraryViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		2CEF788822D44F78006D6DE1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2CEF788922D44FAB006D6DE1 /* ItineraryCell.swift */,
+				2CEF788B22D44FCE006D6DE1 /* DayCell.swift */,
+				2CEF788F22D4531B006D6DE1 /* TaskCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2CFF88DF22CD2F7500D326C6 /* DataController */ = {
@@ -136,8 +145,8 @@
 			children = (
 				2CFF88DF22CD2F7500D326C6 /* DataController */,
 				2C202D8D22CB329A00E160BF /* Controller */,
-				2C202D8C22CB329300E160BF /* View */,
 				2C202D8B22CB328800E160BF /* Model */,
+				2CEF788822D44F78006D6DE1 /* View */,
 				5140F0A322BB5F97007D340A /* GoogleService-Info.plist */,
 				5174F421229D0FF500D45601 /* AppDelegate.swift */,
 				5174F425229D0FF500D45601 /* Main.storyboard */,
@@ -299,19 +308,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CEF788E22D44FFE006D6DE1 /* ItineraryViewController.swift in Sources */,
 				513BE53E22C9C47000865C08 /* nearby.swift in Sources */,
+				2CEF789022D4531B006D6DE1 /* TaskCell.swift in Sources */,
 				2C018BEB22D3C67B000BFCCA /* ItineraryTableViewController.swift in Sources */,
 				2C018BEF22D3D54F000BFCCA /* ItineraryStartController.swift in Sources */,
 				51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */,
 				5174F424229D0FF500D45601 /* ViewController.swift in Sources */,
+				2CEF788A22D44FAB006D6DE1 /* ItineraryCell.swift in Sources */,
 				2C018BE922D23830000BFCCA /* FreeMapController.swift in Sources */,
 				5152AFC522D33B2E0062571B /* MapState.swift in Sources */,
+				2CEF788C22D44FCE006D6DE1 /* DayCell.swift in Sources */,
 				5174F422229D0FF500D45601 /* AppDelegate.swift in Sources */,
 				2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */,
 				517BC63E22C5B108003F5921 /* geocode.swift in Sources */,
 				5128884322CF2CD900EE271C /* CameraController.swift in Sources */,
 				2CFF88E122CD2FA600D326C6 /* FirebaseDBController.swift in Sources */,
-				2C018BED22D3C796000BFCCA /* ItineraryCell.swift in Sources */,
 				51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */,
 				51EDD9D322D2EADA00C20CA1 /* GoogleTranslate.swift in Sources */,
 				2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */,
