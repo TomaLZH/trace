@@ -43,10 +43,10 @@
                             <rect key="frame" x="23" y="7" width="329" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="Top"/>
-                                <segment title="Food"/>
                                 <segment title="All"/>
-                                <segment title="Sights"/>
+                                <segment title="Food"/>
+                                <segment title="Drinks"/>
+                                <segment title="Art"/>
                                 <segment title="Shops"/>
                             </segments>
                             <connections>
