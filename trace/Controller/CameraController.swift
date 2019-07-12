@@ -166,6 +166,5 @@ extension CameraController {
         task?.resume()
     }
 }
-
-/*
+ */
 
