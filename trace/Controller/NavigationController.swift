@@ -32,10 +32,10 @@ class NavigationController: UIViewController {
     @IBOutlet weak var SegmentSelected: UISegmentedControl!
     @IBAction func Segmentchanged(_ sender: Any) {
         switch SegmentSelected.selectedSegmentIndex{
-        case 0: showNearbyAttractions(currentPos, "toppicks")
+        case 0: showNearbyAttractions(currentPos, "all")
         case 1: showNearbyAttractions(currentPos, "food")
-        case 2: showNearbyAttractions(currentPos, "all")
-        case 3: showNearbyAttractions(currentPos, "sights")
+        case 2: showNearbyAttractions(currentPos, "drinks")
+        case 3: showNearbyAttractions(currentPos, "arts")
         case 4: showNearbyAttractions(currentPos, "shops")
         default: break
         }
@@ -45,6 +45,42 @@ class NavigationController: UIViewController {
     @IBOutlet weak var goButton: UIButton!
 
 
+    
+    
+    
+    @IBAction func weather(_ sender: Any) {
+        if CLLocationManager.locationServicesEnabled(){
+            switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("Authorized.")
+                let lat = locationManager.location?.coordinate.latitude
+                let long = locationManager.location?.coordinate.longitude
+                let location = CLLocation(latitude: lat!, longitude: long!)
+                CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error)in
+                    if error != nil {
+                        return
+                    } else if let country = placemarks?.first?.country,
+                        let city = placemarks?.first?.locality {
+                        print(country)
+                        print(city)
+                        
+                        let weatherGetter = GetWeather()
+                        weatherGetter.getWeather(city: city)
+                        
+                    }
+                    
+                })
+                
+            default: break
+            }
+        }
+    }
+
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
