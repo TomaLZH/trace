@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
+
 
 class FirebaseLogInController: UIViewController {
     @IBOutlet weak var segment: UISegmentedControl!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
     
    @IBAction func segmentTapped(_ sender: Any) {
         if segment.selectedSegmentIndex == 0 {
@@ -32,30 +35,10 @@ class FirebaseLogInController: UIViewController {
         
     }
     @IBAction func forgotPasswordTapped(_ sender: Any) {
-        let forgotPasswordAlert = UIAlertController(title: "Forgot password?", message: "Enter email address", preferredStyle: .alert)
-        forgotPasswordAlert.addTextField { (textField) in
-            textField.placeholder = "Enter email address"
-        }
-        forgotPasswordAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        forgotPasswordAlert.addAction(UIAlertAction(title: "Reset Password", style: .default, handler: { (action) in
-            let resetEmail = forgotPasswordAlert.textFields?.first?.text
-            Auth.auth().sendPasswordReset(withEmail: resetEmail!, completion: { (error) in
-                if error != nil{
-                    let resetFailedAlert = UIAlertController(title: "Reset Failed", message: "Error: \(String(describing: error?.localizedDescription))", preferredStyle: .alert)
-                    resetFailedAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(resetFailedAlert, animated: true, completion: nil)
-                }else {
-                    let resetEmailSentAlert = UIAlertController(title: "Reset email sent successfully", message: "Check your email", preferredStyle: .alert)
-                    resetEmailSentAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(resetEmailSentAlert, animated: true, completion: nil)
-                }
-            })
-        }))
-        //PRESENT ALERT
-        self.present(forgotPasswordAlert, animated: true, completion: nil)
+       resetPassword()
     }
     
-    
+   
     
     
     
@@ -83,16 +66,20 @@ class FirebaseLogInController: UIViewController {
                 (user, error) in
                 
                 if error == nil {
-                    
-                    
-                    
-                   print("You did justin yayyy")  //do stuff here
+                    //Print into the console if successfully logged in
+                    print("You have successfully logged in")
+                    //do stuff here
+                  //  let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
+                  //  self.present(vc!, animated: true, completion: nil)
                    
-                    
-                    
-                    
                 } else {
-                    print("Error")
+                    //Tells the user that there is an error and then gets firebase to tell them the error
+                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(defaultAction)
+                    
+                    self.present(alertController, animated: true, completion: nil)
                     
                 }
             }
@@ -121,7 +108,12 @@ class FirebaseLogInController: UIViewController {
                     
                     
                 } else {
-                    print("Ji Pa Boom")
+                    let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                    
+                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alert.addAction(defaultAction)
+                    
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
@@ -129,6 +121,40 @@ class FirebaseLogInController: UIViewController {
     }
     
     
+    func resetPassword() {
+        if self.email.text == "" {
+            let alert = UIAlertController(title: "Oops!", message: "Please enter an email.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(defaultAction)
+            
+            present(alert, animated: true, completion: nil)
+            
+        } else {
+          
+            Auth.auth().sendPasswordReset(withEmail: self.email.text!, completion: { (error) in
+                
+                var title = ""
+                var message = ""
+                
+                if error != nil {
+                    title = "Error!"
+                    message = (error?.localizedDescription)!
+                } else {
+                    title = "Success!"
+                    message = "Password reset email sent."
+                    self.email.text = ""
+                }
+                
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                
+                let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(defaultAction)
+                
+                self.present(alert, animated: true, completion: nil)
+            })
+        }
+    
   
-
+    }
 }
