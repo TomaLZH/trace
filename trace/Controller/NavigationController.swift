@@ -431,21 +431,16 @@ extension NavigationController: MKMapViewDelegate {
             return annotationView
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!,
-                 calloutAccessoryControlTapped control: UIControl!) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let annView = view.annotation
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailsVC = storyboard.instantiateViewController(withIdentifier: "details") as! detailscontroller
         
-        /* if control == view.rightCalloutAccessoryView {
-         println("Disclosure Pressed! \(view.annotation.subtitle)")
-         
-         if let cpa = view.annotation as? CustomPointAnnotation {
-         println("cpa.imageName = \(cpa.imageName)")
-         }
-         } */
+        detailsVC.latitude = annView?.coordinate.latitude
+        detailsVC.longitude = annView?.coordinate.longitude
         
+        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
-    
-    
-    
 
 }
 
