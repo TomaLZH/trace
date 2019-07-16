@@ -15,6 +15,8 @@ class detailscontroller: UIViewController {
     var placeid: String?
     
     
+    @IBOutlet weak var addresslabel: UILabel!
+    @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var imageplace: UIImageView!
     @IBOutlet weak var namelabel: UILabel!
     
@@ -22,7 +24,7 @@ class detailscontroller: UIViewController {
         
         //getplacedetails(self.id)
         super.viewDidLoad()
-        
+        alignall()
         var lat:String = String(format:"%f", latitude!)
         var long:String = String(format:"%f",longitude!)
         getplaceID(lat,long)        //getdetails()
@@ -36,6 +38,11 @@ class detailscontroller: UIViewController {
     
     
     
+    func alignall(){
+        self.namelabel.numberOfLines = 0
+        self.addresslabel.numberOfLines = 0
+        self.descriptionlabel.numberOfLines = 0
+    }
     
     func getplaceID(_ lat : String,_ long: String){
         
@@ -111,10 +118,16 @@ class detailscontroller: UIViewController {
                         //assign the values retrieved
                         let data = try Data(contentsOf: link!)
                         
+                        //get address
+                        let address = venues2["location"] as! NSDictionary
+                        let address2 = address["address"] as! String
+                        
+                        
+                        
                         DispatchQueue.main.async {
                             self.namelabel.text = name
                             self.imageplace.image = UIImage(data:data)
-                            
+                            self.addresslabel.text = address2
                             
                         }
                         
