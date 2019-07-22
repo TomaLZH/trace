@@ -300,6 +300,9 @@ class NavigationController: UIViewController {
                             self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                         }
                     }
+                    
+                    
+                    MapState.nearbyCategory = nil
                 } catch{
                     print(error)
                 }
