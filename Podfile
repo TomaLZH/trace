@@ -15,7 +15,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 
-
+pod 'Firebase/MLVisionTextModel' => '5.2.0'
 pod 'TravelKit'
 
 end
