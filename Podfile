@@ -18,5 +18,4 @@ pod 'Firebase/Auth'
 
 pod 'TravelKit'
 
-pod 'Firebase/MLVision' => '5.2.0'
 end
