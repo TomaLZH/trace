@@ -4,7 +4,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * @enum VisionCloudModelType
- * Type of model to use in vision cloud detection API.
+ * This enum specifies the type of model to use in vision cloud detection API.
  */
 typedef NS_ENUM(NSUInteger, FIRVisionCloudModelType) {
   /** Stable model. */
@@ -29,12 +29,6 @@ NS_SWIFT_NAME(VisionCloudDetectorOptions)
  * `VisionCloudTextDetector` and `VisionCloudDocumentTextDetector`.
  */
 @property(nonatomic) NSUInteger maxResults;
-
-/**
- * API key to use for Cloud Vision API.  If `nil`, the default API key from FirebaseApp will be
- * used.
- */
-@property(nonatomic, copy, nullable) NSString *APIKeyOverride;
 
 @end
 

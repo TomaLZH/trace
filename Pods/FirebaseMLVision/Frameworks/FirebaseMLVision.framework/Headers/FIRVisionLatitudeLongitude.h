@@ -32,7 +32,7 @@ NS_SWIFT_NAME(VisionLatitudeLongitude)
                        longitude:(nullable NSNumber *)longitude NS_DESIGNATED_INITIALIZER;
 
 /**
- * Unavailable.
+ * Not available
  */
 - (instancetype)init NS_UNAVAILABLE;
 

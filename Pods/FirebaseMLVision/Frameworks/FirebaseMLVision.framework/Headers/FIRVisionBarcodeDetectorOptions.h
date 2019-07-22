@@ -76,17 +76,10 @@ NS_SWIFT_NAME(VisionBarcodeDetectorOptions)
 @interface FIRVisionBarcodeDetectorOptions : NSObject
 
 /**
- * The barcode formats detected in an image. Note that the detection time will increase for each
- * additional format that is specified.
+ * The interested Barcode formats in the options. The Barcode detector would detect these barcode
+ * formats from a given image. The more formats are chosen, the slower the detection would be.
  */
 @property(nonatomic, readonly) FIRVisionBarcodeFormat formats;
-
-/**
- * Initializes an instance that detects all supported barcode formats.
- *
- * @return A new instance of Firebase barcode detector options.
- */
-- (instancetype)init;
 
 /**
  * Initializes an instance with the given barcode formats to look for.

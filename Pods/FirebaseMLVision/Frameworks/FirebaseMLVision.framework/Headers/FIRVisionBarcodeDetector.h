@@ -22,11 +22,6 @@ NS_SWIFT_NAME(VisionBarcodeDetector)
 @interface FIRVisionBarcodeDetector : NSObject
 
 /**
- * Unavailable.  Use `Vision` factory methods.
- */
-- (instancetype)init NS_UNAVAILABLE;
-
-/**
  * Detects barcodes in the given image.
  *
  * @param image The image to use for detecting barcodes.
@@ -36,5 +31,4 @@ NS_SWIFT_NAME(VisionBarcodeDetector)
            completion:(FIRVisionBarcodeDetectionCallback)completion;
 
 @end
-
 NS_ASSUME_NONNULL_END

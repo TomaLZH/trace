@@ -39,11 +39,6 @@ NS_SWIFT_NAME(VisionCloudLandmark)
  */
 @property(nonatomic, readonly, nullable) NSArray<FIRVisionLatitudeLongitude *> *locations;
 
-/**
- * Unavailable.
- */
-- (instancetype)init NS_UNAVAILABLE;
-
 @end
 
 NS_ASSUME_NONNULL_END

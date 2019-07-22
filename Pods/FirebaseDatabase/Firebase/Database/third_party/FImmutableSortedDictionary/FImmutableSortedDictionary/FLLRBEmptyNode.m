@@ -6,8 +6,7 @@
 @synthesize key, value, color, left, right;
 
 - (NSString *) description {
-    return [NSString stringWithFormat:@"[key=%@ val=%@ color=%@]", key, value,
-            (color != nil ? @"true" : @"false")];
+    return [NSString stringWithFormat:@"[key=%@ val=%@ color=%@]", key, value, (color ? @"true" : @"false")];
 }
 
 + (id)emptyNode

@@ -22,11 +22,6 @@ NS_SWIFT_NAME(VisionCloudLandmarkDetector)
 @interface FIRVisionCloudLandmarkDetector : NSObject
 
 /**
- * Unavailable.  Use `Vision` factory methods.
- */
-- (instancetype)init NS_UNAVAILABLE;
-
-/**
  * Detects landmark in a given image.
  *
  * @param image The image to use for detecting landmark.

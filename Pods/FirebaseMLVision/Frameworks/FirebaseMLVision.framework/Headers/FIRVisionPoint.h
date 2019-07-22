@@ -25,7 +25,7 @@ NS_SWIFT_NAME(VisionPoint)
 @property(nonatomic, readonly, nullable) NSNumber *z;
 
 /**
- * Unavailable.
+ * Not available
  */
 - (instancetype)init NS_UNAVAILABLE;
 

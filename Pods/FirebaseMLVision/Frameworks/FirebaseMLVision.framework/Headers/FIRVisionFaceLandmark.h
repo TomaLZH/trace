@@ -6,7 +6,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Type of all facial landmarks.
+ * Type of all facical landmarks.
  */
 typedef NSString *FIRFaceLandmarkType NS_EXTENSIBLE_STRING_ENUM NS_SWIFT_NAME(FaceLandmarkType);
 
@@ -57,7 +57,7 @@ NS_SWIFT_NAME(VisionFaceLandmark)
 @property(nonatomic, readonly) FIRVisionPoint *position;
 
 /**
- * Unavailable.
+ * Not available
  */
 - (instancetype)init NS_UNAVAILABLE;
 

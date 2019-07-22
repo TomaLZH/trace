@@ -1,6 +1,5 @@
+#import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
-
-@class FIRVisionTextBlock;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -8,22 +7,24 @@ NS_ASSUME_NONNULL_BEGIN
  * Recognized text in an image.
  */
 NS_SWIFT_NAME(VisionText)
-@interface FIRVisionText : NSObject
+@protocol FIRVisionText <NSObject>
 
 /**
- * String representation of the recognized text.
+ * The rectangle that holds the discovered text relative to the detected image in the view
+ * coordinate system.
+ */
+@property(nonatomic, readonly) CGRect frame;
+
+/**
+ * Recognized text string.
  */
 @property(nonatomic, readonly) NSString *text;
 
 /**
- * An array of blocks recognized in the text.
+ * The four corner points of the text, in clockwise order starting with the top left relative
+ * to the detected image in the view coordinate system. These are `CGPoint`s boxed in `NSValue`s.
  */
-@property(nonatomic, readonly) NSArray<FIRVisionTextBlock *> *blocks;
-
-/**
- * Unavailable.
- */
-- (instancetype)init NS_UNAVAILABLE;
+@property(nonatomic, readonly) NSArray<NSValue *> *cornerPoints;
 
 @end
 

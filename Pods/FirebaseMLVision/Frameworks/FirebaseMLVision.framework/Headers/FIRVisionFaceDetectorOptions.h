@@ -1,69 +1,60 @@
-#import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * @enum VisionFaceDetectorClassificationMode
- * Classification mode for face detection.
+ * @memberof VisionFaceDetectorOptions
+ * Default smallest desired face size: 0.1.
  */
-typedef NS_ENUM(NSUInteger, FIRVisionFaceDetectorClassificationMode) {
-  /**
-   * Face classification mode indicating that the detector performs no classification.
-   */
-  FIRVisionFaceDetectorClassificationModeNone = 1,
-  /**
-   * Face classification mode indicating that the detector performs all classifications.
-   */
-  FIRVisionFaceDetectorClassificationModeAll,
-} NS_SWIFT_NAME(VisionFaceDetectorClassificationMode);
+extern const CGFloat FIRVisionFaceDetectionMinSize NS_SWIFT_NAME(VisionFaceDetectionMinSize);
 
 /**
- * @enum VisionFaceDetectorPerformanceMode
- * Performance preference for accuracy or speed of face detection.
+ * @enum VisionFaceDetectorClassification
+ * This enum specifies the classification type in face detection.
  */
-typedef NS_ENUM(NSUInteger, FIRVisionFaceDetectorPerformanceMode) {
+typedef NS_ENUM(NSUInteger, FIRVisionFaceDetectorClassification) {
   /**
-   * Face detection performance mode that runs faster, but may detect fewer faces and/or return
-   * results with lower accuracy.
+   * Face classification type indicating it performs no classification.
    */
-  FIRVisionFaceDetectorPerformanceModeFast = 1,
+  FIRVisionFaceDetectorClassificationNone = 1,
   /**
-   * Face detection performance mode that runs slower, but may detect more faces and/or return
-   * results with higher accuracy.
+   * Face classification type indicating it performs all classification.
    */
-  FIRVisionFaceDetectorPerformanceModeAccurate,
-} NS_SWIFT_NAME(VisionFaceDetectorPerformanceMode);
+  FIRVisionFaceDetectorClassificationAll,
+} NS_SWIFT_NAME(VisionFaceDetectorClassification);
 
 /**
- * @enum VisionFaceDetectorLandmarkMode
- * Landmark detection mode for face detection.
+ * @enum VisionFaceDetectorMode
+ * This enum specifies a preference for accuracy vs. speed trade-offs in face detection.
  */
-typedef NS_ENUM(NSUInteger, FIRVisionFaceDetectorLandmarkMode) {
+typedef NS_ENUM(NSUInteger, FIRVisionFaceDetectorMode) {
   /**
-   * Face landmark mode indicating that the detector performs no landmark detection.
+   * Face detection mode code indicating detect fewer faces and may be less precise in determining
+   * values such as position, but will run faster.
    */
-  FIRVisionFaceDetectorLandmarkModeNone = 1,
+  FIRVisionFaceDetectorModeFast = 1,
   /**
-   * Face landmark mode indicating that the detector performs landmark detection.
+   * Face detection mode code indicating detect more faces and may be more precise in determining
+   * values such as position, at the cost of speed.
    */
-  FIRVisionFaceDetectorLandmarkModeAll,
-} NS_SWIFT_NAME(VisionFaceDetectorLandmarkMode);
+  FIRVisionFaceDetectorModeAccurate,
+} NS_SWIFT_NAME(VisionFaceDetectorMode);
 
 /**
- * @enum VisionFaceDetectorContourMode
- * Contour detection mode for face detection.
+ * @enum VisionFaceDetectorLandmark
+ * This enum specifies the landmark detection type in face detection.
  */
-typedef NS_ENUM(NSUInteger, FIRVisionFaceDetectorContourMode) {
+typedef NS_ENUM(NSUInteger, FIRVisionFaceDetectorLandmark) {
   /**
-   * Face contour mode indicating that the detector performs no contour detection.
+   * Face landmark detection type indicating it performs no landmark detection.
    */
-  FIRVisionFaceDetectorContourModeNone = 1,
+  FIRVisionFaceDetectorLandmarkNone = 1,
   /**
-   * Face contour mode indicating that the detector performs contour detection.
+   * Face landmark detection type indicating it performs all landmark detection.
    */
-  FIRVisionFaceDetectorContourModeAll,
-} NS_SWIFT_NAME(VisionFaceDetectorContourMode);
+  FIRVisionFaceDetectorLandmarkAll,
+} NS_SWIFT_NAME(VisionFaceDetectorLandmark);
 
 /**
  * Options for specifying a face detector.
@@ -72,52 +63,36 @@ NS_SWIFT_NAME(VisionFaceDetectorOptions)
 @interface FIRVisionFaceDetectorOptions : NSObject
 
 /**
- * The face detector classification mode for characterizing attributes such as smiling. Defaults to
- * `.none`.
+ * Whether to run additional classifiers for characterizing attributes such as smiling. Defaults to
+ * VisionFaceDetectorClassificationNone.
  */
-@property(nonatomic) FIRVisionFaceDetectorClassificationMode classificationMode;
+@property(nonatomic) FIRVisionFaceDetectorClassification classificationType;
 
 /**
- * The face detector performance mode that determines the accuracy of the results and the speed of
- * the detection. Defaults to `.fast`.
+ * Preference for accuracy vs. speed trade-offs in face detection.  Defaults to
+ * VisionFaceDetectorModeFast.
  */
-@property(nonatomic) FIRVisionFaceDetectorPerformanceMode performanceMode;
+@property(nonatomic) FIRVisionFaceDetectorMode modeType;
 
 /**
- * The face detector landmark mode that determines the type of landmark results returned by
- * detection. Defaults to `.none`.
+ * Whether to detect no landmarks or all landmarks in face detection. Processing time increases as
+ * the number of landmarks to search for increases, so detecting all landmarks will increase the
+ * overall detection time. Defaults to VisionFaceDetectorLandmarkNone.
  */
-@property(nonatomic) FIRVisionFaceDetectorLandmarkMode landmarkMode;
-
-/**
- * The face detector contour mode that determines the type of contour results returned by detection.
- * Defaults to `.none`.
- *
- * <p>The following detection results are returned when setting this mode to `.all`:
- *
- * <p>`performanceMode` set to `.fast`, and both `classificationMode` and `landmarkMode` set to
- * `.none`, then only the prominent face will be returned with detected contours.
- *
- * <p>`performanceMode` set to `.accurate`, or if `classificationMode` or `landmarkMode` is set to
- * `.all`, then all detected faces will be returned, but only the prominent face will have
- * detecteted contours.
- */
-@property(nonatomic) FIRVisionFaceDetectorContourMode contourMode;
+@property(nonatomic) FIRVisionFaceDetectorLandmark landmarkType;
 
 /**
  * The smallest desired face size. The size is expressed as a proportion of the width of the head to
  * the image width. For example, if a value of 0.1 is specified, then the smallest face to search
- * for is roughly 10% of the width of the image being searched. Defaults to 0.1. This option does
- * not apply to contour detection.
+ * for is roughly 10% of the width of the image being searched. Defaults to
+ * VisionFaceDetectionMinSize.
  */
 @property(nonatomic) CGFloat minFaceSize;
 
 /**
- * Whether the face tracking feature is enabled for face detection. Defaults to NO. When
- * `performanceMode` is set to `.fast`, and both `classificationMode` and `landmarkMode` set to
- * `.none`, this option will be ignored and tracking will be disabled.
+ * Whether the face tracking feature is enabled in face detection. Defaults to NO.
  */
-@property(nonatomic, getter=isTrackingEnabled) BOOL trackingEnabled;
+@property(nonatomic) BOOL isTrackingEnabled;
 
 @end
 

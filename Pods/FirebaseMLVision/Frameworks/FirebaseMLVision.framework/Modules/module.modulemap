@@ -1,14 +1,13 @@
 framework module FirebaseMLVision {
   umbrella header "FirebaseMLVision.h"
   export *
-  module * { export * }
-  link "c++"
+  module * { export *}
   link "sqlite3"
   link "z"
   link framework "AVFoundation"
   link framework "Accelerate"
-  link framework "CoreFoundation"
   link framework "CoreGraphics"
+  link framework "CoreImage"
   link framework "CoreMedia"
   link framework "CoreVideo"
   link framework "Foundation"
@@ -16,5 +15,4 @@ framework module FirebaseMLVision {
   link framework "QuartzCore"
   link framework "Security"
   link framework "SystemConfiguration"
-  link framework "UIKit"
-}
+  link framework "UIKit"}

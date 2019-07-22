@@ -1,4 +1,4 @@
-# Firebase ML Kit Vision SDK
+# Firebase ML Kit Vison SDK
 
 For more information, check out [Firebase] (https://firebase.google.com).
 
@@ -9,5 +9,5 @@ For more information, check out [Firebase] (https://firebase.google.com).
 2.  Add the following to your Podfile
 
     ```
-    pod 'Firebase/MLVision'
+    pod 'Firebase/FirebaseMLVision'
     ```

@@ -1,7 +1,6 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
-#import "FIRVisionFaceContour.h"
 #import "FIRVisionFaceLandmark.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -81,25 +80,12 @@ NS_SWIFT_NAME(VisionFace)
 @property(nonatomic, readonly) CGFloat rightEyeOpenProbability;
 
 /**
- * Unavailable.
- */
-- (instancetype)init NS_UNAVAILABLE;
-
-/**
  * Returns the landmark, if any, of the given type in this detected face.
  *
  * @param type The type of the facial landmark.
  * @return The landmark of the given type in this face.  nil if there isn't one.
  */
 - (nullable FIRVisionFaceLandmark *)landmarkOfType:(FIRFaceLandmarkType)type;
-
-/**
- * Returns the contour, if any, of the given type in this detected face.
- *
- * @param type The type of the facial contour.
- * @return The contour of the given type in this face.  nil if there isn't one.
- */
-- (nullable FIRVisionFaceContour *)contourOfType:(FIRFaceContourType)type;
 
 @end
 
