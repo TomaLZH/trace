@@ -7,7 +7,7 @@ target 'trace' do
 
   # Pods for trace
 pod 'ApiAI'
-pod 'Firebase/Core'
+pod 'Firebase/Core' => '5.2.0'
 
 pod 'GoogleMaps'
 pod 'Firebase'
@@ -15,8 +15,7 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 
-
+pod 'Firebase/MLVisionTextModel' => '5.2.0'
 pod 'TravelKit'
 
-pod 'Firebase/MLVision'
 end

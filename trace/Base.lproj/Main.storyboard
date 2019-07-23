@@ -26,12 +26,21 @@
                                     <outletCollection property="gestureRecognizers" destination="3cP-SX-OPJ" appends="YES" id="zeh-rc-00c"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg8-T4-V7F">
+                                <rect key="frame" x="307" y="568" width="58" height="30"/>
+                                <state key="normal" title="Weather"/>
+                                <connections>
+                                    <action selector="weather:" destination="C1F-FS-WQs" eventType="touchUpInside" id="jKq-am-rvP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hY0-RE-6Lg" firstAttribute="leading" secondItem="0Fv-vO-7hn" secondAttribute="leading" id="15k-SP-FhN"/>
                             <constraint firstItem="hY0-RE-6Lg" firstAttribute="bottom" secondItem="0Fv-vO-7hn" secondAttribute="bottom" id="Z8B-te-4p1"/>
+                            <constraint firstItem="0Fv-vO-7hn" firstAttribute="bottom" secondItem="fg8-T4-V7F" secondAttribute="bottom" constant="20" id="gkG-CF-y4S"/>
                             <constraint firstItem="hY0-RE-6Lg" firstAttribute="trailing" secondItem="0Fv-vO-7hn" secondAttribute="trailing" id="uKN-1B-8Ro"/>
+                            <constraint firstItem="0Fv-vO-7hn" firstAttribute="trailing" secondItem="fg8-T4-V7F" secondAttribute="trailing" constant="10" id="wY0-og-sU4"/>
                             <constraint firstItem="hY0-RE-6Lg" firstAttribute="top" secondItem="OiE-Xl-Zkb" secondAttribute="top" id="ysY-EM-ohM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0Fv-vO-7hn"/>
