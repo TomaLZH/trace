@@ -110,8 +110,8 @@ class NavigationController: UIViewController {
         mapView.removeAnnotations(mapView.annotations)
         
         //convert Coordinate to String
-        let lat = String(format:"%f", (pos!.latitude))
-        let lng = String(format:"%f", (pos!.longitude))
+        let lat = String(format:"%f", (pos?.latitude ?? 1.3801))
+        let lng = String(format:"%f", (pos?.longitude ?? 103.849))
         
         // put in the values to get the JSON reply
         guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=20&section=\(section)") else { return }

@@ -63,17 +63,15 @@ class ItineraryTableViewController: UITableViewController {
         let end = dateFormatter.date(from: itineraryList[indexPath.row].endDate)
         
         // Calculate number of days
-        let calendar = NSCalendar.current
-        let components = calendar.dateComponents([.day], from: start!, to: end!)
-        let noOfDays = components.day
-        let plural_s = noOfDays! <= 1 ? "" : "s"
+        let noOfDays = itineraryList[indexPath.row].noOfDays()
+        let plural_s = noOfDays <= 1 ? "" : "s"
         
         dateFormatter.dateFormat = "dd MMM yyyy, EEE"
         
         cell.nameLabel.text = name
         cell.countryLabel.text = country
         cell.dateLabel.text = "\(dateFormatter.string(from: start!)) - \(dateFormatter.string(from: end!))"
-        cell.daysLabel.text = "\(noOfDays!) day\(plural_s) trip"
+        cell.daysLabel.text = "\(noOfDays) day\(plural_s) trip"
 
         return cell
     }

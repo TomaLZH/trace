@@ -28,6 +28,8 @@
 		5174F429229D0FF500D45601 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5174F428229D0FF500D45601 /* Assets.xcassets */; };
 		5174F42C229D0FF500D45601 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5174F42A229D0FF500D45601 /* LaunchScreen.storyboard */; };
 		517BC63E22C5B108003F5921 /* geocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517BC63D22C5B108003F5921 /* geocode.swift */; };
+		5189CA7022E56754000D41C3 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5189CA6F22E56754000D41C3 /* Day.swift */; };
+		5189CA7222E56C85000D41C3 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5189CA7122E56C85000D41C3 /* Task.swift */; };
 		51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A9A7C522A0D3B80038B937 /* FirstViewController.swift */; };
 		51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D855A422BA0DF3007A5E7B /* ChatController.swift */; };
 		51EDD9D322D2EADA00C20CA1 /* GoogleTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */; };
@@ -61,6 +63,8 @@
 		5174F42B229D0FF500D45601 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5174F42D229D0FF500D45601 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		517BC63D22C5B108003F5921 /* geocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = geocode.swift; sourceTree = "<group>"; };
+		5189CA6F22E56754000D41C3 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		5189CA7122E56C85000D41C3 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		51A9A7C522A0D3B80038B937 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		51D855A422BA0DF3007A5E7B /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		51EDD9D222D2EADA00C20CA1 /* GoogleTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleTranslate.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 			children = (
 				2C202D8E22CB3E7E00E160BF /* Itinerary.swift */,
 				5152AFC422D33B2E0062571B /* MapState.swift */,
+				5189CA6F22E56754000D41C3 /* Day.swift */,
+				5189CA7122E56C85000D41C3 /* Task.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,12 +340,14 @@
 				51EDD9D522D4509D00C20CA1 /* GetWeather.swift in Sources */,
 				51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */,
 				5174F424229D0FF500D45601 /* ViewController.swift in Sources */,
+				5189CA7022E56754000D41C3 /* Day.swift in Sources */,
 				2CEF788A22D44FAB006D6DE1 /* ItineraryCell.swift in Sources */,
 				2C018BE922D23830000BFCCA /* FreeMapController.swift in Sources */,
 				5152AFC522D33B2E0062571B /* MapState.swift in Sources */,
 				2CEF788C22D44FCE006D6DE1 /* DayCell.swift in Sources */,
 				5174F422229D0FF500D45601 /* AppDelegate.swift in Sources */,
 				2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */,
+				5189CA7222E56C85000D41C3 /* Task.swift in Sources */,
 				517BC63E22C5B108003F5921 /* geocode.swift in Sources */,
 				513972DB22D8276E001F9B1D /* FirebaseLogInController.swift in Sources */,
 				5128884322CF2CD900EE271C /* CameraController.swift in Sources */,
