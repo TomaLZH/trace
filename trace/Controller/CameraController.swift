@@ -1,4 +1,4 @@
-/*
+
 import UIKit
 import Firebase
 
@@ -166,5 +166,5 @@ extension CameraController {
         task?.resume()
     }
 }
- */
+ 
 
