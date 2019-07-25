@@ -16,7 +16,7 @@ import Firebase
 
 class NavigationController: UIViewController {
     var place: CLLocationCoordinate2D?
-    var arraya : [String]?
+    var arraya : [String] = ""
     var country = ""
     var date = ""
     var venue: [String] = []
@@ -235,7 +235,7 @@ class NavigationController: UIViewController {
     }
     
     
-    func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?) {
+    func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?,_ placeid: String?) {
         
         
         
@@ -248,9 +248,15 @@ class NavigationController: UIViewController {
         let cata = nearbycat as! String
         //replace white space of category to ,
         let cat = cata.replacingOccurrences(of: " ", with: ",")
+        
+        if MapState.nearbyCategory != ""{
         //Put in parameters to get approiate JSON reply
         guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&limit=1&query=\(cat)") else { return }
+        }
         
+        if MapState.placesID != "" {
+            guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&limit=1&query=\(placeid)") else { return }
+        }
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
             if let response = response { }

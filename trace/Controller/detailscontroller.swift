@@ -22,7 +22,11 @@ class detailscontroller: UIViewController {
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var imageplace: UIImageView!
     @IBOutlet weak var namelabel: UILabel!
-    
+    @IBAction func getdirections(_ sender: Any) {
+        MapState.placesID = placeid
+        let navVC = navigationController()
+        navigationController?.pushViewController(navVC, animated: true)
+    }
     @IBOutlet weak var ratinglabel: UILabel!
     override func viewDidLoad() {
         
