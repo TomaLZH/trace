@@ -401,7 +401,7 @@ extension ALKCreateGroupViewController: ALKCreateGroupViewModelDelegate {
     }
 
     func sendMessage(at index: Int) {
-        let member = viewModel.rowAt(index: index)
+        let member = self.viewModel.rowAt(index: index)
         let viewModel = ALKConversationViewModel(
             contactId: member.id,
             channelKey: nil,
