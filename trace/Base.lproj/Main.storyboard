@@ -675,9 +675,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuU-Us-Gp7">
-                                        <rect key="frame" x="169" y="308" width="37" height="30"/>
+                                        <rect key="frame" x="160" y="308" width="55" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Done"/>
+                                        <state key="normal" title="Confirm"/>
                                         <connections>
                                             <action selector="onDone:" destination="k7F-41-Z5y" eventType="touchUpInside" id="gSS-UI-OqE"/>
                                         </connections>
@@ -696,6 +696,16 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B42-Ra-QkW">
+                                        <rect key="frame" x="165" y="346" width="45" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Delete">
+                                            <color key="titleColor" red="1" green="0.072387332528156434" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onDelete:" destination="k7F-41-Z5y" eventType="touchUpInside" id="VK9-Qg-YKY"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -711,6 +721,7 @@
                     <navigationItem key="navigationItem" title="Itinerary" id="zCO-CH-Dlb"/>
                     <connections>
                         <outlet property="countryTextField" destination="b7j-rW-qBg" id="FmP-NP-bX0"/>
+                        <outlet property="deleteButton" destination="B42-Ra-QkW" id="TSv-95-jsb"/>
                         <outlet property="doneButton" destination="vuU-Us-Gp7" id="70v-oh-8FO"/>
                         <outlet property="endDateTextField" destination="3WM-kD-MwE" id="eg5-nD-YrA"/>
                         <outlet property="nameTextField" destination="kyI-WG-0pt" id="bAN-2x-fp6"/>
