@@ -60,7 +60,6 @@ class ChatController: UIViewController {
             let cat = parameters["category"] as! AIResponseParameter
             print(cat.stringValue)
             MapState.nearbyCategory = cat.stringValue
-            tabBarController?.selectedIndex = 0
             
         case "done-yes": // User has finished creating their itinerary
             let country = parameters["country"] as! AIResponseParameter

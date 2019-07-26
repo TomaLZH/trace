@@ -95,7 +95,7 @@ class NavigationController: UIViewController {
         print(MapState.nearbyCategory)
         if MapState.nearbyCategory != nil {
             mapView.removeAnnotations(mapView.annotations)
-            getDirections(currentPos, MapState.nearbyCategory)
+           // getDirections(currentPos, MapState.nearbyCategory)
         }
     }
     
@@ -235,7 +235,7 @@ class NavigationController: UIViewController {
     }
     
     
-    func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?) {
+    func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?,_ placeid: String?) {
         
         
         
@@ -248,7 +248,8 @@ class NavigationController: UIViewController {
         let cata = nearbycat as! String
         //replace white space of category to ,
         let cat = cata.replacingOccurrences(of: " ", with: ",")
-        //Put in parameters to get approiate JSON reply
+        
+                //Put in parameters to get approiate JSON reply
         guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&limit=1&query=\(cat)") else { return }
         
         let session = URLSession.shared
@@ -300,6 +301,9 @@ class NavigationController: UIViewController {
                             self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                         }
                     }
+                    
+                    
+                    MapState.nearbyCategory = nil
                 } catch{
                     print(error)
                 }

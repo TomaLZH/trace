@@ -13,13 +13,21 @@ class detailscontroller: UIViewController {
     var latitude: Double?
     var longitude : Double?
     var placeid: String?
+    enum foursquareerror : Error{
+        case nopicturefound
+    }
     
     
     @IBOutlet weak var addresslabel: UILabel!
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var imageplace: UIImageView!
     @IBOutlet weak var namelabel: UILabel!
-    
+    @IBAction func getdirections(_ sender: Any) {
+        MapState.placesID = placeid
+        //let navVC = navigationController()
+     //   navigationController?.pushViewController(navVC, animated: true)
+    }
+    @IBOutlet weak var ratinglabel: UILabel!
     override func viewDidLoad() {
         
         //getplacedetails(self.id)
@@ -85,9 +93,15 @@ class detailscontroller: UIViewController {
         
         
         print(placeid)
-        var ids = placeid as! String
+        var ids = placeid as? String ?? "nil"
+        if ids == "nil"{
+            self.addresslabel.text  = "No Data Found"
+            self.ratinglabel.text = "No Data Found"
+            self.namelabel.text = "No Data Found"
+        }
         
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190715") else { return }
+        else{
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=QNCIFISKNFMRH52SCDX1AR11SKXKU40EM1JO4GAARDLHJWUT&client_secret=TBZ1UMGGSO1231NCC3UGKCMHLKPNCR0AQPT2WPMLKBMWBHHC&v=20190715") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -98,6 +112,7 @@ class detailscontroller: UIViewController {
                     
                     //get the name
                     var output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
+                    print(output)
                     let venues = output["response"] as! NSDictionary
                     let venues2 = venues["venue"] as! NSDictionary
                     let name = venues2["name"] as! String
@@ -105,30 +120,50 @@ class detailscontroller: UIViewController {
                     try DispatchQueue.global(qos: .background).sync {
                         
                         //get the image
-                        let photo = venues2["photos"] as! NSDictionary
-                        let photo2 = photo["groups"] as! NSArray
-                        let photo3 = photo2[1] as! NSDictionary
-                        let photo4 = photo3["items"] as! NSArray
-                        let photo5 = photo4[0] as! NSDictionary
-                        let prefix = photo5["prefix"] as! String
-                        let suffix = photo5["suffix"] as! String
-                        let links = prefix+"300x300"+suffix
-                        let link = URL(string: links)
-                        
+                        let photo: NSDictionary? = venues2["photos"] as? NSDictionary
+                        let photo2: NSArray? = photo?["groups"] as? NSArray
+                        if photo2!.count > 1{
+                        let photo3: NSDictionary? = photo2?[1] as? NSDictionary
+                        let photo4: NSArray? = photo3?["items"] as? NSArray
+                        let photo5: NSDictionary? = photo4?[0] as? NSDictionary
+                            print("it isnt empty")
+                            let prefix = photo5?["prefix"] as! String
+                            let suffix = photo5?["suffix"] as! String
+                            let links = prefix+"300x300"+suffix
+                            let link = URL(string: links)
+                            let data = try Data(contentsOf: link!)
+                            DispatchQueue.main.async {
+                                self.imageplace?.image = UIImage(data:data)
+                            }
+                        }
+                    
+                       
                         //assign the values retrieved
-                        let data = try Data(contentsOf: link!)
-                        
+                        var rating1 = "BLAH BLAH"
                         //get address
                         let address = venues2["location"] as! NSDictionary
-                        let address2 = address["address"] as! String
+                        let address2 = address["address"] as? String ?? "No Address Found"
+                       
+                        //get rating
+                        var rating = venues2["rating"] as? NSNumber ?? 0
                         
+                        //convert NSNumber to String
+                        if rating == 0{
+                             rating1 = "No Ratings Found"
+                        }
+                        else{
+                        let formatter = NumberFormatter()
+                        formatter.numberStyle = .decimal
+                        formatter.maximumFractionDigits = 1
+                        formatter.locale = Locale(identifier: "en")
+                            rating1 = formatter.string(from: rating)!
+                        }
                         
                         
                         DispatchQueue.main.async {
                             self.namelabel.text = name
-                            self.imageplace.image = UIImage(data:data)
                             self.addresslabel.text = address2
-                            
+                            self.ratinglabel.text = rating1 as! String
                         }
                         
                     }
@@ -137,10 +172,10 @@ class detailscontroller: UIViewController {
                 catch{
                     print(error)
                 }
-                
+            
             }
             }.resume()
-        
+        }
     }
     
     
