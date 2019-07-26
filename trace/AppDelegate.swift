@@ -9,6 +9,7 @@
 import UIKit
 import ApiAI
 import Firebase
+import Kommunicate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,9 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+        Kommunicate.setup(applicationId:"25dc110eba251b5b57905d14bb3dab85e")
 
-        
-        
         let configuration = AIDefaultConfiguration()
         // zheng han's: c092badda3ce4b9e8a9918288e76c587
         // desmond's: d31b71863d344cadafed1a9311943fa4

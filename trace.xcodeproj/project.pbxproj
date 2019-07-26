@@ -20,6 +20,7 @@
 		5128884322CF2CD900EE271C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5128884222CF2CD900EE271C /* CameraController.swift */; };
 		513972DB22D8276E001F9B1D /* FirebaseLogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513972DA22D8276E001F9B1D /* FirebaseLogInController.swift */; };
 		513BE53E22C9C47000865C08 /* nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513BE53D22C9C47000865C08 /* nearby.swift */; };
+		513CBEF022EADE4400FF98B3 /* KommController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513CBEEF22EADE4400FF98B3 /* KommController.swift */; };
 		5140F0A422BB5F97007D340A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5140F0A322BB5F97007D340A /* GoogleService-Info.plist */; };
 		5152AFC522D33B2E0062571B /* MapState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5152AFC422D33B2E0062571B /* MapState.swift */; };
 		5174F422229D0FF500D45601 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174F421229D0FF500D45601 /* AppDelegate.swift */; };
@@ -52,6 +53,7 @@
 		5128884222CF2CD900EE271C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		513972DA22D8276E001F9B1D /* FirebaseLogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLogInController.swift; sourceTree = "<group>"; };
 		513BE53D22C9C47000865C08 /* nearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nearby.swift; sourceTree = "<group>"; };
+		513CBEEF22EADE4400FF98B3 /* KommController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KommController.swift; sourceTree = "<group>"; };
 		5140F0A322BB5F97007D340A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5152AFC422D33B2E0062571B /* MapState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapState.swift; sourceTree = "<group>"; };
 		5174F41E229D0FF500D45601 /* trace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trace.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 				2CEF788D22D44FFE006D6DE1 /* ItineraryViewController.swift */,
 				513972DA22D8276E001F9B1D /* FirebaseLogInController.swift */,
 				51D0F42E22E56FC300AEE71B /* errorpageViewController.swift */,
+				513CBEEF22EADE4400FF98B3 /* KommController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				51F3863D22DDA09D00DC5F7A /* detailscontroller.swift in Sources */,
 				2C018BEF22D3D54F000BFCCA /* ItineraryStartController.swift in Sources */,
 				51EDD9D522D4509D00C20CA1 /* GetWeather.swift in Sources */,
+				513CBEF022EADE4400FF98B3 /* KommController.swift in Sources */,
 				51A9A7C622A0D3B80038B937 /* FirstViewController.swift in Sources */,
 				5174F424229D0FF500D45601 /* ViewController.swift in Sources */,
 				2CEF788A22D44FAB006D6DE1 /* ItineraryCell.swift in Sources */,

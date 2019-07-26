@@ -92,10 +92,9 @@ class NavigationController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         //IF user redirected from asking direction from the chat. This is trigger
-        print(MapState.nearbyCategory)
         if MapState.nearbyCategory != nil {
             mapView.removeAnnotations(mapView.annotations)
-           // getDirections(currentPos, MapState.nearbyCategory)
+            getDirections(currentPos, MapState.nearbyCategory)
         }
     }
     
@@ -152,7 +151,6 @@ class NavigationController: UIViewController {
                             var annotation = MKPointAnnotation()
                             annotation.title = listname[i] as! String
                             annotation.coordinate = CLLocationCoordinate2D(latitude: lats[i] as! Double, longitude: longs[i] as! Double)
-                            print(annotation.coordinate)
                             
                             // Add the Annotation
                             DispatchQueue.main.async {
@@ -235,7 +233,7 @@ class NavigationController: UIViewController {
     }
     
     
-    func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?,_ placeid: String?) {
+    func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?) {
         
         
         
@@ -248,7 +246,6 @@ class NavigationController: UIViewController {
         let cata = nearbycat as! String
         //replace white space of category to ,
         let cat = cata.replacingOccurrences(of: " ", with: ",")
-        
                 //Put in parameters to get approiate JSON reply
         guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&limit=1&query=\(cat)") else { return }
         
