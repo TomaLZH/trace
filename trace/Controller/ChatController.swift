@@ -71,6 +71,12 @@ class ChatController: UIViewController {
                                       endDate: date.stringValue,
                                       venue: ["List of strings for venues"])
             FirebaseDBController.insertOrReplace(for: .Itinerary, item: itinerary)
+        case "search":
+            let place = parameters["location"] as! AIResponseParameter
+            print(place.stringValue)
+            let category = parameters["venue-type"] as! AIResponseParameter
+            
+            
         default:
             print("Unmanaged intent.")
         }
