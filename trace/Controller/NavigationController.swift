@@ -85,7 +85,6 @@ class NavigationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         currentPos = locationManager.location?.coordinate
-        
         showNearbyAttractions(currentPos, "all")
 //        goButton.layer.cornerRadius = goButton.frame.size.height/2
     }
@@ -93,12 +92,93 @@ class NavigationController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         //IF user redirected from asking direction from the chat. This is trigger
         if MapState.nearbyCategory != nil {
-            mapView.removeAnnotations(mapView.annotations)
+            self.mapView.removeAnnotations(self.mapView.annotations)
             getDirections(currentPos, MapState.nearbyCategory)
+        }
+        if MapState.placesID != nil {
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            directionID(MapState.placesID!)
         }
     }
     
+    //get details
+
+    func directionID (_ placesid : String){
+        mapView.removeAnnotations(mapView.annotations)
+        var placeid = placesid as! String
+        
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(placeid)?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190701") else {return}
+        let session = URLSession.shared
+        session.dataTask(with: url){(data,response,error) in
+            if var response = response {
+                
+            }
+            if var data = data{
+                do{
+                    let output = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+                    let venues = output["response"] as! NSDictionary
+                    let venues2 = venues["venue"] as! NSDictionary
+                    let venues3 = venues2["location"] as! NSDictionary
+                    let lat = venues3["lat"] as! Double
+                    let long = venues3["lng"] as! Double
+                    print(lat,long)
+                    let place = venues2["name"] as! String
+                    print(place)
+                    self.place = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                    print(self.place)
+                    let request = createDirectionsRequest(from:self.place!)
+                    let directions = MKDirections(request: request)
+                    resetMapView(withNew: directions)
+                    
+                    let annotation = MKPointAnnotation()
+                    annotation.title = place
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: self.place!.latitude, longitude: self.place!.longitude)
+                    self.mapView.addAnnotation(annotation)
+                    
+                    directions.calculate{ [unowned self] (response, error) in
+                        guard let response = response else {return}
+                        
+                        for route in response.routes {
+                            self.mapView.addOverlay(route.polyline)
+                            self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                        }
+                    }
+                    
+                    MapState.placesID = nil
+                    
+                } catch{
+                    print(error)
+                }
+            }
+           }.resume()
     
+    
+    
+    
+    
+    
+    
+        func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request {
+            let destinationCoordinate       = getCenterLocation(for: mapView).coordinate//replace with corrdinates obtained from zh in an array
+            let startingLocation            = MKPlacemark(coordinate: coordinate)
+            let destination                 = MKPlacemark(coordinate: destinationCoordinate)
+            
+            let request                     = MKDirections.Request()
+            request.source                  = MKMapItem(placemark: startingLocation)
+            request.destination             = MKMapItem(placemark: destination)
+            request.transportType           = .walking
+            request.requestsAlternateRoutes = true
+            
+            return request
+        }
+    
+    
+        func resetMapView(withNew directions: MKDirections) {
+            mapView.removeOverlays(mapView.overlays)
+            directionsArray.append(directions)
+            let _ = directionsArray.map { $0.cancel() }
+        }
+    }
     
     //ATTRACTIONS NEARBY
     func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: String) {
@@ -113,7 +193,8 @@ class NavigationController: UIViewController {
         let lng = String(format:"%f", (pos?.longitude ?? 103.849))
         
         // put in the values to get the JSON reply
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(lng)&limit=20&section=\(section)") else { return }
+        
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190701&ll=\(lat),\(lng)&limit=20&section=\(section)") else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -243,11 +324,13 @@ class NavigationController: UIViewController {
         //Convert Coordinate to String
         let lat = String(format:"%f", pos!.latitude)
         let lng = String(format:"%f", pos!.longitude)
-        let cata = nearbycat as! String
         //replace white space of category to ,
+        
+        
+        let cata = nearbycat as! String
         let cat = cata.replacingOccurrences(of: " ", with: ",")
                 //Put in parameters to get approiate JSON reply
-        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&limit=1&query=\(cat)") else { return }
+        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&query=\(cat)") else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in

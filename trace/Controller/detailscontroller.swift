@@ -18,21 +18,24 @@ class detailscontroller: UIViewController {
     }
     
     
+    @IBOutlet weak var button: UIButton!
     @IBOutlet weak var addresslabel: UILabel!
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var imageplace: UIImageView!
     @IBOutlet weak var namelabel: UILabel!
     @IBAction func getdirections(_ sender: Any) {
         MapState.placesID = placeid
-        //let navVC = navigationController()
-     //   navigationController?.pushViewController(navVC, animated: true)
+        print(MapState.placesID)
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "navigation") as? NavigationController
+        self.navigationController?.pushViewController(vc!, animated: true)
+
+        
+        
     }
     @IBOutlet weak var ratinglabel: UILabel!
     override func viewDidLoad() {
-        
         //getplacedetails(self.id)
         super.viewDidLoad()
-        alignall()
         var lat:String = String(format:"%f", latitude!)
         var long:String = String(format:"%f",longitude!)
         getplaceID(lat,long)        //getdetails()
@@ -46,11 +49,6 @@ class detailscontroller: UIViewController {
     
     
     
-    func alignall(){
-        self.namelabel.numberOfLines = 0
-        self.addresslabel.numberOfLines = 0
-        self.descriptionlabel.numberOfLines = 0
-    }
     
     func getplaceID(_ lat : String,_ long: String){
         
@@ -58,7 +56,7 @@ class detailscontroller: UIViewController {
         
         
         // put in the values to get the JSON reply
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=5PNCWIYXYGVUNIWYQYVXXMYXE50JG0FVLVOHG0HCCT0DNYGY&client_secret=4MZQUKPM4W3HOUX2WMKEPNWA4VHNNXOY4HWMTEPC0R2VDDLH&v=20190701&ll=\(lat),\(long)") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190701&ll=\(lat),\(long)") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -101,7 +99,7 @@ class detailscontroller: UIViewController {
         }
         
         else{
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=QNCIFISKNFMRH52SCDX1AR11SKXKU40EM1JO4GAARDLHJWUT&client_secret=TBZ1UMGGSO1231NCC3UGKCMHLKPNCR0AQPT2WPMLKBMWBHHC&v=20190715") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190715") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -160,10 +158,15 @@ class detailscontroller: UIViewController {
                         }
                         
                         
+
+                        
                         DispatchQueue.main.async {
                             self.namelabel.text = name
                             self.addresslabel.text = address2
-                            self.ratinglabel.text = rating1 as! String
+                            if self.addresslabel.text == "No Address Found"{
+                                self.button.isHidden = false
+                            }
+                            self.ratinglabel.text = (rating1 as! String) + "/10"
                         }
                         
                     }

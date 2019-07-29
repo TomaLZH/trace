@@ -2,5 +2,5 @@ import Foundation
 
 class MapState {
     static var nearbyCategory: String?
-    static var placesID: String?
+    static var placesID: String? 
 }
