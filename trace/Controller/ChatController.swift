@@ -23,6 +23,7 @@ class ChatController: UIViewController {
             if let msg = response.result.fulfillment.messages[0] as NSDictionary? {
                 self.speechAndText(text: msg.value(forKey: "speech") as! String)
                 self.manageResponse(response)
+                self.retrieveWeather(response)
             }
         }, failure: { (request, error) in
             print(error!)
@@ -82,7 +83,7 @@ class ChatController: UIViewController {
         let intent = response.result.metadata.intentName
         //let parameters = response.result.parameters
         switch intent {
-        case "getweather": // User has finished creating their itinerary
+        case "getweather": 
             if CLLocationManager.locationServicesEnabled(){
                 switch CLLocationManager.authorizationStatus() {
                 case .authorizedAlways, .authorizedWhenInUse:
