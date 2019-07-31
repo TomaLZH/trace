@@ -9,7 +9,7 @@
 import UIKit
 
 class detailscontroller: UIViewController {
-    
+    var isopen: String?
     var latitude: Double?
     var longitude : Double?
     var placeid: String?
@@ -18,6 +18,7 @@ class detailscontroller: UIViewController {
     }
     
     
+    @IBOutlet weak var openorclose: UILabel!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var addresslabel: UILabel!
     @IBOutlet weak var descriptionlabel: UILabel!
@@ -110,7 +111,6 @@ class detailscontroller: UIViewController {
                     
                     //get the name
                     var output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
-                    print(output)
                     let venues = output["response"] as! NSDictionary
                     let venues2 = venues["venue"] as! NSDictionary
                     let name = venues2["name"] as! String
@@ -158,9 +158,20 @@ class detailscontroller: UIViewController {
                         }
                         
                         
-
+                        //get opening time and current status
+                        if venues2["hour"] != nil{
+                        let status = venues2["hour"] as! NSDictionary
+                        let isopen1 = status["isOpen"] as! Bool
                         
+                        if isopen1 == true{
+                            self.isopen = "Currently Open"
+                        }
+                        else{
+                            self.isopen = "Currently Closed"
+                        }
+                        }
                         DispatchQueue.main.async {
+                            self.openorclose.text = self.isopen
                             self.namelabel.text = name
                             self.addresslabel.text = address2
                             if self.addresslabel.text == "No Address Found"{

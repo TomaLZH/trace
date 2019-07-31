@@ -102,11 +102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "586073134.881237"
+            timestampString = "586255819.1442519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
             landmarkName = "checkLocationAuthorization()"
             landmarkType = "7">
          </BreakpointContent>
@@ -118,11 +118,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "trace/Controller/NavigationController.swift"
-            timestampString = "586073134.881309"
+            timestampString = "586255819.144708"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
             landmarkName = "getDirections(_:_:)"
             landmarkType = "7">
          </BreakpointContent>

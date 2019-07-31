@@ -72,11 +72,43 @@ class ChatController: UIViewController {
                                       venue: ["List of strings for venues"])
             FirebaseDBController.insertOrReplace(for: .Itinerary, item: itinerary)
         case "search":
-            let place = parameters["location"] as! AIResponseParameter
-            print(place.stringValue)
-            let category = parameters["venue-type"] as! AIResponseParameter
+            print("search")
+            let venue_type = parameters["venue-type"] as! AIResponseParameter
+            let venue_title = parameters["venue-title"] as! AIResponseParameter
+            let country = parameters["geo-country"] as! AIResponseParameter
+            let capital = parameters["geo-capital"] as! AIResponseParameter
+            let open = parameters["open"] as! AIResponseParameter
+            let city = parameters["geo-city"] as! AIResponseParameter
+            let sort = parameters["sort"] as! AIResponseParameter
             
+            print(venue_title.stringValue)
             
+            if venue_title.stringValue != "" {
+                print("VENUE TITLE")
+                MapState.searchplace = venue_title.stringValue
+                self.tracetext.text = "We have found the searched place! A marker has been marked on your map. Have fun exploring!"
+            }
+            
+            else{
+            if venue_type.stringValue != "" {
+                MapState.venuetype = venue_type.stringValue
+            }
+           if venue_title.stringValue != "" {
+                MapState.venuetype = venue_title.stringValue
+            }
+            if country.stringValue != "" {
+                MapState.region = country.stringValue
+            }
+            if capital.stringValue != "" {
+                MapState.region = capital.stringValue
+            }
+            if city.stringValue != "" {
+                MapState.region = city.stringValue
+            }
+            MapState.open = open.stringValue
+            MapState.price = sort.stringValue
+            self.tracetext.text = "Places that matches these criteria have been marked on your map. Hope you find a good place to go"
+            }
         default:
             print("Unmanaged intent.")
         }

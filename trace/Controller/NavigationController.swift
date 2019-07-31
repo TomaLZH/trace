@@ -91,20 +91,178 @@ class NavigationController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         //IF user redirected from asking direction from the chat. This is trigger
+        currentPos = locationManager.location?.coordinate
+
         if MapState.nearbyCategory != nil {
-            self.mapView.removeAnnotations(self.mapView.annotations)
             getDirections(currentPos, MapState.nearbyCategory)
         }
         if MapState.placesID != nil {
-            self.mapView.removeAnnotations(self.mapView.annotations)
             directionID(MapState.placesID!)
         }
+        
+        if MapState.searchplace != nil{
+            searchplace(MapState.searchplace!)
+        }
+        print(MapState.region, MapState.venuetype, MapState.price, MapState.open,currentPos)
+        
+
+        if MapState.price != nil || MapState.open != nil || MapState.venuetype != nil{
+            if MapState.region == nil {
+                MapState.region = ""
+            }
+            search(MapState.region!,MapState.venuetype!,MapState.price!,MapState.open!,currentPos!)
+        }
+    }
+    
+    func search(_ region:String,_ venuetype:String,_ price:String,_ open:String,_ pos : CLLocationCoordinate2D){
+        self.mapView.removeOverlays(self.mapView.overlays)
+        //remove annotation to reset the map
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        var placement = "near=\(region)"
+        var openstatus = ""
+        var pricea = ""
+        print(region)
+        let venuetypes = venuetype.replacingOccurrences(of: " ", with: ",")
+        print(open)
+        print(price)
+        print(venuetype)
+        let lat = String(format:"%f", (pos.latitude ?? 1.3801))
+        let lng = String(format:"%f", (pos.longitude ?? 103.849))
+        
+        if open == "true" {
+            openstatus = "1"
+        }
+        
+        if price == "cheapest" {
+            pricea = "1"
+        }
+        else if price == "cheap" {
+            pricea = "1,2"
+        }
+        else if price == "expensive" {
+            pricea = "3,4"
+        }
+        
+        if region == "" {
+            self.place = CLLocationCoordinate2D(latitude: pos.latitude, longitude: pos.latitude)
+            placement = "ll=\(pos.latitude),\(pos.longitude)"
+        }
+        print(pricea)
+        print(placement)
+        guard var url = URL(string:"https://api.foursquare.com/v2/venues/explore?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190701&\(placement)&query=\(venuetypes)&open=\(openstatus)&price=\(pricea)") else {return}
+
+        let session = URLSession.shared
+        session.dataTask(with: url){(data,response,error) in
+            if var response = response{}
+            if var data = data{
+                do{
+                    let output = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+                    let venues = output["response"] as! NSDictionary
+                    let venues2 = venues["groups"] as! NSArray
+                    let venues3 = venues2[0] as! NSDictionary
+                    let venues4 = venues3["items"] as! NSArray
+                    
+                    for i in 0..<venues4.count {
+                        DispatchQueue.global(qos: .background).sync {
+                            var annotation = MKPointAnnotation()
+                            let venues5 = venues4[i] as! NSDictionary
+                            let venues6 = venues5["venue"] as! NSDictionary
+                            let name = venues6["name"] as! String
+                            
+                            let venues7 = venues6["location"] as! NSDictionary
+                            let lat = venues7["lat"] as! Double
+                            let long = venues7["lng"] as! Double
+                            
+                            annotation.title = name
+                            annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                            
+                            let center = annotation.coordinate
+                    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.15, longitudeDelta: 0.15))
+                            self.mapView.setRegion(region, animated: true)
+                            DispatchQueue.main.async{
+                                self.mapView.addAnnotation(annotation)
+                            }
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                    MapState.region = nil
+                    MapState.venuetype = nil
+                    MapState.open = nil
+                    MapState.price = nil
+                }catch{
+                    print(error)
+                }
+            }
+        }.resume()
+        
+    }
+    
+    
+    
+    
+    //search place
+    func searchplace(_ place : String){
+        
+        self.mapView.removeOverlays(self.mapView.overlays)
+        //remove annotation to reset the map
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        print("search place")
+        let placess = place as! String
+        let places = placess.replacingOccurrences(of: " ", with: ",")
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&ll=44.3,37.2&v=20190701&intent=global&limit=20&query=\(places)"  )else{return}
+        
+        let session = URLSession.shared
+        session.dataTask(with: url){(data,response,error) in
+            if var response = response {
+            }
+            if var data = data{
+                do{
+                    print("bfkjasmdklasmlk")
+                    
+                    
+                    let output = try JSONSerialization.jsonObject(with: data, options: []) as! [String:Any]
+                    let venues = output["response"] as! NSDictionary
+                    let venues2 = venues["venues"] as! NSArray
+                    let venues3 = venues2[0] as! NSDictionary
+                    let nameplace = venues3["name"] as! String
+                    let venues4 = venues3["location"] as! NSDictionary
+                    let lat = venues4["lat"] as! Double
+                    let long = venues4["lng"] as! Double
+                    
+                    
+                    DispatchQueue.global(qos: .background).sync{
+                    let annotation = MKPointAnnotation()
+                    annotation.title = nameplace
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                    let center = CLLocationCoordinate2D(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+                    let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                    self.mapView.setRegion(region, animated: true)
+                    MapState.searchplace = nil
+                        DispatchQueue.main.sync {
+                            
+                        
+                        self.mapView.addAnnotation(annotation)
+                    }
+                    }
+                    
+                    
+                } catch{
+                    print(error)
+                }
+            }
+        }.resume()
     }
     
     //get details
 
     func directionID (_ placesid : String){
-        mapView.removeAnnotations(mapView.annotations)
+        self.mapView.removeOverlays(self.mapView.overlays)
+        //remove annotation to reset the map
+        self.mapView.removeAnnotations(self.mapView.annotations)
         var placeid = placesid as! String
         
         guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(placeid)?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190701") else {return}
@@ -184,9 +342,9 @@ class NavigationController: UIViewController {
     func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: String) {
 
         checkLocationServices()
-        mapView.removeOverlays(mapView.overlays)
+        self.mapView.removeOverlays(self.mapView.overlays)
         //remove annotation to reset the map
-        mapView.removeAnnotations(mapView.annotations)
+        self.mapView.removeAnnotations(self.mapView.annotations)
         
         //convert Coordinate to String
         let lat = String(format:"%f", (pos?.latitude ?? 1.3801))
@@ -316,8 +474,9 @@ class NavigationController: UIViewController {
     
     func getDirections(_ pos : CLLocationCoordinate2D?,_ nearbycat: String?) {
         
-        
-        
+        //remove annotation to reset the map
+        self.mapView.removeAnnotations(self.mapView.annotations)
+
         //get the location
         checkLocationServices()
         

@@ -113,6 +113,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Xy-1n-HFb">
+                                <rect key="frame" x="91" y="280" width="193" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <color key="highlightedColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -122,10 +129,11 @@
                         <viewLayoutGuide key="safeArea" id="Xxx-gU-2yl"/>
                     </view>
                     <connections>
-                        <outlet property="addresslabel" destination="Xxb-cy-EmH" id="szH-0q-1L3"/>
+                        <outlet property="addresslabel" destination="Xxb-cy-EmH" id="mER-D8-luc"/>
                         <outlet property="button" destination="g0q-nE-aIZ" id="xW5-xa-LsV"/>
                         <outlet property="imageplace" destination="vH9-SJ-yNN" id="LPI-rf-rSi"/>
                         <outlet property="namelabel" destination="MlW-EC-1e9" id="9Oa-ej-0Xi"/>
+                        <outlet property="openorclose" destination="3Xy-1n-HFb" id="TFB-up-QEo"/>
                         <outlet property="ratinglabel" destination="NPY-Iv-0YT" id="wf9-ja-OoZ"/>
                     </connections>
                 </viewController>
