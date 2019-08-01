@@ -1,9 +1,10 @@
 import UIKit
 import ApiAI
 import AVFoundation
-
+import CoreLocation
 
 class ChatController: UIViewController {
+    let locationManager = CLLocationManager()
     var nearbycata: String?
     @IBOutlet weak var tracetext: UILabel!
     @IBOutlet weak var inputtext: UITextField!
@@ -22,6 +23,7 @@ class ChatController: UIViewController {
             if let msg = response.result.fulfillment.messages[0] as NSDictionary? {
                 self.speechAndText(text: msg.value(forKey: "speech") as! String)
                 self.manageResponse(response)
+                self.retrieveWeather(response)
             }
         }, failure: { (request, error) in
             print(error!)
@@ -75,5 +77,54 @@ class ChatController: UIViewController {
             print("Unmanaged intent.")
         }
     }
+    
+    
+    func retrieveWeather(_ response: AIResponse){
+        let intent = response.result.metadata.intentName
+        //let parameters = response.result.parameters
+        switch intent {
+        case "getweather": 
+            if CLLocationManager.locationServicesEnabled(){
+                switch CLLocationManager.authorizationStatus() {
+                case .authorizedAlways, .authorizedWhenInUse:
+                    print("Authorized.")
+                    let lat = locationManager.location?.coordinate.latitude
+                    let long = locationManager.location?.coordinate.longitude
+                    let location = CLLocation(latitude: lat!, longitude: long!)
+                    CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error)in
+                        if error != nil {
+                            return
+                        } else if let country = placemarks?.first?.country,
+                            let city = placemarks?.first?.locality {
+                            print(country)
+                            print(city)
+                            
+                            let weatherGetter = GetWeather()
+                            weatherGetter.getWeather(city: city)
+                            
+                        }
+                        
+                    })
+                    
+                default: break
+                }
+            }
+        default:
+            print("Unmanaged intent.")
+        
+        
+
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 

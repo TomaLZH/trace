@@ -14,7 +14,7 @@ import Firebase
 
 
 
-class NavigationController: UIViewController {
+class NavigationController: UIViewController{
     var place: CLLocationCoordinate2D?
     var arraya : [String]?
     var country = ""
@@ -44,11 +44,9 @@ class NavigationController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var goButton: UIButton!
 
-
-    
-    
     
     @IBAction func weather(_ sender: Any) {
+        
         if CLLocationManager.locationServicesEnabled(){
             switch CLLocationManager.authorizationStatus() {
             case .authorizedAlways, .authorizedWhenInUse:
