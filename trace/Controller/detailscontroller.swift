@@ -57,7 +57,7 @@ class detailscontroller: UIViewController {
         
         
         // put in the values to get the JSON reply
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190701&ll=\(lat),\(long)") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&v=20190701&ll=\(lat),\(long)") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -88,9 +88,7 @@ class detailscontroller: UIViewController {
     
     
     func getplacedetails(_ placeid: String?){
-        
-        
-        
+
         print(placeid)
         var ids = placeid as? String ?? "nil"
         if ids == "nil"{
@@ -100,7 +98,7 @@ class detailscontroller: UIViewController {
         }
         
         else{
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=E1TG2A34J4T5VG2PTDF5U1D3MYP2ABQ0410WLXYNLMPIYCGV&client_secret=WEEA0K5KPAAFIOFABHDTY2PHZMD54AUBRKBAVL0IMHUKXO3F&v=20190715") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&v=20190715") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in

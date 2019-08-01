@@ -65,6 +65,9 @@ class ChatController: UIViewController {
                         DispatchQueue.main.async {
                         self.tracetext.text = "The Time Zone for \(searchcountry) is/are \(timezones)"
                     }
+                        MapState.searchterm = nil
+                        MapState.searchcountry = nil
+
                         }
                         if searchterm == "currency" {
                             var currency = facts["currencies"] as! NSArray
@@ -74,11 +77,18 @@ class ChatController: UIViewController {
                             DispatchQueue.main.async {
                                 self.tracetext.text = "The currency for \(searchcountry) is \(currenci!), \(currencysymbol!)"
                             }
+                            MapState.searchterm = nil
+                            MapState.searchcountry = nil
+
+
                         }
                         if searchterm == "region" {
                             var region = facts["region"]
                             DispatchQueue.main.async{
                             self.tracetext.text = "\(searchcountry) is in \(region!)!"
+                            MapState.searchterm = nil
+                                MapState.searchcountry = nil
+
                             }
                         }
                         
@@ -86,12 +96,20 @@ class ChatController: UIViewController {
                             var population = facts["population"]
                             DispatchQueue.main.async{
                                 self.tracetext.text = "\(searchcountry) has a population of \(population!) people."
+                                MapState.searchterm = nil
+                                MapState.searchcountry = nil
+
+
                             }
                         }
                         if searchterm == "capital" {
                             var capital = facts["capital"]
                             DispatchQueue.main.async {
-                                self.tracetext.text = "The capital of \(searchcountry) is \(capital)"
+                                self.tracetext.text = "The capital of \(searchcountry) is \(capital!)"
+                                MapState.searchterm = nil
+                                MapState.searchcountry = nil
+
+
                             }
                         }
                         
