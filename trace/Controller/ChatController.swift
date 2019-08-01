@@ -40,6 +40,68 @@ class ChatController: UIViewController {
         super.viewDidLoad()
     }
     
+    func factscountry(_ searchterm: String, _ searchcountry: String){
+        print(searchterm)
+        print(searchcountry)
+        var searchcountry1 = searchcountry.replacingOccurrences(of: " ", with: "%20")
+        
+        
+        guard var url = URL(string: "https://restcountries.eu/rest/v2/name/\(searchcountry1)") else {return}
+        let session = URLSession.shared
+        session.dataTask(with: url){(data,response,error) in
+            if var response = response {}
+            if var data = data{
+                do{
+                    let output = try JSONSerialization.jsonObject(with: data, options: []) as! NSArray
+                    let facts = output[0] as! NSDictionary
+
+                    try DispatchQueue.global(qos: .background).async {
+                    print(facts)
+                    if searchterm == "time zone" || searchterm == "timezone" {
+                        var timezone = facts["timezones"] as! NSArray
+                        var timezones = timezone.componentsJoined(by: " ")
+                        print(timezones)
+                        DispatchQueue.main.async {
+                        self.tracetext.text = "The Time Zone for \(searchcountry) is/are \(timezones)"
+                    }
+                        }
+                        if searchterm == "currency" {
+                            var currency = facts["currencies"] as! NSArray
+                            var currency2 = currency[0] as! NSDictionary
+                            var currenci = currency2["name"]
+                            var currencysymbol = currency2["symbol"]
+                            DispatchQueue.main.async {
+                                self.tracetext.text = "The currency for \(searchcountry) is \(currenci!), \(currencysymbol!)"
+                            }
+                        }
+                        if searchterm == "region" {
+                            var region = facts["region"]
+                            DispatchQueue.main.async{
+                            self.tracetext.text = "\(searchcountry) is in \(region!)!"
+                            }
+                        }
+                        
+                        if searchterm == "population"{
+                            var population = facts["population"]
+                            DispatchQueue.main.async{
+                                self.tracetext.text = "\(searchcountry) has a population of \(population!) people."
+                            }
+                        }
+                        if searchterm == "capital" {
+                            var capital = facts["capital"]
+                            DispatchQueue.main.async {
+                                self.tracetext.text = "The capital of \(searchcountry) is \(capital)"
+                            }
+                        }
+                        
+                    }
+                }catch{
+                    print(error)
+                }
+            }
+        }.resume()
+    }
+    
     let speechSynthesizer = AVSpeechSynthesizer()
     
     func speechAndText(text: String) {
@@ -109,9 +171,53 @@ class ChatController: UIViewController {
             MapState.price = sort.stringValue
             self.tracetext.text = "Places that matches these criteria have been marked on your map. Hope you find a good place to go"
             }
+            
+            
+            
+        case "factscountry":
+            print("Ask Country")
+            var searchterm = parameters["searchterm"] as! AIResponseParameter
+            var country = parameters["country"] as! AIResponseParameter
+            
+            MapState.searchterm = searchterm.stringValue
+            
+            if country.stringValue == ""  {
+                self.tracetext.text = "Please enter a country"
+            }
+            
+            if country.stringValue != "" {
+                MapState.searchcountry = country.stringValue
+            }
+            
+            if MapState.searchcountry != nil && MapState.searchterm != nil{
+                factscountry(MapState.searchterm!, MapState.searchcountry!)
+            }
+            
+            
+        case "country":
+            var searchcountry = parameters["country"] as! AIResponseParameter
+            var searchcity = parameters["city"] as! AIResponseParameter
+            
+            if MapState.searchterm == nil {
+                self.tracetext.text = "Sorry, I do not understand."
+            }
+            else{
+                if searchcountry.stringValue != ""{
+                MapState.searchcountry = searchcountry.stringValue
+                factscountry(MapState.searchterm!, MapState.searchcountry!)
+                }
+                if searchcity.stringValue != ""{
+                    MapState.searchcountry = searchcity.stringValue
+                    factscountry(MapState.searchterm!, MapState.searchcountry!)
+                }
+            }
+            
+            
         default:
             print("Unmanaged intent.")
         }
+        
+        
     }
 }
 

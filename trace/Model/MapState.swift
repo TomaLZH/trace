@@ -8,4 +8,7 @@ class MapState {
     static var region : String?
     static var open : String?
     static var price : String?
+    
+    static var searchcountry : String?
+    static var searchterm: String?
 }
