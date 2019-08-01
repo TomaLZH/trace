@@ -63,7 +63,7 @@ class NavigationController: UIViewController{
                         print(city)
                         
                         let weatherGetter = GetWeather()
-                        weatherGetter.getWeather(city: city)
+                        weatherGetter.getWeather(city: city, onComplete: { })
                         
                     }
                     

@@ -17,6 +17,7 @@
 		2CEF788E22D44FFE006D6DE1 /* ItineraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788D22D44FFE006D6DE1 /* ItineraryViewController.swift */; };
 		2CEF789022D4531B006D6DE1 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788F22D4531B006D6DE1 /* TaskCell.swift */; };
 		2CFF88E122CD2FA600D326C6 /* FirebaseDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFF88E022CD2FA600D326C6 /* FirebaseDBController.swift */; };
+		512037BC22F1847B0074F19E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512037BB22F1847B0074F19E /* Weather.swift */; };
 		5128884322CF2CD900EE271C /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5128884222CF2CD900EE271C /* CameraController.swift */; };
 		513972DB22D8276E001F9B1D /* FirebaseLogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513972DA22D8276E001F9B1D /* FirebaseLogInController.swift */; };
 		513BE53E22C9C47000865C08 /* nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513BE53D22C9C47000865C08 /* nearby.swift */; };
@@ -52,6 +53,7 @@
 		2CEF788F22D4531B006D6DE1 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		2CFF88E022CD2FA600D326C6 /* FirebaseDBController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDBController.swift; sourceTree = "<group>"; };
 		45C2F2CFD0F2A705B1E65211 /* Pods-trace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trace.release.xcconfig"; path = "Target Support Files/Pods-trace/Pods-trace.release.xcconfig"; sourceTree = "<group>"; };
+		512037BB22F1847B0074F19E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		5128884222CF2CD900EE271C /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		513972DA22D8276E001F9B1D /* FirebaseLogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseLogInController.swift; sourceTree = "<group>"; };
 		513BE53D22C9C47000865C08 /* nearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = nearby.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				5152AFC422D33B2E0062571B /* MapState.swift */,
 				5189CA6F22E56754000D41C3 /* Day.swift */,
 				5189CA7122E56C85000D41C3 /* Task.swift */,
+				512037BB22F1847B0074F19E /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				5189CA7022E56754000D41C3 /* Day.swift in Sources */,
 				2CEF788A22D44FAB006D6DE1 /* ItineraryCell.swift in Sources */,
 				51D0F42F22E56FC300AEE71B /* errorpageViewController.swift in Sources */,
+				512037BC22F1847B0074F19E /* Weather.swift in Sources */,
 				2C018BE922D23830000BFCCA /* FreeMapController.swift in Sources */,
 				5152AFC522D33B2E0062571B /* MapState.swift in Sources */,
 				2CEF788C22D44FCE006D6DE1 /* DayCell.swift in Sources */,

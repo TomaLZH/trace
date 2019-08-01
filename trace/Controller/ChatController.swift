@@ -23,7 +23,7 @@ class ChatController: UIViewController {
             if let msg = response.result.fulfillment.messages[0] as NSDictionary? {
                 self.speechAndText(text: msg.value(forKey: "speech") as! String)
                 self.manageResponse(response)
-                self.retrieveWeather(response)
+                //self.retrieveWeather(response)
             }
         }, failure: { (request, error) in
             print(error!)
@@ -73,17 +73,109 @@ class ChatController: UIViewController {
                                       endDate: date.stringValue,
                                       venue: ["List of strings for venues"])
             FirebaseDBController.insertOrReplace(for: .Itinerary, item: itinerary)
+            
+            
+        case "getweather":
+            
+             let country = parameters["geo-country"] as? AIResponseParameter
+            let city = parameters["geo-city"] as? AIResponseParameter
+             
+             if country?.stringValue != "" {
+             Weather.country = country?.stringValue
+             Weather.city = country?.stringValue
+                
+                if CLLocationManager.locationServicesEnabled(){
+                    switch CLLocationManager.authorizationStatus() {
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        print("Authorized.")
+                        let lat = locationManager.location?.coordinate.latitude
+                        let long = locationManager.location?.coordinate.longitude
+                        let location = CLLocation(latitude: lat!, longitude: long!)
+                        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {
+                            (placemarks, error)in
+                            
+                            let weatherGetter = GetWeather()
+                            var cityInput = ""
+                            if error != nil {
+                                return
+                            }
+                            if country != nil {
+                                cityInput = country!.stringValue
+                                
+                                // let tempCelcius = Weather.celsius
+                                // let name = Weather.name
+                            }
+                            if city != nil {
+                                cityInput = city!.stringValue
+                            }
+                            
+                            weatherGetter.getWeather(city: cityInput, onComplete: {
+                                DispatchQueue.main.async {
+                                    self.tracetext.text = Weather.weather
+                                }
+                            })
+                        })
+                    default: break
+                    }
+                }
+                
+                
+                
+             }
+            
+             else {
+          
+            if CLLocationManager.locationServicesEnabled(){
+                switch CLLocationManager.authorizationStatus() {
+                case .authorizedAlways, .authorizedWhenInUse:
+                    print("Authorized.")
+                    let lat = locationManager.location?.coordinate.latitude
+                    let long = locationManager.location?.coordinate.longitude
+                    let location = CLLocation(latitude: lat!, longitude: long!)
+                    CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error)in
+                        if error != nil {
+                            return
+                        } else if let country = placemarks?.first?.country,
+                            let city = placemarks?.first?.locality {
+                            print(country)
+                            print(city)
+                            
+                            let weatherGetter = GetWeather()
+                            weatherGetter.getWeather(city: city, onComplete: { })
+                            
+                            // let tempCelcius = Weather.celsius
+                            // let name = Weather.name
+                            
+                            print(Weather.weather!)
+                            self.tracetext.text = Weather.weather
+                            
+                        }
+                        
+                    })
+                    
+                default: break
+                }
+            }
+            
+        }
+            
+            
+            
         default:
             print("Unmanaged intent.")
         }
     }
     
-    
+  /*
     func retrieveWeather(_ response: AIResponse){
         let intent = response.result.metadata.intentName
-        //let parameters = response.result.parameters
+        let parameters = response.result.parameters
+
         switch intent {
-        case "getweather": 
+        case "getweather":
+            let country = parameters["geo-country"] as! AIResponseParameter
+            let city = parameters["geo-city"] as! AIResponseParameter
+            Weather.country = country.stringValue
             if CLLocationManager.locationServicesEnabled(){
                 switch CLLocationManager.authorizationStatus() {
                 case .authorizedAlways, .authorizedWhenInUse:
@@ -102,13 +194,22 @@ class ChatController: UIViewController {
                             let weatherGetter = GetWeather()
                             weatherGetter.getWeather(city: city)
                             
+                           // let tempCelcius = Weather.celsius
+                           // let name = Weather.name
+                           
+                            
+                            
                         }
                         
                     })
-                    
+                    print(Weather.weather)
+                    self.tracetext.text = Weather.weather
                 default: break
                 }
             }
+            
+            
+            
         default:
             print("Unmanaged intent.")
         
@@ -118,7 +219,7 @@ class ChatController: UIViewController {
     }
     
     
-    
+    */
     
     
     
