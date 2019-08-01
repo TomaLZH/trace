@@ -65,6 +65,13 @@ class ItineraryStartController: UIViewController {
                                      startDate: startDate,
                                      endDate: endDate,
                                      venue: [nil])
+        if (!newItinerary.validateDates()) {
+            let alert = UIAlertController(title: "Error", message: "Please enter a valid date range", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
         newItinerary.new()
         FirebaseDBController.insertOrReplace(for: .Itinerary, item: newItinerary)
         navigationController?.popViewController(animated: true)

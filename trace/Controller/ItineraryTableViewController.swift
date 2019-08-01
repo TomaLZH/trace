@@ -63,7 +63,7 @@ class ItineraryTableViewController: UITableViewController {
         let end = dateFormatter.date(from: itineraryList[indexPath.row].endDate)
         
         // Calculate number of days
-        let noOfDays = itineraryList[indexPath.row].noOfDays()
+        let noOfDays = itineraryList[indexPath.row].numberOfDays()
         let plural_s = noOfDays <= 1 ? "" : "s"
         
         dateFormatter.dateFormat = "dd MMM yyyy, EEE"

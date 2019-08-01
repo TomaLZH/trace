@@ -1,0 +1,138 @@
+
+/* Class = "UIButton"; normalTitle = "Select Language"; ObjectID = "1LU-SJ-2PF"; */
+"1LU-SJ-2PF.normalTitle" = "Select Language";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "3iC-EC-fe3"; */
+"3iC-EC-fe3.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "No Data Found"; ObjectID = "3zq-D9-h5X"; */
+"3zq-D9-h5X.text" = "No Data Found";
+
+/* Class = "UITabBarItem"; title = "Talk"; ObjectID = "7cR-Dg-qbc"; */
+"7cR-Dg-qbc.title" = "Talk";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "8VT-Jq-xaA"; */
+"8VT-Jq-xaA.normalTitle" = "Send";
+
+/* Class = "UILabel"; text = "translated"; ObjectID = "9wH-IZ-vAX"; */
+"9wH-IZ-vAX.text" = "translated";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "B42-Ra-QkW"; */
+"B42-Ra-QkW.normalTitle" = "Delete";
+
+/* Class = "UILabel"; text = "Country"; ObjectID = "Bwe-CA-mFN"; */
+"Bwe-CA-mFN.text" = "Country";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "ClK-Sz-Fc3"; */
+"ClK-Sz-Fc3.title" = "Item";
+
+/* Class = "UILabel"; text = "Name:"; ObjectID = "CoW-Cz-qeJ"; */
+"CoW-Cz-qeJ.text" = "Name:";
+
+/* Class = "UITabBarItem"; title = "Free-Roam"; ObjectID = "DjN-cu-c74"; */
+"DjN-cu-c74.title" = "Free-Roam";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "GJO-IV-fnt"; */
+"GJO-IV-fnt.normalTitle" = "Login";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "GQ3-lh-JBv"; */
+"GQ3-lh-JBv.text" = "Name";
+
+/* Class = "UILabel"; text = "Address:"; ObjectID = "J8b-sR-T8u"; */
+"J8b-sR-T8u.text" = "Address:";
+
+/* Class = "UILabel"; text = "Day 0"; ObjectID = "KL3-uV-mPo"; */
+"KL3-uV-mPo.text" = "Day 0";
+
+/* Class = "UIButton"; normalTitle = "Forget Password"; ObjectID = "Lp1-mc-l7j"; */
+"Lp1-mc-l7j.normalTitle" = "Forget Password";
+
+/* Class = "UISegmentedControl"; OpP-9M-p42.segmentTitles[0] = "Top"; ObjectID = "OpP-9M-p42"; */
+"OpP-9M-p42.segmentTitles[0]" = "Top";
+
+/* Class = "UISegmentedControl"; OpP-9M-p42.segmentTitles[1] = "Food"; ObjectID = "OpP-9M-p42"; */
+"OpP-9M-p42.segmentTitles[1]" = "Food";
+
+/* Class = "UISegmentedControl"; OpP-9M-p42.segmentTitles[2] = "All"; ObjectID = "OpP-9M-p42"; */
+"OpP-9M-p42.segmentTitles[2]" = "All";
+
+/* Class = "UISegmentedControl"; OpP-9M-p42.segmentTitles[3] = "Sights"; ObjectID = "OpP-9M-p42"; */
+"OpP-9M-p42.segmentTitles[3]" = "Sights";
+
+/* Class = "UISegmentedControl"; OpP-9M-p42.segmentTitles[4] = "Outdoor"; ObjectID = "OpP-9M-p42"; */
+"OpP-9M-p42.segmentTitles[4]" = "Outdoor";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "RYP-JQ-IXO"; */
+"RYP-JQ-IXO.text" = "Date";
+
+/* Class = "UINavigationItem"; title = "Trace"; ObjectID = "VaI-ho-yMn"; */
+"VaI-ho-yMn.title" = "Trace";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "WsV-Hl-EHE"; */
+"WsV-Hl-EHE.text" = "Name";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "ect-QW-4TH"; */
+"ect-QW-4TH.placeholder" = "Email";
+
+/* Class = "UIButton"; normalTitle = "Weather"; ObjectID = "fg8-T4-V7F"; */
+"fg8-T4-V7F.normalTitle" = "Weather";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "frZ-pr-Wki"; */
+"frZ-pr-Wki.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Get Direction"; ObjectID = "g0q-nE-aIZ"; */
+"g0q-nE-aIZ.normalTitle" = "Get Direction";
+
+/* Class = "UITabBarItem"; title = "Itinerary"; ObjectID = "gN9-3I-I1z"; */
+"gN9-3I-I1z.title" = "Itinerary";
+
+/* Class = "UILabel"; text = "Days"; ObjectID = "j1y-9P-g7b"; */
+"j1y-9P-g7b.text" = "Days";
+
+/* Class = "UISegmentedControl"; jlc-g5-zc3.segmentTitles[0] = "Login"; ObjectID = "jlc-g5-zc3"; */
+"jlc-g5-zc3.segmentTitles[0]" = "Login";
+
+/* Class = "UISegmentedControl"; jlc-g5-zc3.segmentTitles[1] = "Signup"; ObjectID = "jlc-g5-zc3"; */
+"jlc-g5-zc3.segmentTitles[1]" = "Signup";
+
+/* Class = "UILabel"; text = "Country"; ObjectID = "kog-ME-Lzn"; */
+"kog-ME-Lzn.text" = "Country";
+
+/* Class = "UIButton"; normalTitle = "New Task"; ObjectID = "lNt-Pg-tTa"; */
+"lNt-Pg-tTa.normalTitle" = "New Task";
+
+/* Class = "UIButton"; normalTitle = "Photo"; ObjectID = "mWW-cX-Rz6"; */
+"mWW-cX-Rz6.normalTitle" = "Photo";
+
+/* Class = "UITabBarItem"; title = "Itinerary"; ObjectID = "mfp-Kj-5l1"; */
+"mfp-Kj-5l1.title" = "Itinerary";
+
+/* Class = "UITabBarItem"; title = "Item"; ObjectID = "mi2-ZO-fXN"; */
+"mi2-ZO-fXN.title" = "Item";
+
+/* Class = "UILabel"; text = "Rating:"; ObjectID = "nkO-13-AP7"; */
+"nkO-13-AP7.text" = "Rating:";
+
+/* Class = "UIBarButtonItem"; title = "go"; ObjectID = "pmK-cY-tKp"; */
+"pmK-cY-tKp.title" = "go";
+
+/* Class = "UIButton"; normalTitle = "Camera"; ObjectID = "qL5-aL-qjS"; */
+"qL5-aL-qjS.normalTitle" = "Camera";
+
+/* Class = "UILabel"; text = "Start Date"; ObjectID = "qLV-pM-8nF"; */
+"qLV-pM-8nF.text" = "Start Date";
+
+/* Class = "UILabel"; text = "detected"; ObjectID = "rCd-Fr-9eY"; */
+"rCd-Fr-9eY.text" = "detected";
+
+/* Class = "UILabel"; text = "End Date"; ObjectID = "rxa-Ep-tt5"; */
+"rxa-Ep-tt5.text" = "End Date";
+
+/* Class = "UILabel"; text = "Trace is your travelling companion. Ask her anything about your travels!"; ObjectID = "suT-14-J69"; */
+"suT-14-J69.text" = "Trace is your travelling companion. Ask her anything about your travels!";
+
+/* Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "vuU-Us-Gp7"; */
+"vuU-Us-Gp7.normalTitle" = "Confirm";
+
+/* Class = "UINavigationItem"; title = "Itinerary"; ObjectID = "zCO-CH-Dlb"; */
+"zCO-CH-Dlb.title" = "Itinerary";

@@ -4,21 +4,39 @@ import UIKit
 struct cellData {
     var isOpened = Bool()
     var title = String()
-    var sectionData = [String]()
+    var sectionData = [Task]()
 }
 
 class ItineraryViewController: UITableViewController {
 
     var tableViewData = [cellData]()
     var itinerary: Itinerary?
+    var listOfTasks = [[Task]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Hard-coded for testing
-        tableViewData = [cellData(isOpened: false, title: "Day 1", sectionData: ["9am Uber", "10am Activity", "11am Activity"]),
-                         cellData(isOpened: false, title: "Day 2", sectionData: ["12pm Lunch", "3pm Tour", "6pm Dinner", "9pm Camp"])]
+        if let noOfDays = itinerary?.numberOfDays() {
+            for i in 1...noOfDays {
+//                FirebaseDBController.loadTasks(forItinerary: itinerary?.id ?? "", forDay: i) {
+//                    (taskList) in
+//                    self.listOfTasks.append(taskList)
+//                }
+                let taskList = FirebaseDBController.getTasks(forItinerary: itinerary?.id ?? "", forDay: i)
+                self.listOfTasks.append(taskList)
+            }
+            for i in 0...listOfTasks.count-1 {
+                let dayTasks = listOfTasks[i]
+                if dayTasks.count > 0 {
+                    for j in 0...dayTasks.count {
+                        let task = dayTasks[j]
+                    }
+                }
+                let dayCell = cellData(isOpened: false, title: "Day \(i+1)", sectionData: dayTasks)
+                tableViewData.append(dayCell)
+            }
         }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -48,13 +66,15 @@ class ItineraryViewController: UITableViewController {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell") as! TaskCell
-            cell.taskLabel.text = tableViewData[indexPath.section].sectionData[dataIndex]
+            cell.taskLabel.text = tableViewData[indexPath.section].sectionData[dataIndex].title
             return cell
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 { // if parent cell(day) is tapped
+        // if parent cell(day) is tapped
+        if indexPath.row == 0 {
+            // handle expanding and minimising cell groups
             if tableViewData[indexPath.section].isOpened == true {
                 tableViewData[indexPath.section].isOpened = false
                 let sections = IndexSet.init(integer: indexPath.section)
@@ -64,8 +84,11 @@ class ItineraryViewController: UITableViewController {
                 let sections = IndexSet.init(integer: indexPath.section)
                 tableView.reloadSections(sections, with: .none)
             }
-        } else { // else when child cell(task) is tapped
-            // go to edit screen
+        }
+        // else when child cell(task) is tapped
+        else {
+            // go to edit screen of task
+            
         }
     }
     
