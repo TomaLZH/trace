@@ -40,10 +40,11 @@ class ChatController: UIViewController {
         super.viewDidLoad()
     }
     
-    func factscountry(_ searchterm: String, _ searchcountry: String){
+    func factscountry(_ searchterm1: String, _ searchcountry: String){
+        let searchterm = searchterm1.lowercased()
         print(searchterm)
         print(searchcountry)
-        var searchcountry1 = searchcountry.replacingOccurrences(of: " ", with: "%20")
+        let searchcountry1 = searchcountry.replacingOccurrences(of: " ", with: "%20")
         
         
         guard var url = URL(string: "https://restcountries.eu/rest/v2/name/\(searchcountry1)") else {return}

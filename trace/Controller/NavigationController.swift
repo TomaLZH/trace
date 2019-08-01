@@ -476,7 +476,7 @@ class NavigationController: UIViewController {
         
         //remove annotation to reset the map
         self.mapView.removeAnnotations(self.mapView.annotations)
-
+        
         //get the location
         checkLocationServices()
         
