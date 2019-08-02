@@ -172,7 +172,6 @@ class detailscontroller: UIViewController {
                         
                         
                         DispatchQueue.main.async {
-                            self.openorclose.text = self.isopen
                             self.namelabel.text = name
                             self.addresslabel.text = address2
                             if self.addresslabel.text == "No Address Found"{
