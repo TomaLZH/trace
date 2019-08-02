@@ -1,8 +1,15 @@
 import UIKit
 
+protocol DayCellDelegate: AnyObject {
+    func newTaskTapped(cell: DayCell)
+}
+
 class DayCell: UITableViewCell {
 
     @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var newTaskBtn: UIButton!
+    
+    weak var delegate: DayCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -14,5 +21,9 @@ class DayCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    @IBAction func newTaskTapped(_ sender: Any) {
+        delegate?.newTaskTapped(cell: self)
+    }
+    
 }

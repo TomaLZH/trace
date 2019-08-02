@@ -12,6 +12,7 @@
 		2C018BEF22D3D54F000BFCCA /* ItineraryStartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */; };
 		2C0880F222F2A1D100D17E36 /* EditTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0880F122F2A1D100D17E36 /* EditTaskController.swift */; };
 		2C0880F422F2B62600D17E36 /* TaskMapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0880F322F2B62600D17E36 /* TaskMapController.swift */; };
+		2C0880F622F3A52A00D17E36 /* CenterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0880F522F3A52A00D17E36 /* CenterAnnotationView.swift */; };
 		2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C202D8E22CB3E7E00E160BF /* Itinerary.swift */; };
 		2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33933122C9C63900A1F87B /* NavigationController.swift */; };
 		2CEF788A22D44FAB006D6DE1 /* ItineraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788922D44FAB006D6DE1 /* ItineraryCell.swift */; };
@@ -48,6 +49,7 @@
 		2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryStartController.swift; sourceTree = "<group>"; };
 		2C0880F122F2A1D100D17E36 /* EditTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskController.swift; sourceTree = "<group>"; };
 		2C0880F322F2B62600D17E36 /* TaskMapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskMapController.swift; sourceTree = "<group>"; };
+		2C0880F522F3A52A00D17E36 /* CenterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterAnnotationView.swift; sourceTree = "<group>"; };
 		2C202D8E22CB3E7E00E160BF /* Itinerary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Itinerary.swift; sourceTree = "<group>"; };
 		2C33933122C9C63900A1F87B /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		2CEF788922D44FAB006D6DE1 /* ItineraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryCell.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				2CEF788922D44FAB006D6DE1 /* ItineraryCell.swift */,
 				2CEF788B22D44FCE006D6DE1 /* DayCell.swift */,
 				2CEF788F22D4531B006D6DE1 /* TaskCell.swift */,
+				2C0880F522F3A52A00D17E36 /* CenterAnnotationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				2CFF88E122CD2FA600D326C6 /* FirebaseDBController.swift in Sources */,
 				51D855A522BA0DF3007A5E7B /* ChatController.swift in Sources */,
 				51EDD9D322D2EADA00C20CA1 /* GoogleTranslate.swift in Sources */,
+				2C0880F622F3A52A00D17E36 /* CenterAnnotationView.swift in Sources */,
 				2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

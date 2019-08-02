@@ -7,8 +7,14 @@ struct cellData {
     var sectionData = [Task]()
 }
 
-class ItineraryViewController: UITableViewController {
-
+class ItineraryViewController: UITableViewController, DayCellDelegate {
+    func newTaskTapped(cell: DayCell) {
+        let indexPath = self.tableView.indexPath(for: cell)
+        let day = indexPath!.section + 1
+        tappedDay = day
+    }
+    
+    var tappedDay: Int?
     var tableViewData = [cellData]()
     var itinerary: Itinerary?
     var listOfTasks = [[Task]]()
@@ -62,6 +68,7 @@ class ItineraryViewController: UITableViewController {
         let dataIndex = indexPath.row - 1
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "dayCell") as! DayCell
+            cell.delegate = self
             cell.dayLabel.text = tableViewData[indexPath.section].title
             return cell
         } else {
@@ -96,6 +103,14 @@ class ItineraryViewController: UITableViewController {
         if segue.identifier == "editItinerary" {
             let itineraryEditController = segue.destination as! ItineraryStartController
             itineraryEditController.itineraryToEdit = itinerary
+        }
+        else if segue.identifier == "newTask" {
+            let editTaskController = segue.destination as! EditTaskController
+            
+            if tappedDay != nil {
+                editTaskController.forDay = tappedDay
+                editTaskController.forItineraryId = itinerary?.id
+            }
         }
     }
 

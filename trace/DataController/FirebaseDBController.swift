@@ -3,7 +3,7 @@ import FirebaseDatabase
 import Firebase
 import FirebaseAuth
 
-// id for testing purposes only
+// id
 let user = "justinMac"
 
 let dateFormatter = DateFormatter()
@@ -11,7 +11,7 @@ let dateFormatter = DateFormatter()
 enum itemType: String {
     case Itinerary = "itineraries/"
     case Day = "itineraries/days"
-    case Task = "itineraries/days/tasks"
+    case Task = "itineraries/tasks"
 }
 
 
@@ -45,6 +45,24 @@ class FirebaseDBController {
                     "title": title
                     ])
             }
+        }
+        else if let item = item as? Task {
+            let taskId = UUID().uuidString
+            var idToUpload = ""
+            if item.id == nil {
+                idToUpload = taskId
+            } else {
+                idToUpload = item.id!
+            }
+            let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(item.itineraryId!)/days/\(item.day!)/\(idToUpload)")
+            ref.setValue([
+                "id": idToUpload,
+                "title": item.title,
+                "time": item.time,
+                "type": item.taskType,
+                "lat": item.lat,
+                "lng": item.lng
+                ])
         }
     }
     
@@ -88,6 +106,7 @@ class FirebaseDBController {
                                     time: r.childSnapshot(forPath: "time").value as? String ?? "Type",
                                     lat: r.childSnapshot(forPath: "lat").value as? Double ?? 0,
                                     lng: r.childSnapshot(forPath: "lng").value as? Double ?? 0)
+                thisTask.id = r.childSnapshot(forPath: "id").value as? String
                 taskList.append(thisTask)
             }
             
@@ -99,6 +118,7 @@ class FirebaseDBController {
         var taskList: [Task] = []
         
         let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)/days/\(forDay)")
+        print("itineraries/\(user)/\(forItinerary)/days/\(forDay)")
         
         ref.observeSingleEvent(of: .value, with: {
             (snaphot) in
@@ -112,9 +132,11 @@ class FirebaseDBController {
                                     lat: r.childSnapshot(forPath: "lat").value as? Double ?? 0,
                                     lng: r.childSnapshot(forPath: "lng").value as? Double ?? 0
                                     )
+                thisTask.id = r.childSnapshot(forPath: "id").value as? String
                 taskList.append(thisTask)
             }
         })
+        
         return taskList
     }
     

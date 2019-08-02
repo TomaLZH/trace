@@ -2,9 +2,12 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class TaskMapController: UIViewController, CLLocationManagerDelegate {
+class TaskMapController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     var lm: CLLocationManager?
+    var task: Task?
+    var coordinatesPassed: CLLocationCoordinate2D?
+
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var setCurrentBtn: UIButton!
     override func viewDidLoad() {
@@ -22,17 +25,8 @@ class TaskMapController: UIViewController, CLLocationManagerDelegate {
         ////////////////////////////////////////////////
     }
     
-    // This function is called whenever the user's location is updated.
-    // lm?.distanceFilter affects how much a location has to change before this is called
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let loc = locations.last!
-        
-        let region = MKCoordinateRegion(center: loc.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        mapView.setRegion(region, animated: true)
-    }
-    
     @IBAction func onSetCurrentPress(_ sender: Any) {
-        
+        coordinatesPassed = mapView.centerCoordinate
     }
     
     /*
