@@ -69,13 +69,22 @@ class ChatController: UIViewController {
                         MapState.searchcountry = nil
 
                         }
+                        var currencyarray: [String] = []
+                        
                         if searchterm == "currency" {
                             var currency = facts["currencies"] as! NSArray
-                            var currency2 = currency[0] as! NSDictionary
-                            var currenci = currency2["name"]
-                            var currencysymbol = currency2["symbol"]
+                            for i in 0..<currency.count{
+                                var currency2 = currency[i] as! NSDictionary
+                                var currenci = currency2["name"] as! String
+                                var currencysymbol = currency2["symbol"] as! String
+                                currencyarray.append(currenci)
+                                currencyarray.append(currencysymbol)
+                            }
+                            
+                            var currencyarrays = currencyarray.joined(separator: ",")
+                            
                             DispatchQueue.main.async {
-                                self.tracetext.text = "The currency for \(searchcountry) is \(currenci!), \(currencysymbol!)"
+                                self.tracetext.text = "The currency for \(searchcountry) is \(currencyarrays)"
                             }
                             MapState.searchterm = nil
                             MapState.searchcountry = nil

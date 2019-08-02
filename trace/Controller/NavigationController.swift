@@ -149,7 +149,7 @@ class NavigationController: UIViewController {
         }
         print(pricea)
         print(placement)
-        guard var url = URL(string:"https://api.foursquare.com/v2/venues/explore?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&v=20190701&\(placement)&query=\(venuetypes)&open=\(openstatus)&price=\(pricea)") else {return}
+        guard var url = URL(string:"https://api.foursquare.com/v2/venues/explore?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&v=20190701&\(placement)&query=\(venuetypes)&open=\(openstatus)&price=\(pricea)") else {return}
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -213,7 +213,7 @@ class NavigationController: UIViewController {
         print("search place")
         let placess = place as! String
         let places = placess.replacingOccurrences(of: " ", with: ",")
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&ll=44.3,37.2&v=20190701&intent=global&limit=20&query=\(places)"  )else{return}
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&ll=44.3,37.2&v=20190701&intent=global&limit=20&query=\(places)"  )else{return}
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -265,7 +265,7 @@ class NavigationController: UIViewController {
         self.mapView.removeAnnotations(self.mapView.annotations)
         var placeid = placesid as! String
         
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(placeid)?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&v=20190701") else {return}
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(placeid)?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&v=20190701") else {return}
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
             if var response = response {
@@ -352,7 +352,7 @@ class NavigationController: UIViewController {
         
         // put in the values to get the JSON reply
         
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&v=20190701&ll=\(lat),\(lng)&limit=20&section=\(section)") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&v=20190701&ll=\(lat),\(lng)&limit=20&section=\(section)") else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -489,7 +489,7 @@ class NavigationController: UIViewController {
         let cata = nearbycat as! String
         let cat = cata.replacingOccurrences(of: " ", with: ",")
         //Put in parameters to get approiate JSON reply
-        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&query=\(cat)") else { return }
+        guard let url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&v=20190701&opennow=1&sortbydistance=1&ll=\(lat),\(lng)&query=\(cat)") else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in

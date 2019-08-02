@@ -57,7 +57,7 @@ class detailscontroller: UIViewController {
         
         
         // put in the values to get the JSON reply
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&v=20190701&ll=\(lat),\(long)") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&v=20190701&ll=\(lat),\(long)") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -98,7 +98,7 @@ class detailscontroller: UIViewController {
         }
         
         else{
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=D0ENHVESWOVBSOXM3NEZ3HEEXBPENPPGSF5HCLUI3BT1EMH0&client_secret=RYZNZJBBTHM3XOPIIGVDHBWLAR5ZU5ZPBC4Z42PSSXLS1DKR&v=20190715") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&v=20190715") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -110,6 +110,7 @@ class detailscontroller: UIViewController {
                     //get the name
                     var output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
                     let venues = output["response"] as! NSDictionary
+                    print(output)
                     let venues2 = venues["venue"] as! NSDictionary
                     let name = venues2["name"] as! String
                     
@@ -168,6 +169,8 @@ class detailscontroller: UIViewController {
                             self.isopen = "Currently Closed"
                         }
                         }
+                        
+                        
                         DispatchQueue.main.async {
                             self.openorclose.text = self.isopen
                             self.namelabel.text = name
