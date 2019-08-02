@@ -11,4 +11,6 @@ class MapState {
     
     static var searchcountry : String?
     static var searchterm: String?
+    
+    static var apikeys: String? = "client_id=OYB4RDYYNNFAPNLYODUEEALXLRLGEFSB5IJBKRJ2LRJRSJWK&client_secret=5VHKG3QWZMMOHFY2RHI5LSYXTDSLGPPMTD1CWBNT1IHCFFYD"
 }

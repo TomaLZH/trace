@@ -55,9 +55,9 @@ class NavigationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         currentPos = locationManager.location?.coordinate
         showNearbyAttractions(currentPos, "all")
-        //        goButton.layer.cornerRadius = goButton.frame.size.height/2
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,15 +68,14 @@ class NavigationController: UIViewController {
             getDirections(currentPos, MapState.nearbyCategory)
         }
         if MapState.placesID != nil {
+            mapView.removeAnnotations(mapView.annotations)
             directionID(MapState.placesID!)
         }
         
         if MapState.searchplace != nil{
             searchplace(MapState.searchplace!)
         }
-        print(MapState.region, MapState.venuetype, MapState.price, MapState.open,currentPos)
-        
-        
+
         if MapState.price != nil || MapState.open != nil || MapState.venuetype != nil{
             if MapState.region == nil {
                 MapState.region = ""
@@ -119,7 +118,7 @@ class NavigationController: UIViewController {
         }
         print(pricea)
         print(placement)
-        guard var url = URL(string:"https://api.foursquare.com/v2/venues/explore?client_id=C5UQOXGXQRJ3GQWD2GO54F55VPH3FTJJSTLLFMDQOW50SKH1&client_secret=1BOLVECMJWH5I4T3JBH5IBKKOTXAXZZ3PN04CI2FKD4XXNAE&v=20190701&\(placement)&query=\(venuetypes)&open=\(openstatus)&price=\(pricea)") else {return}
+        guard var url = URL(string:"https://api.foursquare.com/v2/venues/explore?\(MapState.apikeys!)&v=20190701&\(placement)&query=\(venuetypes)&open=\(openstatus)&price=\(pricea)") else {return}
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -179,11 +178,13 @@ class NavigationController: UIViewController {
     func searchplace(_ place : String){
         
         //remove annotation to reset the map
+        //remove annotation to reset the map
         self.mapView.removeAnnotations(self.mapView.annotations)
+        mapView.removeAnnotations(mapView.annotations)
         print("search place")
         let placess = place as! String
         let places = placess.replacingOccurrences(of: " ", with: ",")
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=C5UQOXGXQRJ3GQWD2GO54F55VPH3FTJJSTLLFMDQOW50SKH1&client_secret=1BOLVECMJWH5I4T3JBH5IBKKOTXAXZZ3PN04CI2FKD4XXNAE&ll=44.3,37.2&v=20190701&intent=global&limit=20&query=\(places)"  )else{return}
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?\(MapState.apikeys!)&ll=44.3,37.2&v=20190701&intent=global&limit=20&query=\(places)"  )else{return}
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -231,11 +232,13 @@ class NavigationController: UIViewController {
     
     func directionID (_ placesid : String){
         //remove annotation to reset the map
-        mapView.removeAnnotations(mapView.annotations)
+        //remove annotation to reset the map
         self.mapView.removeAnnotations(self.mapView.annotations)
+        mapView.removeAnnotations(mapView.annotations)
+        
         var placeid = placesid as! String
         
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(placeid)?client_id=C5UQOXGXQRJ3GQWD2GO54F55VPH3FTJJSTLLFMDQOW50SKH1&client_secret=1BOLVECMJWH5I4T3JBH5IBKKOTXAXZZ3PN04CI2FKD4XXNAE&v=20190701") else {return}
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(placeid)?\(MapState.apikeys!)&v=20190701") else {return}
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
             if var response = response {
@@ -260,8 +263,8 @@ class NavigationController: UIViewController {
                     annotation.coordinate = CLLocationCoordinate2D(latitude: self.place!.latitude, longitude: self.place!.longitude)
                     self.mapView.addAnnotation(annotation)
                     directions.calculate{ [unowned self] (response, error) in
-                        guard let response = response else {return}
-                        for route in response.routes {
+                        guard var responses = response else {return}
+                        for route in responses.routes {
                             self.mapView.addOverlay(route.polyline)
                             self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                         }
@@ -302,17 +305,16 @@ class NavigationController: UIViewController {
     func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: String) {
         
         checkLocationServices()
-        self.mapView.removeOverlays(self.mapView.overlays)
-        //remove annotation to reset the map
         self.mapView.removeAnnotations(self.mapView.annotations)
-        
+        mapView.removeAnnotations(mapView.annotations)
+
         //convert Coordinate to String
         let lat = String(format:"%f", (pos?.latitude ?? 1.3801))
         let lng = String(format:"%f", (pos?.longitude ?? 103.849))
         
         // put in the values to get the JSON reply
         
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?client_id=C5UQOXGXQRJ3GQWD2GO54F55VPH3FTJJSTLLFMDQOW50SKH1&client_secret=1BOLVECMJWH5I4T3JBH5IBKKOTXAXZZ3PN04CI2FKD4XXNAE&v=20190701&ll=\(lat),\(lng)&limit=20&section=\(section)") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/explore?\(MapState.apikeys!)&v=20190701&ll=\(lat),\(lng)&limit=20&section=\(section)") else { return }
         
         let session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in

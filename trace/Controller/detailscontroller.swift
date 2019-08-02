@@ -5,6 +5,8 @@ class detailscontroller: UIViewController {
     var latitude: Double?
     var longitude : Double?
     var placeid: String?
+    var open: String = "No Opening Time Found"
+    var isopenarray: [String] = []
     enum foursquareerror : Error{
         case nopicturefound
     }
@@ -13,6 +15,7 @@ class detailscontroller: UIViewController {
     @IBOutlet weak var openorclose: UILabel!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var addresslabel: UILabel!
+    @IBOutlet weak var openingtime: UILabel!
     @IBOutlet weak var descriptionlabel: UILabel!
     @IBOutlet weak var imageplace: UIImageView!
     @IBOutlet weak var namelabel: UILabel!
@@ -49,7 +52,7 @@ class detailscontroller: UIViewController {
         
         
         // put in the values to get the JSON reply
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=C5UQOXGXQRJ3GQWD2GO54F55VPH3FTJJSTLLFMDQOW50SKH1&client_secret=1BOLVECMJWH5I4T3JBH5IBKKOTXAXZZ3PN04CI2FKD4XXNAE&v=20190701&ll=\(lat),\(long)") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?\(MapState.apikeys!)&v=20190701&ll=\(lat),\(long)") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -90,7 +93,7 @@ class detailscontroller: UIViewController {
         }
             
         else{
-            guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=C5UQOXGXQRJ3GQWD2GO54F55VPH3FTJJSTLLFMDQOW50SKH1&client_secret=1BOLVECMJWH5I4T3JBH5IBKKOTXAXZZ3PN04CI2FKD4XXNAE&v=20190715") else { return }
+            guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?\(MapState.apikeys!)&v=20190715") else { return }
             
             var session = URLSession.shared
             session.dataTask(with: url){(data,response,error) in
@@ -102,7 +105,6 @@ class detailscontroller: UIViewController {
                         //get the name
                         var output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
                         let venues = output["response"] as! NSDictionary
-                        print(output)
                         let venues2 = venues["venue"] as! NSDictionary
                         let name = venues2["name"] as! String
                         
@@ -152,23 +154,62 @@ class detailscontroller: UIViewController {
                             //get opening time and current status
                             if venues2["hour"] != nil{
                                 let status = venues2["hour"] as! NSDictionary
-                                let isopen1 = status["isOpen"] as! Bool
+                                let isopen1 = status["isOpen"] as! String
                                 
-                                if isopen1 == true{
+                                if isopen1 == "true"{
                                     self.isopen = "Currently Open"
                                 }
                                 else{
                                     self.isopen = "Currently Closed"
                                 }
                             }
+
+                            if venues2["popular"] != nil {
+                                let venues3 = venues2["popular"] as! NSDictionary
+                                let isopen1 = venues3["isOpen"] as! Bool
+                                if isopen1 == true{
+                                    self.isopen = "Currently Open"
+                                }
+                                else{
+                                    self.isopen = "Currently Closed"
+                                }
+                                
+                                let status = venues3["timeframes"] as! NSArray
+                                for i in 0..<status.count{
+                                    let status1 = status[i] as! NSDictionary
+                                    let days = status1["days"] as! String
+                                    let status2 = status1["open"] as! NSArray
+                                    let status3 = status2[0] as! NSDictionary
+                                    let time = status3["renderedTime"] as! String
+                                    let timing = days + ": " + time
+                                    self.isopenarray.append(timing)
+                                }
+                                self.open = self.isopenarray.joined(separator: "\n")
+                            }
+                            
+                            
+                            if venues2["hours"] != nil{
+                                let venues3 = venues2["hours"] as! NSDictionary
+                                let status = venues3["timeframes"] as! NSArray
+                                for i in 0..<status.count{
+                                    var status1 = status[i] as! NSDictionary
+                                    var days = status1["days"] as! String
+                                    var status2 = status1["open"] as! NSArray
+                                    var status3 = status2[0] as! NSDictionary
+                                    var time = status3["renderedTime"] as! String
+                                    var timing = days + ":" + time
+                                    self.isopenarray.append(timing)
+                                }
+                                
+                                self.open = self.isopenarray.joined(separator: "\n")
+                            }
                             
                             
                             DispatchQueue.main.async {
+                                self.openingtime.text = self.open
+                                self.openorclose.text = self.isopen
                                 self.namelabel.text = name
                                 self.addresslabel.text = address2
-                                if self.addresslabel.text == "No Address Found"{
-                                    self.button.isHidden = false
-                                }
                                 self.ratinglabel.text = (rating1 as! String) + "/10"
                             }
                             
