@@ -305,9 +305,12 @@ class NavigationController: UIViewController {
     func showNearbyAttractions(_ pos: CLLocationCoordinate2D?, _ section: String) {
         
         checkLocationServices()
+        
+        self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.removeAnnotations(self.mapView.annotations)
         mapView.removeAnnotations(mapView.annotations)
-
+        mapView.removeOverlays(mapView.overlays)
+        
         //convert Coordinate to String
         let lat = String(format:"%f", (pos?.latitude ?? 1.3801))
         let lng = String(format:"%f", (pos?.longitude ?? 103.849))
