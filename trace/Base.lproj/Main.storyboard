@@ -13,7 +13,7 @@
         <!--Item-->
         <scene sceneID="QmK-oq-49R">
             <objects>
-                <viewController id="C1F-FS-WQs" customClass="NavigationController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="navigation" id="C1F-FS-WQs" customClass="NavigationController" customModule="trace" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jH4-2m-ckD"/>
                         <viewControllerLayoutGuide type="bottom" id="FtK-RV-rhF"/>
@@ -431,8 +431,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trace is your travelling companion. Ask her anything about your travels!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suT-14-J69">
-                                <rect key="frame" x="46" y="305" width="283" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask about your travels!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suT-14-J69">
+                                <rect key="frame" x="46" y="325.5" width="283" height="20.5"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -448,8 +448,15 @@
                                     <action selector="entermessage:" destination="ybn-Pf-hf9" eventType="touchUpInside" id="7FC-Sx-j8u"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIO-lA-HWc">
+                                <rect key="frame" x="123" y="64" width="129" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.92316251719999998" green="0.99942404029999998" blue="0.95267472149999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="lvj-QN-Vaw" secondAttribute="trailing" constant="46" id="1dE-jp-9mZ"/>
                             <constraint firstItem="lvj-QN-Vaw" firstAttribute="leading" secondItem="C66-RI-xi9" secondAttribute="leading" constant="46" id="5FX-wz-3dC"/>
@@ -736,10 +743,12 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="veb-jf-FqD">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPM-au-Vga">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPM-au-Vga">
                                 <rect key="frame" x="120" y="536" width="135" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.074094692530000006" green="0.71290336239999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="vkc-DK-ZiQ"/>
+                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 <state key="normal" title="Set current center"/>
@@ -752,6 +761,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="veb-jf-FqD" firstAttribute="top" secondItem="KTe-x8-kJJ" secondAttribute="top" id="0GC-zr-rz2"/>
+                            <constraint firstItem="KTe-x8-kJJ" firstAttribute="bottom" secondItem="mPM-au-Vga" secondAttribute="bottom" constant="46" id="7ad-LU-uMj"/>
+                            <constraint firstItem="KTe-x8-kJJ" firstAttribute="trailing" secondItem="mPM-au-Vga" secondAttribute="trailing" constant="120" id="9xx-Eg-5J4"/>
+                            <constraint firstItem="mPM-au-Vga" firstAttribute="leading" secondItem="KTe-x8-kJJ" secondAttribute="leading" constant="120" id="Zhv-7h-rcG"/>
                             <constraint firstItem="veb-jf-FqD" firstAttribute="leading" secondItem="KTe-x8-kJJ" secondAttribute="leading" id="ZoE-99-rol"/>
                             <constraint firstItem="veb-jf-FqD" firstAttribute="trailing" secondItem="KTe-x8-kJJ" secondAttribute="trailing" id="p8e-Mi-8kI"/>
                             <constraint firstItem="veb-jf-FqD" firstAttribute="bottom" secondItem="KTe-x8-kJJ" secondAttribute="bottom" id="tC0-VO-c1K"/>
@@ -902,7 +914,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="L1K-iy-jNr"/>
+        <segue reference="Ekw-nR-9hZ"/>
         <segue reference="LPJ-n0-acf"/>
     </inferredMetricsTieBreakers>
 </document>

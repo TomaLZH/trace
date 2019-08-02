@@ -1,13 +1,13 @@
 import UIKit
 import ApiAI
 import AVFoundation
-
+import CoreLocation
 
 class ChatController: UIViewController {
     var nearbycata: String?
     @IBOutlet weak var tracetext: UILabel!
     @IBOutlet weak var inputtext: UITextField!
-    
+    let locationManager = CLLocationManager()
     @IBAction func entermessage(_ sender: Any) {
         let request = ApiAI.shared().textRequest()
         
@@ -239,8 +239,89 @@ class ChatController: UIViewController {
                     factscountry(MapState.searchterm!, MapState.searchcountry!)
                 }
             }
+        case "getweather":
             
+            let country = parameters["geo-country"] as? AIResponseParameter
+            let city = parameters["geo-city"] as? AIResponseParameter
             
+            if country?.stringValue != "" {
+                Weather.country = country?.stringValue
+                Weather.city = country?.stringValue
+                
+                if CLLocationManager.locationServicesEnabled(){
+                    switch CLLocationManager.authorizationStatus() {
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        print("Authorized.")
+                        let lat = locationManager.location?.coordinate.latitude
+                        let long = locationManager.location?.coordinate.longitude
+                        let location = CLLocation(latitude: lat!, longitude: long!)
+                        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {
+                            (placemarks, error)in
+                            
+                            let weatherGetter = GetWeather()
+                            var cityInput = ""
+                            if error != nil {
+                                return
+                            }
+                            if country != nil {
+                                cityInput = country!.stringValue
+                                
+                                // let tempCelcius = Weather.celsius
+                                // let name = Weather.name
+                            }
+                            if city != nil {
+                                cityInput = city!.stringValue
+                            }
+                            
+                            weatherGetter.getWeather(city: cityInput, onComplete: {
+                                DispatchQueue.main.async {
+                                    self.tracetext.text = Weather.weather
+                                }
+                            })
+                        })
+                    default: break
+                    }
+                }
+                
+                
+                
+            }
+                
+            else {
+                
+                if CLLocationManager.locationServicesEnabled(){
+                    switch CLLocationManager.authorizationStatus() {
+                    case .authorizedAlways, .authorizedWhenInUse:
+                        print("Authorized.")
+                        let lat = locationManager.location?.coordinate.latitude
+                        let long = locationManager.location?.coordinate.longitude
+                        let location = CLLocation(latitude: lat!, longitude: long!)
+                        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error)in
+                            if error != nil {
+                                return
+                            } else if let country = placemarks?.first?.country,
+                                let city = placemarks?.first?.locality {
+                                print(country)
+                                print(city)
+                                
+                                let weatherGetter = GetWeather()
+                                weatherGetter.getWeather(city: city, onComplete: { })
+                                
+                                // let tempCelcius = Weather.celsius
+                                // let name = Weather.name
+                                
+                                print(Weather.weather!)
+                                self.tracetext.text = Weather.weather
+                                
+                            }
+                            
+                        })
+                        
+                    default: break
+                    }
+                }
+                
+            }
         default:
             print("Unmanaged intent.")
         }

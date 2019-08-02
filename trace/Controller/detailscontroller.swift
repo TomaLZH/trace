@@ -1,11 +1,3 @@
-//
-//  detailscontroller.swift
-//  trace
-//
-//  Created by ITP312 on 12/7/19.
-//  Copyright © 2019 NYP. All rights reserved.
-//
-
 import UIKit
 
 class detailscontroller: UIViewController {
@@ -29,7 +21,7 @@ class detailscontroller: UIViewController {
         print(MapState.placesID)
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "navigation") as? NavigationController
         self.navigationController?.pushViewController(vc!, animated: true)
-
+        
         
         
     }
@@ -57,7 +49,7 @@ class detailscontroller: UIViewController {
         
         
         // put in the values to get the JSON reply
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&v=20190701&ll=\(lat),\(long)") else { return }
+        guard var url = URL(string: "https://api.foursquare.com/v2/venues/search?client_id=C5UQOXGXQRJ3GQWD2GO54F55VPH3FTJJSTLLFMDQOW50SKH1&client_secret=1BOLVECMJWH5I4T3JBH5IBKKOTXAXZZ3PN04CI2FKD4XXNAE&v=20190701&ll=\(lat),\(long)") else { return }
         
         var session = URLSession.shared
         session.dataTask(with: url){(data,response,error) in
@@ -88,7 +80,7 @@ class detailscontroller: UIViewController {
     
     
     func getplacedetails(_ placeid: String?){
-
+        
         print(placeid)
         var ids = placeid as? String ?? "nil"
         if ids == "nil"{
@@ -96,107 +88,106 @@ class detailscontroller: UIViewController {
             self.ratinglabel.text = "No Data Found"
             self.namelabel.text = "No Data Found"
         }
-        
+            
         else{
-        guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=RSIQCDUUO1CU1NCAWP4J4FXUT150YB3ZERKYIUCEYV3DYMNF&client_secret=NS5FX4EMMRHA3RPEWWOEZLIQ4T2B20WFNAF310GRRQNM3N5U&v=20190715") else { return }
-        
-        var session = URLSession.shared
-        session.dataTask(with: url){(data,response,error) in
-            if var response = response {
-            }
-            if var data = data{
-                do{
-                    
-                    //get the name
-                    var output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
-                    let venues = output["response"] as! NSDictionary
-                    print(output)
-                    let venues2 = venues["venue"] as! NSDictionary
-                    let name = venues2["name"] as! String
-                    
-                    try DispatchQueue.global(qos: .background).sync {
+            guard var url = URL(string: "https://api.foursquare.com/v2/venues/\(ids)?client_id=C5UQOXGXQRJ3GQWD2GO54F55VPH3FTJJSTLLFMDQOW50SKH1&client_secret=1BOLVECMJWH5I4T3JBH5IBKKOTXAXZZ3PN04CI2FKD4XXNAE&v=20190715") else { return }
+            
+            var session = URLSession.shared
+            session.dataTask(with: url){(data,response,error) in
+                if var response = response {
+                }
+                if var data = data{
+                    do{
                         
-                        //get the image
-                        let photo: NSDictionary? = venues2["photos"] as? NSDictionary
-                        let photo2: NSArray? = photo?["groups"] as? NSArray
-                        if photo2!.count > 1{
-                        let photo3: NSDictionary? = photo2?[1] as? NSDictionary
-                        let photo4: NSArray? = photo3?["items"] as? NSArray
-                        let photo5: NSDictionary? = photo4?[0] as? NSDictionary
-                            print("it isnt empty")
-                            let prefix = photo5?["prefix"] as! String
-                            let suffix = photo5?["suffix"] as! String
-                            let links = prefix+"383x303"+suffix
-                            let link = URL(string: links)
-                            let data = try Data(contentsOf: link!)
+                        //get the name
+                        var output = try JSONSerialization.jsonObject(with: data, options:[]) as! [String:Any]
+                        let venues = output["response"] as! NSDictionary
+                        print(output)
+                        let venues2 = venues["venue"] as! NSDictionary
+                        let name = venues2["name"] as! String
+                        
+                        try DispatchQueue.global(qos: .background).sync {
+                            
+                            //get the image
+                            let photo: NSDictionary? = venues2["photos"] as? NSDictionary
+                            let photo2: NSArray? = photo?["groups"] as? NSArray
+                            if photo2!.count > 1{
+                                let photo3: NSDictionary? = photo2?[1] as? NSDictionary
+                                let photo4: NSArray? = photo3?["items"] as? NSArray
+                                let photo5: NSDictionary? = photo4?[0] as? NSDictionary
+                                print("it isnt empty")
+                                let prefix = photo5?["prefix"] as! String
+                                let suffix = photo5?["suffix"] as! String
+                                let links = prefix+"383x303"+suffix
+                                let link = URL(string: links)
+                                let data = try Data(contentsOf: link!)
+                                DispatchQueue.main.async {
+                                    self.imageplace?.image = UIImage(data:data)
+                                }
+                            }
+                            
+                            
+                            //assign the values retrieved
+                            var rating1 = "BLAH BLAH"
+                            //get address
+                            let address = venues2["location"] as! NSDictionary
+                            let address2 = address["address"] as? String ?? "No Address Found"
+                            
+                            //get rating
+                            var rating = venues2["rating"] as? NSNumber ?? 0
+                            
+                            //convert NSNumber to String
+                            if rating == 0{
+                                rating1 = "No Ratings Found"
+                            }
+                            else{
+                                let formatter = NumberFormatter()
+                                formatter.numberStyle = .decimal
+                                formatter.maximumFractionDigits = 1
+                                formatter.locale = Locale(identifier: "en")
+                                rating1 = formatter.string(from: rating)!
+                            }
+                            
+                            
+                            //get opening time and current status
+                            if venues2["hour"] != nil{
+                                let status = venues2["hour"] as! NSDictionary
+                                let isopen1 = status["isOpen"] as! Bool
+                                
+                                if isopen1 == true{
+                                    self.isopen = "Currently Open"
+                                }
+                                else{
+                                    self.isopen = "Currently Closed"
+                                }
+                            }
+                            
+                            
                             DispatchQueue.main.async {
-                                self.imageplace?.image = UIImage(data:data)
+                                self.namelabel.text = name
+                                self.addresslabel.text = address2
+                                if self.addresslabel.text == "No Address Found"{
+                                    self.button.isHidden = false
+                                }
+                                self.ratinglabel.text = (rating1 as! String) + "/10"
                             }
-                        }
-                    
-                       
-                        //assign the values retrieved
-                        var rating1 = "BLAH BLAH"
-                        //get address
-                        let address = venues2["location"] as! NSDictionary
-                        let address2 = address["address"] as? String ?? "No Address Found"
-                       
-                        //get rating
-                        var rating = venues2["rating"] as? NSNumber ?? 0
-                        
-                        //convert NSNumber to String
-                        if rating == 0{
-                             rating1 = "No Ratings Found"
-                        }
-                        else{
-                        let formatter = NumberFormatter()
-                        formatter.numberStyle = .decimal
-                        formatter.maximumFractionDigits = 1
-                        formatter.locale = Locale(identifier: "en")
-                            rating1 = formatter.string(from: rating)!
-                        }
-                        
-                        
-                        //get opening time and current status
-                        if venues2["hour"] != nil{
-                        let status = venues2["hour"] as! NSDictionary
-                        let isopen1 = status["isOpen"] as! Bool
-                        
-                        if isopen1 == true{
-                            self.isopen = "Currently Open"
-                        }
-                        else{
-                            self.isopen = "Currently Closed"
-                        }
-                        }
-                        
-                        
-                        DispatchQueue.main.async {
-                            self.namelabel.text = name
-                            self.addresslabel.text = address2
-                            if self.addresslabel.text == "No Address Found"{
-                                self.button.isHidden = false
-                            }
-                            self.ratinglabel.text = (rating1 as! String) + "/10"
+                            
                         }
                         
                     }
+                    catch{
+                        print(error)
+                    }
                     
                 }
-                catch{
-                    print(error)
-                }
-            
-            }
-            }.resume()
+                }.resume()
         }
     }
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     
     
 }
