@@ -93,11 +93,11 @@ class FirebaseDBController {
     static func loadTasks(forItinerary: String, forDay: Int, onComplete: @escaping ([Task]) -> Void) {
         var taskList: [Task] = []
         
-        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)/days/\(forDay)/tasks")
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)/days/\(forDay)")
         
         ref.observeSingleEvent(of: .value, with: {
             (snaphot) in
-            
+            print("YES")
             for record in snaphot.children
             {
                 let r = record as! DataSnapshot
@@ -117,8 +117,7 @@ class FirebaseDBController {
     static func getTasks(forItinerary: String, forDay: Int) -> [Task] {
         var taskList: [Task] = []
         
-        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)/days/\(forDay)")
-        print("itineraries/\(user)/\(forItinerary)/days/\(forDay)")
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)/days/\(forDay)/")
         
         ref.observeSingleEvent(of: .value, with: {
             (snaphot) in
