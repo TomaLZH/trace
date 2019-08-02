@@ -524,12 +524,16 @@ class NavigationController: UIViewController {
                     let directions = MKDirections(request: request)
                     resetMapView(withNew: directions)
                     
+                    
+                    self.mapView.removeAnnotations(self.mapView.annotations)
+
+                    
                     //add annotation to the target place
                     let annotation = MKPointAnnotation()
                     annotation.title = listname[0] as! String
                     annotation.coordinate = CLLocationCoordinate2D(latitude: self.place!.latitude, longitude: self.place!.longitude)
                     self.mapView.addAnnotation(annotation)
-                    
+
                     //add the line
                     directions.calculate { [unowned self] (response, error) in
                         //Handle error if needed

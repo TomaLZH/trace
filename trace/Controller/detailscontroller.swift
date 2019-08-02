@@ -125,7 +125,7 @@ class detailscontroller: UIViewController {
                             print("it isnt empty")
                             let prefix = photo5?["prefix"] as! String
                             let suffix = photo5?["suffix"] as! String
-                            let links = prefix+"300x300"+suffix
+                            let links = prefix+"383x303"+suffix
                             let link = URL(string: links)
                             let data = try Data(contentsOf: link!)
                             DispatchQueue.main.async {
