@@ -240,13 +240,12 @@ class ChatController: UIViewController {
                 }
             }
         case "getweather":
+            let country = parameters["geo-country"] as! AIResponseParameter
+            let city = parameters["geo-city"] as! AIResponseParameter
             
-            let country = parameters["geo-country"] as? AIResponseParameter
-            let city = parameters["geo-city"] as? AIResponseParameter
-            
-            if country?.stringValue != "" {
-                Weather.country = country?.stringValue
-                Weather.city = country?.stringValue
+            if country.stringValue != "" || city.stringValue != "" {
+                Weather.country = country.stringValue
+                Weather.city = country.stringValue
                 
                 if CLLocationManager.locationServicesEnabled(){
                     switch CLLocationManager.authorizationStatus() {
@@ -263,14 +262,14 @@ class ChatController: UIViewController {
                             if error != nil {
                                 return
                             }
-                            if country != nil {
-                                cityInput = country!.stringValue
+                            if country.stringValue != "" {
+                                cityInput = country.stringValue
                                 
                                 // let tempCelcius = Weather.celsius
                                 // let name = Weather.name
                             }
-                            if city != nil {
-                                cityInput = city!.stringValue
+                            if city.stringValue != "" {
+                                cityInput = city.stringValue
                             }
                             
                             weatherGetter.getWeather(city: cityInput, onComplete: {
@@ -282,45 +281,38 @@ class ChatController: UIViewController {
                     default: break
                     }
                 }
-                
-                
-                
             }
-                
             else {
-                
-                if CLLocationManager.locationServicesEnabled(){
-                    switch CLLocationManager.authorizationStatus() {
-                    case .authorizedAlways, .authorizedWhenInUse:
-                        print("Authorized.")
-                        let lat = locationManager.location?.coordinate.latitude
-                        let long = locationManager.location?.coordinate.longitude
-                        let location = CLLocation(latitude: lat!, longitude: long!)
-                        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error)in
-                            if error != nil {
-                                return
-                            } else if let country = placemarks?.first?.country,
-                                let city = placemarks?.first?.locality {
-                                print(country)
-                                print(city)
-                                
-                                let weatherGetter = GetWeather()
-                                weatherGetter.getWeather(city: city, onComplete: { })
-                                
-                                // let tempCelcius = Weather.celsius
-                                // let name = Weather.name
-                                
-                                print(Weather.weather!)
-                                self.tracetext.text = Weather.weather
-                                
-                            }
+                self.tracetext.text = "Sorry, I can't find that place."
+                let utter = AVSpeechUtterance(string: self.tracetext.text!)
+                AVSpeechSynthesizer().speak(utter)
+            }
+        case "getlocalweather":
+            if CLLocationManager.locationServicesEnabled(){
+                switch CLLocationManager.authorizationStatus() {
+                case .authorizedAlways, .authorizedWhenInUse:
+                    print("Authorized. Default")
+                    let lat = locationManager.location?.coordinate.latitude
+                    let long = locationManager.location?.coordinate.longitude
+                    let location = CLLocation(latitude: lat!, longitude: long!)
+                    CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error)in
+                        if error != nil {
+                            return
+                        } else if let country = placemarks?.first?.country,
+                            let city = placemarks?.first?.locality {
+                            print(country)
+                            print(city)
                             
-                        })
-                        
-                    default: break
-                    }
+                            let weatherGetter = GetWeather()
+                            weatherGetter.getWeather(city: city, onComplete: {
+                                DispatchQueue.main.async {
+                                    self.tracetext.text = Weather.weather
+                                }
+                            })
+                        }
+                    })
+                default: break
                 }
-                
             }
         default:
             print("Unmanaged intent.")

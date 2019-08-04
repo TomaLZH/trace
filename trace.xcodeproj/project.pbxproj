@@ -11,6 +11,7 @@
 		2C018BEB22D3C67B000BFCCA /* ItineraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */; };
 		2C018BEF22D3D54F000BFCCA /* ItineraryStartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */; };
 		2C202D8F22CB3E7E00E160BF /* Itinerary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C202D8E22CB3E7E00E160BF /* Itinerary.swift */; };
+		2C2788A522F6D801004661BE /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2788A422F6D801004661BE /* TaskViewController.swift */; };
 		2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C33933122C9C63900A1F87B /* NavigationController.swift */; };
 		2CEF788A22D44FAB006D6DE1 /* ItineraryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788922D44FAB006D6DE1 /* ItineraryCell.swift */; };
 		2CEF788C22D44FCE006D6DE1 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF788B22D44FCE006D6DE1 /* DayCell.swift */; };
@@ -48,6 +49,7 @@
 		2C018BEA22D3C67B000BFCCA /* ItineraryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryTableViewController.swift; sourceTree = "<group>"; };
 		2C018BEE22D3D54F000BFCCA /* ItineraryStartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryStartController.swift; sourceTree = "<group>"; };
 		2C202D8E22CB3E7E00E160BF /* Itinerary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Itinerary.swift; sourceTree = "<group>"; };
+		2C2788A422F6D801004661BE /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		2C33933122C9C63900A1F87B /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		2CEF788922D44FAB006D6DE1 /* ItineraryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItineraryCell.swift; sourceTree = "<group>"; };
 		2CEF788B22D44FCE006D6DE1 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				513CBEEF22EADE4400FF98B3 /* KommController.swift */,
 				5136A53A22F3E2D7009EC380 /* EditTaskController.swift */,
 				5136A53C22F3E2F6009EC380 /* TaskMapController.swift */,
+				2C2788A422F6D801004661BE /* TaskViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				51D0F42F22E56FC300AEE71B /* errorpageViewController.swift in Sources */,
 				2C018BE922D23830000BFCCA /* FreeMapController.swift in Sources */,
 				5152AFC522D33B2E0062571B /* MapState.swift in Sources */,
+				2C2788A522F6D801004661BE /* TaskViewController.swift in Sources */,
 				2CEF788C22D44FCE006D6DE1 /* DayCell.swift in Sources */,
 				5174F422229D0FF500D45601 /* AppDelegate.swift in Sources */,
 				2C33933222C9C63900A1F87B /* NavigationController.swift in Sources */,

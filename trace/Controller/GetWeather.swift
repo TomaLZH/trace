@@ -20,6 +20,7 @@ class GetWeather {
         
         let escapedCity = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
+        print("\(openWeatherMapBaseURL)?APPID=\(openWeatherMapAPIKey)&q=\(escapedCity)")
         let weatherRequestURL = URL(string: "\(openWeatherMapBaseURL)?APPID=\(openWeatherMapAPIKey)&q=\(escapedCity)")
         //let weatherRequestURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?APPID=ce45135fe033185bb7ad75548acc9335&q=Ang%20Mo%20Kio")
         
@@ -33,7 +34,7 @@ class GetWeather {
                     do {
                         let weather = try
                             JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: AnyObject]
-                        let tempKelvin = weather["main"]!["temp"]!! as! Double
+                        let tempKelvin = weather["main"]!["temp"]! as! Double
                         
                         var tempCelcius = tempKelvin - 273.15
                         tempCelcius = Double(round(10*tempCelcius)/10)
@@ -44,9 +45,8 @@ class GetWeather {
                         let pressure = weather["main"]!["pressure"]!!
                         // Weather.celsius = tempCelcius
                         // Weather.name = weather["name"]! as! String
-                        self.utterance = AVSpeechUtterance(string: "Weather for \(weather["name"]!): It is \((weather["weather"]![0]! as! [String: AnyObject])["main"]!) outside. The temperature is \(tempCelcius) Celcius. The Humidity is \(weather["main"]!["humidity"]!!) percent. The pressure is \(weather["main"]!["pressure"]!!)hpa." )
-                        
-                        Weather.weather = "Weather for \(name): It is \(condition["main"]!) outside. The temperature is \(tempCelcius) Celcius. The Humidity is \(humidity) percent. The pressure is \(pressure)hpa."
+                        Weather.weather = "It is \(condition["main"]!) in \(name). The temperature is \(tempCelcius) Celcius. The Humidity is \(humidity) percent. The pressure is \(pressure)hpa."
+                        self.utterance = AVSpeechUtterance(string: Weather.weather!)
                         self.utterance.rate = 0.4
                         self.syth.speak(self.utterance)
                         

@@ -363,7 +363,7 @@ class NavigationController: UIViewController {
                         }
                     }
                     
-                } catch{
+                } catch {
                     print(error)
                 }
                 

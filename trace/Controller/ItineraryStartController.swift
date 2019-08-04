@@ -54,18 +54,46 @@ class ItineraryStartController: UIViewController {
     
     // Upload data to Firebase and return to previous screen
     @IBAction func onDone(_ sender: Any) {
-        guard let name = nameTextField.text else { return }
-        guard let country = countryTextField.text else { return }
-        guard let startDate = startDateTextField.text else { return }
-        guard let endDate = endDateTextField.text else { return }
+        let name = nameTextField.text
+        let country = countryTextField.text
+        let startDate = startDateTextField.text
+        let endDate = endDateTextField.text
+        
+        if name?.count == 0 || country?.count == 0 || startDate?.count == 0 || endDate?.count == 0 {
+            let alertIncomplete = UIAlertController(title: "Error", message: "All fields should be filled in.", preferredStyle: .alert)
+            
+            alertIncomplete.addAction(
+                UIAlertAction(title: "Okay",
+                              style: .default,
+                              handler: nil
+            ))
+            self.present(alertIncomplete, animated: true, completion: nil)
+            return
+        }
         
         let newItinerary = Itinerary(id: itineraryToEdit?.id,
-                                     name: name,
-                                     country: country,
-                                     startDate: startDate,
-                                     endDate: endDate,
+                                     name: name!,
+                                     country: country!,
+                                     startDate: startDate!,
+                                     endDate: endDate!,
                                      venue: [nil])
-        newItinerary.new()
+        
+        if newItinerary.validateDates() {
+            if itineraryToEdit == nil {
+                newItinerary.new()
+            }
+        }
+        else {
+            let alert = UIAlertController(title: "Error", message: "Please enter valid dates.", preferredStyle: .alert)
+            
+            alert.addAction(
+                UIAlertAction(title: "Okay",
+                              style: .default,
+                              handler: nil
+            ))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
         FirebaseDBController.insertOrReplace(for: .Itinerary, item: newItinerary)
         navigationController?.popViewController(animated: true)
     }

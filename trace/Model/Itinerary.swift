@@ -36,6 +36,9 @@ class Itinerary {
         
         let start = dateFormatter.date(from: startDate)
         let end = dateFormatter.date(from: endDate)
+        if start == nil || end == nil {
+            return false
+        }
         
         let calendar = NSCalendar.current
         let components = calendar.dateComponents([.day], from: start!, to: end!)

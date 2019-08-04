@@ -4,6 +4,7 @@ import UIKit
 struct cellData {
     var isOpened = Bool()
     var title = String()
+    //var sectionData = [Task]()
     var sectionData = [Task]()
 }
 
@@ -17,37 +18,46 @@ class ItineraryViewController: UITableViewController, DayCellDelegate {
     var tappedDay: Int?
     var tableViewData = [cellData]()
     var itinerary: Itinerary?
-    var listOfTasks = [[Task]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let noOfDays = itinerary?.numberOfDays() {
-            for i in 1...noOfDays {
-                //                FirebaseDBController.loadTasks(forItinerary: itinerary?.id ?? "", forDay: i) {
-                //                    (taskList) in
-                //                    self.listOfTasks.append(taskList)
-                //                }
-                let taskList = FirebaseDBController.getTasks(forItinerary: itinerary?.id ?? "", forDay: i)
-                self.listOfTasks.append(taskList)
-            }
-            for i in 0...listOfTasks.count-1 {
-                let dayTasks = listOfTasks[i]
-                if dayTasks.count > 0 {
-                    for j in 0...dayTasks.count {
-                        let task = dayTasks[j]
-                    }
+    }
+    
+    func loadTasks() {
+        if itinerary != nil {
+            for i in 1...itinerary!.numberOfDays() {
+                FirebaseDBController.loadTasks(forItinerary: itinerary!.id!, forDay: i) {
+                    (taskList) in
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "HH:mm"
+                    
+                    let sortedTasks = taskList.sorted { dateFormatter.date(from: $0.time)! < dateFormatter.date(from: $1.time)! }
+
+                    let thisDay = cellData(isOpened: true, title: "Day \(i)", sectionData: sortedTasks)
+                    self.tableViewData.append(thisDay)
+                    self.tableView.reloadData()
                 }
-                let dayCell = cellData(isOpened: false, title: "Day \(i+1)", sectionData: dayTasks)
-                tableViewData.append(dayCell)
+//                let taskList = FirebaseDBController.getTasks(forItinerary: itinerary!.id!, forDay: i)
+//                let thisDay = cellData(isOpened: true, title: "Day \(i)", sectionData: taskList)
+//                self.tableViewData.append(thisDay)
             }
+            self.tableView.reloadData()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        navigationItem.title = itinerary?.name
+        tableViewData = []
+        loadTasks()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        FirebaseDBController.loadItinerary(forItinerary: itinerary!.id!) { (loadedItinerary) in
+            self.itinerary = loadedItinerary
+            self.navigationItem.title = loadedItinerary.name
+            self.tableView.reloadData()
+        }
     }
     
     // number of sections is equal to the number of parent cells(days)
@@ -73,7 +83,15 @@ class ItineraryViewController: UITableViewController, DayCellDelegate {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell") as! TaskCell
-            cell.taskLabel.text = tableViewData[indexPath.section].sectionData[dataIndex].title
+//            cell.taskLabel.text = tableViewData[indexPath.section].sectionData[dataIndex].title
+            let task = tableViewData[indexPath.section].sectionData[dataIndex]
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            let timeAsDate = dateFormatter.date(from: task.time)
+            
+            dateFormatter.dateFormat = "hh:mm a"
+            let timeAsString = dateFormatter.string(from: timeAsDate!)
+            cell.taskLabel.text = "\(timeAsString) - \(task.title)"
             return cell
         }
     }
@@ -94,8 +112,7 @@ class ItineraryViewController: UITableViewController, DayCellDelegate {
         }
             // else when child cell(task) is tapped
         else {
-            // go to edit screen of task
-            
+            // go to task screen handled in prepare for segue
         }
     }
     
@@ -111,6 +128,15 @@ class ItineraryViewController: UITableViewController, DayCellDelegate {
                 editTaskController.forDay = tappedDay
                 editTaskController.forItineraryId = itinerary?.id
             }
+        }
+        else if segue.identifier == "viewTask" {
+            let viewTaskController = segue.destination as! TaskViewController
+            let indexPath = self.tableView.indexPathForSelectedRow!
+            let dataIndex = indexPath.row - 1
+            let dayCellData = tableViewData[indexPath.section]
+            let taskData = dayCellData.sectionData[dataIndex]
+            
+            viewTaskController.task = taskData
         }
     }
     

@@ -28,7 +28,7 @@ class FirebaseDBController {
             }
             let ref = FirebaseDatabase.Database.database().reference().child("\(location.rawValue)\(user)/\(idToUpload)")
             
-            ref.setValue([
+            ref.updateChildValues([
                 "id": idToUpload,
                 "name": item.name,
                 "country": item.country,
@@ -37,13 +37,15 @@ class FirebaseDBController {
                 "venue": item.venue
                 ])
             
-            for i in 1...item.days.count {
-                let refDays = FirebaseDatabase.Database.database().reference().child("\(location.rawValue)\(user)/\(idToUpload)/days/\(i)")
-                let title = "Day \(i)"
-                
-                refDays.setValue([
-                    "title": title
-                    ])
+            if item.days.count >= 1 {
+                for i in 1...item.days.count {
+                    let refDays = FirebaseDatabase.Database.database().reference().child("\(location.rawValue)\(user)/\(idToUpload)/days/\(i)")
+                    let title = "Day \(i)"
+                    
+                    refDays.setValue([
+                        "title": title
+                        ])
+                }
             }
         }
         else if let item = item as? Task {
@@ -90,6 +92,41 @@ class FirebaseDBController {
         })
     }
     
+    static func loadItinerary(forItinerary: String, onComplete: @escaping (Itinerary) -> Void) {
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)")
+        
+        ref.observeSingleEvent(of: .value, with: {
+            r in
+            
+            let thisItinerary = Itinerary(id: r.childSnapshot(forPath: "id").value as? String,
+                                          name: r.childSnapshot(forPath: "name").value as! String,
+                                          country: r.childSnapshot(forPath: "country").value as! String,
+                                          startDate: r.childSnapshot(forPath: "startDate").value as! String,
+                                          endDate: r.childSnapshot(forPath: "endDate").value as! String,
+                                          venue: r.childSnapshot(forPath: "venue").value as? [String] ?? [nil])
+            
+            onComplete(thisItinerary)
+        })
+    }
+    
+    static func getItinerary(forItinerary: String) -> Itinerary? {
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)")
+        var itinerary: Itinerary?
+        ref.observeSingleEvent(of: .value, with: {
+            r in
+            
+            let thisItinerary = Itinerary(id: r.childSnapshot(forPath: "id").value as? String,
+                                          name: r.childSnapshot(forPath: "name").value as! String,
+                                          country: r.childSnapshot(forPath: "country").value as! String,
+                                          startDate: r.childSnapshot(forPath: "startDate").value as! String,
+                                          endDate: r.childSnapshot(forPath: "endDate").value as! String,
+                                          venue: r.childSnapshot(forPath: "venue").value as? [String] ?? [nil])
+            itinerary = thisItinerary
+        })
+        
+        return itinerary
+    }
+    
     static func loadTasks(forItinerary: String, forDay: Int, onComplete: @escaping ([Task]) -> Void) {
         var taskList: [Task] = []
         
@@ -97,42 +134,65 @@ class FirebaseDBController {
         
         ref.observeSingleEvent(of: .value, with: {
             (snaphot) in
-            print("YES")
             for record in snaphot.children
             {
                 let r = record as! DataSnapshot
-                let thisTask = Task(title: r.childSnapshot(forPath: "title").value as! String,
-                                    taskType: r.childSnapshot(forPath: "type").value as! String,
-                                    time: r.childSnapshot(forPath: "time").value as? String ?? "Type",
-                                    lat: r.childSnapshot(forPath: "lat").value as? Double ?? 0,
-                                    lng: r.childSnapshot(forPath: "lng").value as? Double ?? 0)
-                thisTask.id = r.childSnapshot(forPath: "id").value as? String
-                taskList.append(thisTask)
+                if let taskId = r.childSnapshot(forPath: "id").value as? String {
+                    let thisTask = Task(title: r.childSnapshot(forPath: "title").value as! String,
+                                        taskType: r.childSnapshot(forPath: "type").value as! String,
+                                        time: r.childSnapshot(forPath: "time").value as? String ?? "Type",
+                                        lat: r.childSnapshot(forPath: "lat").value as? Double ?? 0,
+                                        lng: r.childSnapshot(forPath: "lng").value as? Double ?? 0)
+                    thisTask.setId(taskId)
+                    thisTask.setItineraryId(forItinerary)
+                    thisTask.setDay(forDay)
+                    taskList.append(thisTask)
+                }
             }
-            
             onComplete(taskList)
+        })
+    }
+    
+    static func loadTask(forItinerary: String, forDay: Int, forTask: String, onComplete: @escaping (Task) -> Void) {
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)/days/\(forDay)/\(forTask)")
+        
+        ref.observeSingleEvent(of: .value, with: {
+            r in
+                if let taskId = r.childSnapshot(forPath: "id").value as? String {
+                    let thisTask = Task(title: r.childSnapshot(forPath: "title").value as! String,
+                                        taskType: r.childSnapshot(forPath: "type").value as! String,
+                                        time: r.childSnapshot(forPath: "time").value as? String ?? "Type",
+                                        lat: r.childSnapshot(forPath: "lat").value as? Double ?? 0,
+                                        lng: r.childSnapshot(forPath: "lng").value as? Double ?? 0)
+                    thisTask.setId(taskId)
+                    thisTask.setItineraryId(forItinerary)
+                    thisTask.setDay(forDay)
+                    onComplete(thisTask)
+                }
         })
     }
     
     static func getTasks(forItinerary: String, forDay: Int) -> [Task] {
         var taskList: [Task] = []
         
-        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)/days/\(forDay)/")
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(forItinerary)/days/\(forDay)")
         
         ref.observeSingleEvent(of: .value, with: {
             (snaphot) in
-            
             for record in snaphot.children
             {
                 let r = record as! DataSnapshot
-                let thisTask = Task(title: r.childSnapshot(forPath: "title").value as? String ?? "Title",
-                                    taskType: r.childSnapshot(forPath: "type").value as? String ?? "Type",
-                                    time: r.childSnapshot(forPath: "time").value as? String ?? "Type",
-                                    lat: r.childSnapshot(forPath: "lat").value as? Double ?? 0,
-                                    lng: r.childSnapshot(forPath: "lng").value as? Double ?? 0
-                )
-                thisTask.id = r.childSnapshot(forPath: "id").value as? String
-                taskList.append(thisTask)
+                if let taskId = r.childSnapshot(forPath: "id").value as? String {
+                    let thisTask = Task(title: r.childSnapshot(forPath: "title").value as! String,
+                                        taskType: r.childSnapshot(forPath: "type").value as! String,
+                                        time: r.childSnapshot(forPath: "time").value as? String ?? "Type",
+                                        lat: r.childSnapshot(forPath: "lat").value as? Double ?? 0,
+                                        lng: r.childSnapshot(forPath: "lng").value as? Double ?? 0)
+                    thisTask.id = taskId
+                    thisTask.setItineraryId(forItinerary)
+                    thisTask.setDay(forDay)
+                    taskList.append(thisTask)
+                }
             }
         })
         
@@ -142,11 +202,16 @@ class FirebaseDBController {
     static func delete(for location: itemType, item: Any) {
         if let id = item as? String {
             if location == .Itinerary {
-                print("deleting for \(location.rawValue)\(user)/\(id)/")
                 let ref = FirebaseDatabase.Database.database().reference().child("\(location.rawValue)\(user)/\(id)/")
                 
                 ref.removeValue()
             }
         }
+    }
+    
+    static func deleteTask(itineraryId: String, day: Int, taskId: String) {
+        let ref = FirebaseDatabase.Database.database().reference().child("itineraries/\(user)/\(itineraryId)/days/\(day)/\(taskId)")
+        
+        ref.removeValue()
     }
 }
